@@ -1,0 +1,67 @@
+.ceShiTable {
+  padding: 10px 15px;
+  text-align:center;
+  font-size: 12px;
+  height: 100%;
+}
+
+.ceShiTable .ceShiTable-text2  {
+  display:inline-block;
+}
+
+.ceShiTable-title {
+    background: rgba(0, 180, 251, 0.5);
+    font-weight:bold;
+    color: #000;
+}
+
+.ceShiTable-title span {
+  font-size: 12px;
+  height: 24px;
+  line-height: 24px;
+}
+
+.ceShiTable-body {
+  height: calc(100% - 30px);
+  overflow-y: scroll;
+  color: #a1b6e5;
+}
+
+.ceShiTable-body::-webkit-scrollbar {
+  width: 3px;
+}
+
+.ceShiTable-body::-webkit-scrollbar-thumb {
+  background: rgba(0, 180, 251, 0.5);
+  border-radius: 7px;
+  box-shadow:inset 0 0 15px rgba(0, 180, 251, 1);
+}
+
+.ceShiTable-body ul {
+  padding-inline-start: 0px;
+}
+
+.ceShiTable-body ul .noData{
+  height: 78px;
+  line-height: 78px;
+}
+
+.ceShiTable-body ul li {
+  background:transparent;
+  display:flex;
+  align-items:center;
+  min-height: 24px;
+}
+
+.ceShiTable-body ul li span {
+  font-size: 12px;
+}
+
+.ceShiTable-body ul li:nth-child(2n) {
+  background: rgba(157, 217, 255, 0.1)
+}
+
+.ceShiTable-body ul li:hover {
+  background: rgba(87, 98, 250, 0.4);
+  color: rgba(255, 255, 255, 1);
+}

@@ -1,0 +1,17 @@
+.commonHeader {
+    width: 100%;
+    height: 50px;
+    position: fixed;
+    background: #001529;
+    z-index: 100;
+}
+
+.commonHeader .logout {
+    float: right;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 10px;
+    height: 50px;
+    line-height: 50px;
+}

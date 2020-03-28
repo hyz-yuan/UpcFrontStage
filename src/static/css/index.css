@@ -1,0 +1,127 @@
+.commonTableCheckButton {
+    height: 22px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #2f54eb;
+    background-color: #f0f5ff;
+    border:1px solid #adc6ff;
+    border-radius: 4px;
+    margin: 0;
+    padding: 0 7px;
+    outline: none;
+    cursor: pointer;
+}
+
+.commonTableCarButton {
+    height: 22px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #1890ff;
+    background-color: #e6f7ff;
+    border:1px solid #91d5ff;
+    border-radius: 4px;
+    margin: 0;
+    padding: 0 7px;
+    outline: none;
+    cursor: pointer;
+}
+
+
+.commonTablePasswordButton {
+    height: 22px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #13c2c2;
+    background-color: #e6fffb;
+    border:1px solid #87e8de;
+    border-radius: 4px;
+    margin: 0;
+    padding: 0 7px;
+    outline: none;
+    cursor: pointer;
+}
+
+.commonTableChangeButton {
+    height: 22px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #52c41a;
+    background-color: #f6ffed;
+    border:1px solid #b7eb8f;
+    border-radius: 4px;
+    margin: 0;
+    padding: 0 7px;
+    outline: none;
+    cursor: pointer;
+}
+
+.commonTableStopButton {
+    height: 22px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #fa541c;
+    background-color: #fff2e8;
+    border:1px solid #ffbb96;
+    border-radius: 4px;
+    margin: 0;
+    padding: 0 7px;
+    outline: none;
+    cursor: pointer;
+}
+
+.commonTableDeleteButton {
+    height: 22px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #eb2f96;
+    background-color: #fff0f6;
+    border:1px solid #ffadd2;
+    border-radius: 4px;
+    margin: 0;
+    padding: 0 7px;
+    outline: none;
+    cursor: pointer;
+}
+
+.customPanelStyle {
+    background: #f7f7f7;
+    border-radius: 4px;
+    margin: 10px;
+    border: 0;
+    text-align:right;
+    overflow: hidden;
+}
+
+.commonSelectBox {
+    text-align: left;
+}
+
+.customPanelStyle hr {
+    margin-top: 0;
+    border: 0.5px solid #d9d9d9
+}
+
+.commonSelectBox .condition {
+    width: 100%;
+    display: inline-block;
+}
+
+.commonSelectBox .condition .childCondition {
+    float: left;
+    width: 32.33%;
+    margin-right: 1%;
+    margin-bottom: 10px;
+}
+
+.commonSelectBox .footer {
+    height: 30px;
+}
+
+.operateHeader {
+    margin: 10px;
+    text-align: right;
+}
+
+.operateHeader Button{
+    margin-left: 10px;
+}

@@ -1,0 +1,37 @@
+.rightBodyUnfold {
+    padding-left: 256px;
+    padding-top: 50px;
+}
+
+.rightBodyFold {
+    padding-left: 80px;
+    padding-top: 50px;
+}
+
+.tableDiv {
+    margin: 0 10px 60px 10px;
+}
+
+.myModal Col {
+    text-align: right;
+}
+
+.myModal label {
+    line-height: 32px;
+    float: right;
+    margin-bottom: 10px;
+}
+
+.myModal label strong {
+    color: red;
+}
+
+.myModal .cardPic {
+    width: 172px;
+    height: 86px;
+}
+
+.myModal .facePic {
+    width: 86px;
+    height: 86px;
+}
