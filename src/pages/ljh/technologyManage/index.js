@@ -1,11 +1,17 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
-import { Table, Input,DatePicker, Button, Popconfirm, Form,message } from 'antd/lib/index';
-import './index.css'
-import moment from "moment";
+import * as React from "react";
+import {Table, Button, Popconfirm, Form,  Input,Select,message} from "antd/lib/index";
 import {fetchPost} from "../../../static/util/fetch";
-const EditableContext = React.createContext();
+import RightBodyHeaderBar from '../../../static/component/rightBodyHeaderBar'
 
-const EditableRow = ({ index, ...props }) => {
+import moment from "../projectProgress/progressTable";
+import {useState} from "react";
+import {useRef} from "react";
+import {useContext} from "react";
+import {useEffect} from "react";
+const EditableContext = React.createContext();
+class technologyManage extends React.Component{
+
+EditableRow = ({ index, ...props }) => {
     const [form] = Form.useForm();
     return (
         <Form form={form} component={false}>
@@ -16,7 +22,7 @@ const EditableRow = ({ index, ...props }) => {
     );
 };
 
-const EditableCell = ({
+ EditableCell = ({
                           title,
                           editable,
                           children,
@@ -35,8 +41,8 @@ const EditableCell = ({
         }
     }, [editing]);
 
-    const toggleEdit = () => {//日期类型特殊处理
-        const value =inputType === 'date' ? moment(record[dataIndex], 'YYYY-MM-DD'):record[dataIndex];
+    const toggleEdit = () => {
+        const value =record[dataIndex];
         setEditing(!editing);
         form.setFieldsValue({
             [dataIndex]: value,
@@ -44,20 +50,21 @@ const EditableCell = ({
     };
 
     const save = async e => {
-        try {
-            const values = await form.validateFields();
-            toggleEdit();
-            handleSave({ ...record, ...values });
-        } catch (errInfo) {
-            console.log('Save failed:', errInfo);
-        }
-    };
+         try {
+             const values = await form.validateFields();
+             toggleEdit();
+             handleSave({ ...record, ...values });
+         } catch (errInfo) {
+             console.log('Save failed:', errInfo);
+         }
+     };
 
     let childNode = children;
 
     if (editable) {
-        const inputNode =inputType === 'date' ? <DatePicker ref={inputRef} onBlur={save} />
-                                                : <Input ref={inputRef} onBlur={save} />;
+        const inputNode =inputType === 'select' ?
+            <Select  style={{ width: 120 }} ref={inputRef} onChange={save}>    {this.options}    </Select>
+            : <Input ref={inputRef} onBlur={save} />;
         childNode = editing ? (
             <Form.Item
                 style={{
@@ -83,36 +90,19 @@ const EditableCell = ({
     return <td {...restProps}>{childNode}</td>;
 };
 
-export default class ProgressTable extends React.Component {
-    constructor(props) {
-        super(props);
-        this.columns = [
+
+state={
+        columns: [
             {
-                title: '进度名称',
-                dataIndex: 'progressName',
+                title: '上级名称',
+                dataIndex: 'pId',
                 width: '30%',
+                inputType:'select',
                 editable: true,
             },
             {
-                title: '开始时间',
-                dataIndex: 'beginTime',
-                editable: true,
-                inputType:'date',
-            },
-            {
-                title: '结束时间',
-                dataIndex: 'endTime',
-                editable: true,
-                inputType:'date',
-            },
-            {
-                title: '遇到的问题',
-                dataIndex: 'problem',
-                editable: true,
-            },
-            {
-                title: '解决方案',
-                dataIndex: 'solution',
+                title: '技术名称',
+                dataIndex: 'technologyName',
                 editable: true,
             },
             {
@@ -120,32 +110,30 @@ export default class ProgressTable extends React.Component {
                 dataIndex: 'operation',
                 render: (text, record) =>
                     this.state.dataSource.length >= 1 ? (
-                        <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
+                        <Popconfirm title="确认删除吗?" onConfirm={() => this.handleDelete(record.key)}>
                             <a>删除</a>
                         </Popconfirm>
                     ) : null,
             },
-        ];
-     // this.props.onRef(this)
-    }
-    state={
+        ],
+        title:"技术管理",
         dataSource: [],
     }
+    options=[];//下列列表选项
     componentDidMount() {
         this.loadData();
-
+        this.options.push(<Select key='0'>第一级</Select>);
     }
     loadData(){
-        let params={ projectId : this.props.pid };
-        this.requestProgress(global.constants.progressList,params);
+        let params={};
+        this.requestProgress(global.constants.technologySelect,params);
     }
 
 
     requestProgress = (url,params) =>{
-
         fetchPost(url,params)
             .then(
-                res => this.setProgressData(res)
+                res => this.setData(res)
             )
             .catch(e => console.log(e))
             .finally(() => {
@@ -154,38 +142,42 @@ export default class ProgressTable extends React.Component {
                 })
             })
     }
-    setProgressData = (list) => {
+
+
+    setData = (list) => {
+        let pname ={};
+        this.options=[];
+        this.options.push(<Select key='0'>第一级</Select>);
+        list.map((item, index) => {
+            pname[item.id]=item.technologyName;
+            this.options.push(<Select key={item.id}>{item.technologyName}</Select>);
+        })
+        //this.state.options.push(<Select key='a'>'a'</Select>);
         this.setState({
             dataSource: list.map((item, index) => {
                 return {
                     ...item,
-                    beginTime:moment(parseInt(item.beginTime)).format("YYYY-MM-DD"),
-                    endTime:moment(parseInt(item.endTime)).format("YYYY-MM-DD"),
+                    pId:item.pId==0?"第一级":pname[item.pId],
                     key: index
 
                 }
             }),
-
         })
-        this.props.reloadGant();
         //message.info("保存成功！")
     }
     handleDelete = key => {
         const dataSource = [...this.state.dataSource];
         let params={
-            projectId : this.props.pid,
             id:dataSource[key].id,
         };
-        this.requestProgress(global.constants.deleteProgress,params);
+        this.requestProgress(global.constants.deleteTechnology,params);
     };
 
     handleAdd = () => {
         let params={
-            projectId : this.props.pid,
-            beginTime:new Date(),
-            endTime:new Date(),
+            pId:0,
         };
-        this.requestProgress(global.constants.addProgress,params);
+        this.requestProgress(global.constants.insertTechnology,params);
     };
 
     handleSave = row => {
@@ -196,31 +188,26 @@ export default class ProgressTable extends React.Component {
         this.setState({
             dataSource: newData,
         });
-       let params={
-           projectId : this.props.pid,
-           id : row.id,
-           progressName:row.progressName,
-           beginTime:row.beginTime,
-           endTime:row.endTime,
-           problem:row.problem,
-           solution:row.solution,
-       };
-        this.requestProgress(global.constants.updateProgress,params);
+        let params={
+            id : row.id,
+            technologyName:row.technologyName,
+            pId:row.pId.length>2?null:row.pId, /// will cause error
+        };
+        this.requestProgress(global.constants.updateTechnology,params);
     };
 
     render() {
-        const { dataSource } = this.state;
+        const {dataSource} = this.state;
         const components = {
             body: {
-                row: EditableRow,
-                cell: EditableCell,
+                row: this.EditableRow,
+                cell: this.EditableCell,
             },
         };
-        const columns = this.columns.map(col => {
+        const columns = this.state.columns.map(col => {
             if (!col.editable) {
                 return col;
             }
-
             return {
                 ...col,
                 onCell: record => ({
@@ -235,23 +222,27 @@ export default class ProgressTable extends React.Component {
         });
         return (
             <div>
-                <Button
-                    onClick={this.handleAdd}
-                    type="primary"
-                    style={{
-                        marginBottom: 16,
-                    }}
-                >
-                   新增
-                </Button>
-                <Table
-                    components={components}
-                    rowClassName={() => 'editable-row'}
-                    bordered
-                    dataSource={dataSource}
-                    columns={columns}
-                />
+                <RightBodyHeaderBar title={this.state.title}/>
+                <div>
+                    <Button
+                        onClick={this.handleAdd}
+                        type="primary"
+                        style={{
+                            marginBottom: 16,
+                        }}
+                    >
+                        新增
+                    </Button>
+                    <Table
+                        components={components}
+                        rowClassName={() => 'editable-row'}
+                        bordered
+                        dataSource={dataSource}
+                        columns={columns}
+                    />
+                </div>
             </div>
-        );
+        )
     }
 }
+export default technologyManage

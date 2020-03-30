@@ -7,6 +7,9 @@ global.constants = {
     addProgress: serverUrl + '/progress/addProgressList',
     updateProgress: serverUrl + '/progress/updateProgressList',
     deleteProgress: serverUrl + '/progress/deleteProgressList',
-    projectDetail: serverUrl + '/porject/projectDetail'
-
+    projectDetail: serverUrl + '/porject/projectDetail',
+    technologySelect:serverUrl + '/technology/selectTechnology',
+    updateTechnology:serverUrl + '/technology/updateTechnology',
+    insertTechnology:serverUrl + '/technology/insertNewTechnology',
+    deleteTechnology:serverUrl + '/technology/deleteNewTechnology',
 };

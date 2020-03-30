@@ -33,7 +33,7 @@ class Login extends Component {
             loginName: this.state.username,
             password: this.state.password
         }
-        createHashHistory().push('/sys/projectProgress');
+        createHashHistory().push('/sys/technologyManage');
         // fetchPost(global.constants.login, params)
         //     .then(
         //         res => {

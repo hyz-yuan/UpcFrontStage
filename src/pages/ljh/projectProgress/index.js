@@ -109,7 +109,7 @@ class projectProgress extends React.Component{
                             <TimeLine  mode="year" data={gantData}  />
                             </div>
                         <div style={{marginTop:'50px'}}>
-                            <ProgressTable onRef={this.onRef} pid={currentProjectID} reloadGant={this.requestProgress}/></div>
+                            <ProgressTable pid={currentProjectID} reloadGant={this.requestProgress}/></div>
                     </div>
                 </div>
 
