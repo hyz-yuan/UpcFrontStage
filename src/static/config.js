@@ -1,6 +1,7 @@
 const serverUrl = "http://localhost:9080/test"
 //const serverUrl = "https://www.intell-traffic.com:8444"
 global.constants = {
+    // create by ljh  ---begin
     projectList: serverUrl + '/project/projectList',
     projectListByMid: serverUrl + '/project/getProjectByManagerId',
     progressList: serverUrl + '/progress/getProgressList',
@@ -12,4 +13,5 @@ global.constants = {
     updateTechnology:serverUrl + '/technology/updateTechnology',
     insertTechnology:serverUrl + '/technology/insertNewTechnology',
     deleteTechnology:serverUrl + '/technology/deleteNewTechnology',
+    // create by ljh ---end
 };

@@ -235,6 +235,7 @@ state={
                         新增
                     </Button>
                     <Table
+                        style={{ width: 500 }}
                         components={components}
                         rowClassName={() => 'editable-row'}
                         bordered
