@@ -12,6 +12,7 @@ global.constants = {
     updateTechnology:serverUrl + '/technology/updateTechnology',
     insertTechnology:serverUrl + '/technology/insertNewTechnology',
     deleteTechnology:serverUrl + '/technology/deleteNewTechnology',
+    rightsList:serverUrl + '/manage/setRight',
     // create by ljh ---end
 
     //gsl用到的后端接口
@@ -21,10 +22,14 @@ global.constants = {
     changeProject:serverUrl+'/project1/changeProject',
     getProject:serverUrl+ '/project1/getProject',
 
+// <<<<<<< HEAD
 //    董志涵
     login:serverUrl+'web/login',
     sendCode:serverUrl+'web/sendCode',
     codeMaching:serverUrl+'web/codeMaching',
     logout:serverUrl+'web/logout',
 
+// =======
+    organizationChart : serverUrl + '/teamStructure/getTeamStructure'
+// >>>>>>> 98b1cd2cf54e11cb115c694da2cc49d02eb2325e
 };

@@ -48,7 +48,7 @@ class leftBar extends Component {
                             </span>
                         }
                     >
-                        <Menu.Item key={userType ? "/sys/basic/business" : "/sys/home"}
+                        <Menu.Item key={userType ? "/sys/basic/business" : "/sys/organizationChart"}
                                    onClick={this.goChildren}>企业信息</Menu.Item>
                         {userType ? '' : <Menu.Item key="/sys/basic/car" onClick={this.goChildren}>车辆信息</Menu.Item>}
                         {userType ? '' : <Menu.Item key="/sys/basic/driver" onClick={this.goChildren}>驾驶员信息</Menu.Item>}
