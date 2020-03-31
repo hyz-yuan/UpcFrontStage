@@ -80,25 +80,27 @@ class organizationChart extends Component{
                                     //fontWeight:  'bolder'
                                     }
                                 },
-                            lineStyle: {
-                                color: '#000',
-                                width: 1,
-                                type: 'broken' // 'curve'|'broken'|'solid'|'dotted'|'dashed'
-                                }
+
                             },
-                            emphasis: {
-                                label: {
-                                    show: false
-                                }
-                            }
-                        },
+                    },
+                    lineStyle: {
+                        color: '#000',
+                        width: 1,
+                        curveness : 0,//曲度
+                        type: 'solid' // 'curve'|'broken'|'solid'|'dotted'|'dashed'
+                    },
+                    emphasis: {
+                        label: {
+                            show: false
+                        }
+                    },
                     data: [treeData]
                 }]
         }
 
         return(
-            <div>
-                <ReactEcharts  option={option} style={{height:'200px',width:'100%'}}/>
+            <div >
+                <ReactEcharts  option={option} style={{height:'500px',width:'100%'}}/>
             </div>
         )
     }
