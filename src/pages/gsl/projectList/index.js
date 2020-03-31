@@ -19,7 +19,7 @@ class projectList extends React.Component {
                 //点击项目名称后，进行跳转
                 render: (text, record) => (<a onClick={(e) => this.goChildren(record.id)}>{text}</a>)
             },
-            {title: '实施地', dataIndex: 'placeName',},
+            {title: '实施地', dataIndex: 'workPlaceName',},
             {title: '负责人', dataIndex: 'managerName',},
             {title: '开始时间', dataIndex: 'beginTime',},
             {title: '结束时间', dataIndex: 'endTime',},
