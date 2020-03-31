@@ -7,9 +7,13 @@ import LeftBar from '../static/component/leftBar'
 import Header from '../static/component/header'
 
 const Home = loadable(()=>import('./ljh/home'));
-const projectList = loadable(()=>import('./ljh/projectList'));
+// const projectList = loadable(()=>import('./ljh/projectList'));
 const projectProgress = loadable(()=>import('./ljh/projectProgress'));
 const technologyManage = loadable(()=>import('./ljh/technologyManage'));
+
+//gsl新增
+const projectList = loadable(()=>import('./gsl/projectList'));
+const projectManage = loadable(()=>import('./gsl/projectManage'));
 
 class MainFrame extends Component{
     state = {
@@ -25,6 +29,7 @@ class MainFrame extends Component{
                     <Route path="/sys/projectList" component={projectList}/>
                     <Route path="/sys/projectProgress" component={projectProgress}/>
                     <Route path="/sys/technologyManage" component={technologyManage}/>
+                    <Route path="/sys/projectManage/:id" component={projectManage}/>
                 </div>
             </div>
         )

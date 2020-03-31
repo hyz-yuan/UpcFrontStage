@@ -34,6 +34,9 @@ class Login extends Component {
             password: this.state.password
         }
         createHashHistory().push('/sys/technologyManage');
+        //gsl测试
+        // createHashHistory().push('/sys/projectList');
+
         // fetchPost(global.constants.login, params)
         //     .then(
         //         res => {
