@@ -21,4 +21,10 @@ global.constants = {
     changeProject:serverUrl+'/project1/changeProject',
     getProject:serverUrl+ '/project1/getProject',
 
+//    董志涵
+    login:serverUrl+'web/login',
+    sendCode:serverUrl+'web/sendCode',
+    codeMaching:serverUrl+'web/codeMaching',
+    logout:serverUrl+'web/logout',
+
 };
