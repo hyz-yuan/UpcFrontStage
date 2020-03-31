@@ -1,6 +1,7 @@
 const serverUrl = "http://localhost:9080/test"
 //const serverUrl = "https://www.intell-traffic.com:8444"
 global.constants = {
+    // create by ljh ---begin
     projectListByMid: serverUrl + '/project/getProjectByManagerId',
     progressList: serverUrl + '/progress/getProgressList',
     addProgress: serverUrl + '/progress/addProgressList',
@@ -11,6 +12,7 @@ global.constants = {
     updateTechnology:serverUrl + '/technology/updateTechnology',
     insertTechnology:serverUrl + '/technology/insertNewTechnology',
     deleteTechnology:serverUrl + '/technology/deleteNewTechnology',
+    // create by ljh ---end
 
     //gsl用到的后端接口
     projectList: serverUrl + '/project2/projectList',
