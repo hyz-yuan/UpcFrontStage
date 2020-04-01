@@ -8,34 +8,35 @@ global.constants = {
     updateProgress: serverUrl + '/progress/updateProgressList',
     deleteProgress: serverUrl + '/progress/deleteProgressList',
     projectDetail: serverUrl + '/porject/projectDetail',
-    technologySelect:serverUrl + '/technology/selectTechnology',
-    updateTechnology:serverUrl + '/technology/updateTechnology',
-    insertTechnology:serverUrl + '/technology/insertNewTechnology',
-    deleteTechnology:serverUrl + '/technology/deleteNewTechnology',
+    technologySelect: serverUrl + '/technology/selectTechnology',
+    updateTechnology: serverUrl + '/technology/updateTechnology',
+    insertTechnology: serverUrl + '/technology/insertNewTechnology',
+    deleteTechnology: serverUrl + '/technology/deleteNewTechnology',
 
-    WorkPlaceSelect:serverUrl + '/workPlace/selectWorkPlace',
-    updateWorkPlace:serverUrl + '/workPlace/updateWorkPlace',
-    insertWorkPlace:serverUrl + '/workPlace/insertWorkPlace',
-    deleteWorkPlace:serverUrl + '/workPlace/deleteWorkPlace',
+    WorkPlaceSelect: serverUrl + '/workPlace/selectWorkPlace',
+    updateWorkPlace: serverUrl + '/workPlace/updateWorkPlace',
+    insertWorkPlace: serverUrl + '/workPlace/insertWorkPlace',
+    deleteWorkPlace: serverUrl + '/workPlace/deleteWorkPlace',
 
-    rightsList:serverUrl + '/manage/setRight',
+    rightsList: serverUrl + '/manage/setRight',
     // create by ljh ---end
 
     //gsl用到的后端接口
     projectList: serverUrl + '/project2/projectList',
-    addProject:serverUrl+'/project1/addProject',
-    deleteProject: serverUrl+'/project1/deleteProject',
-    changeProject:serverUrl+'/project1/changeProject',
-    getProject:serverUrl+ '/project1/getProject',
+    addProject: serverUrl + '/project1/addProject',
+    deleteProject: serverUrl + '/project1/deleteProject',
+    changeProject: serverUrl + '/project1/changeProject',
+    getProject: serverUrl + '/project1/getProject',
 
     //dzh
-    login:serverUrl+'web/login',
-    sendCode:serverUrl+'web/sendCode',
-    codeMaching:serverUrl+'web/codeMaching',
-    logout:serverUrl+'web/logout',
+    login: serverUrl + 'web/login',
+    sendCode: serverUrl + 'web/sendCode',
+    codeMaching: serverUrl + 'web/codeMaching',
+    logout: serverUrl + 'web/logout',
     //hyz
-    organizationChart : serverUrl + '/teamStructure/getTeamStructure',
+    organizationChart: serverUrl + '/teamStructure/getTeamStructure',
     //yxy
-    register:serverUrl+'/web/register',
-
+    register: serverUrl + '/web/register',
+    //dzw
+    projectDetailSingle: serverUrl + '/project1/getProjectDetail'
 };
