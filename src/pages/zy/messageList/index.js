@@ -11,7 +11,6 @@ import moment from 'moment';
 
     
     state={
-        title:"消息中心",
         columns:[
             { title: '项目名称',dataIndex: 'projectName'},
             { title: '日期',dataIndex: 'operatorTime'},
