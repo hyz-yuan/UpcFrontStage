@@ -12,4 +12,8 @@ global.constants = {
     updateTechnology:serverUrl + '/technology/updateTechnology',
     insertTechnology:serverUrl + '/technology/insertNewTechnology',
     deleteTechnology:serverUrl + '/technology/deleteNewTechnology',
+    WorkPlaceSelect:serverUrl + '/workPlace/selectWorkPlace',
+    updateWorkPlace:serverUrl + '/workPlace/updateWorkPlace',
+    insertWorkPlace:serverUrl + '/workPlace/insertWorkPlace',
+    deleteWorkPlace:serverUrl + '/workPlace/deleteWorkPlace',
 };
