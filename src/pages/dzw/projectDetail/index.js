@@ -25,7 +25,18 @@ export default class ProjectDetail extends Component {
     }
 
     getProjectDetail = () => {
-        let param = {id: 1};
+        let url = this.props.location.search; //获取url中"?"符后的字串
+        console.log("url:" + url);
+        let id = 1;
+        if (url.indexOf("?") != -1) {
+            let str = url.substr(1);
+            console.log("str:" + str);
+            // console.log("str1:" + str.split("=")[0]);//id
+            // console.log("str2:" + str.split("=")[1]);//1
+            id = parseInt(str.split("=")[1]);
+        }
+
+        let param = {id: id};
         fetchPost(global.constants.projectDetailSingle, param)
             .then(
                 res => {

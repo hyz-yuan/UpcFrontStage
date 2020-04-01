@@ -8,6 +8,7 @@ import Header from '../static/component/header'
 
 const Home = loadable(()=>import('./ljh/home'));
 const projectList = loadable(()=>import('./ljh/projectList'));
+const projectListNew = loadable(()=>import('./gsl/projectList'));
 const organizationChart = loadable(()=>import('./hyz/organizationChart'));
 const projectProgress = loadable(()=>import('./ljh/projectProgress'));
 const technologyManage = loadable(()=>import('./ljh/technologyManage'));
@@ -30,6 +31,7 @@ class MainFrame extends Component{
                     <Route path="/sys/home" component={Home}/>
                     <Route path="/sys/organizationChart" component={organizationChart}/>
                     <Route path="/sys/projectList" component={projectList}/>
+                    <Route path="/sys/projectListNew" component={projectListNew}/>
                     <Route path="/sys/projectProgress" component={projectProgress}/>
 
                     <Route path="/sys/technologyManage" component={technologyManage}/>

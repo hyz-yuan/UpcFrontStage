@@ -42,7 +42,7 @@ class projectList extends React.Component {
 
     goChildren = (id) => {
         sessionStorage.clear();
-        createHashHistory().push('/sys/projectDetail'+id)
+        createHashHistory().push('/sys/projectDetail?id='+id)
     };
 
 
