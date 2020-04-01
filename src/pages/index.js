@@ -12,6 +12,9 @@ const projectProgress = loadable(()=>import('./ljh/projectProgress'));
 const technologyManage = loadable(()=>import('./ljh/technologyManage'));
 const taskList = loadable(()=>import('./wjb/taskList'));
 
+
+
+
 class MainFrame extends Component{
     state = {
     };
@@ -27,6 +30,8 @@ class MainFrame extends Component{
                     <Route path="/sys/projectProgress" component={projectProgress}/>
                     <Route path="/sys/technologyManage" component={technologyManage}/>
                     <Route path="/sys/taskList" component= {taskList}/>
+                   
+                   
                 </div>
             </div>
         )

@@ -1,7 +1,8 @@
 import React,{Component} from 'react';
 import {Table,Button,Modal} from 'antd';
 import {fetchPost} from "../../../static/util/fetch";
-import ReportInsert from "./ReportInsert"
+import ReportInsert from "./ReportInsert";
+import moment from "moment";
 
 
 
@@ -42,6 +43,7 @@ import ReportInsert from "./ReportInsert"
             reportList: list.map((item, index) => {
                 return {
                     ...item,
+                    date:moment(parseInt(item.date)).format("YYYY-MM-DD"),
                     key: index
                 }
             })
@@ -126,8 +128,6 @@ import ReportInsert from "./ReportInsert"
                 >
                        <ReportInsert
                        conditions={this.state.conditions||{}}
-                      //  userId={this.state.conditions.userId||{}} 
-                      //  projectName={this.state.conditions.projectName||{}}
                        insertData={this.state.insertData||{}} 
                        dispatchData={(data)=>{this.setState({insertData:data})}}
                        

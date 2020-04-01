@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
-import {Col,Row,Select,Input,Upload,Button} from 'antd';
+import {Col,Row,Select,Input,Upload,Button,message} from 'antd';
+import {serverUrl} from "../../../static/config";
 
 
 
@@ -22,7 +23,17 @@ const { TextArea } = Input;
         data[option]=value;
         this.props.dispatchData(data);
    }
-    
+   handleFile = (info) => {
+     console.log(info.fileList)
+    const fileList = info.fileList;
+   
+    if (info.file.status === 'done') {
+        message.success(`${info.file.name} 上传成功`);
+    } else if (info.file.status === 'error') {
+        message.error(`${info.file.name} 上传失败.`);
+    }
+    this.changeInput(fileList,"document");
+}
 
     render() {
       
@@ -50,7 +61,12 @@ const { TextArea } = Input;
             <Row style={{marginTop:10}}>
                 <Col span={3} style={{lineHeight:'41px'}}>附件上传<span style={{color:'#FF3300'}}>*</span></Col>
                 <Col span={20}>
-                    <Upload>
+                    <Upload
+                     action={'http://localhost:9080/test/upload/uploadReport'}
+                     onChange={this.handleFile}
+                    //  showUploadList={false}
+                    //   fileList={formData.propagandaEnclosure}>
+                       >
                         <Button>
                          选择上传文件
                         </Button>

@@ -43,7 +43,7 @@ import ReportDetails from './ReportDetails'
         })
     }
     
-    handleClick = (item)=>{console.log(item)
+    handleClick = (item)=>{
           this.setState({
             isVisible:true,
             queryTerms:item
@@ -72,6 +72,15 @@ import ReportDetails from './ReportDetails'
             {
                 title: '本人角色',
                 dataIndex: 'userType',
+                render:(text,record)=>{
+                 
+                    if(text === 0){
+                      return "组长"
+                    }else{
+                      return "组员"
+                    }
+                
+                 },
       
             },
               {
