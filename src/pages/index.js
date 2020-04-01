@@ -8,9 +8,12 @@ import Header from '../static/component/header'
 
 const Home = loadable(()=>import('./ljh/home'));
 const projectList = loadable(()=>import('./ljh/projectList'));
+const organizationChart = loadable(()=>import('./hyz/organizationChart'));
 const projectProgress = loadable(()=>import('./ljh/projectProgress'));
 const technologyManage = loadable(()=>import('./ljh/technologyManage'));
 const workPlace = loadable(()=>import('./wwp/workPlace'));
+
+
 class MainFrame extends Component{
     state = {
     };
@@ -22,10 +25,13 @@ class MainFrame extends Component{
                 <LeftBar/>
                 <div className='rightBodyUnfold'>
                     <Route path="/sys/home" component={Home}/>
+                    <Route path="/sys/organizationChart" component={organizationChart}/>
                     <Route path="/sys/projectList" component={projectList}/>
                     <Route path="/sys/projectProgress" component={projectProgress}/>
+
                     <Route path="/sys/technologyManage" component={technologyManage}/>
                     <Route path="/sys/workPlace" component={workPlace}/>
+
                 </div>
             </div>
         )

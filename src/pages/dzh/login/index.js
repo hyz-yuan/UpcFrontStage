@@ -4,6 +4,7 @@ import LoginUsername from '../../../static/image/loginUsername.png';
 import LoginPassword from '../../../static/image/loginPassword.png';
 import './index.css'
 import {createHashHistory} from "history";
+import {fetchPost} from "../../../static/util/fetch";
 
 class Login extends Component {
     state = {
@@ -33,21 +34,27 @@ class Login extends Component {
             loginName: this.state.username,
             password: this.state.password
         }
-        createHashHistory().push('/sys/workPlace');
-        //gsl测试
-        // createHashHistory().push('/sys/projectList');
-
-        // fetchPost(global.constants.login, params)
-        //     .then(
-        //         res => {
-        //             res.userType?createHashHistory().push('/sys/basic/business'):createHashHistory().push('/sys/home')
-        //         }
-        //     )
-        //     .catch(e => console.log(e))
+        //createHashHistory().push('/sys/home');
+        // eslint-disable-next-line no-undef
+        fetchPost('http://localhost:7080/pages/web/login', params)
+        //     fetchPost(global.constants.login,params)
+            .then(
+                res => {
+                    // res.userType?createHashHistory().push('/sys/projectList'):createHashHistory().push('/sys/home')
+                    if(res.userType==1)createHashHistory().push('/sys/projectList');
+                    else if(res.userType==2)createHashHistory().push('/sys/projectList');
+                    else if(res.userType==3)createHashHistory().push('/sys/projectList');
+                }
+            )
+            .catch(e => console.log(e))
     }
 
     forgetPassword = () => {
         createHashHistory().push('/forgetPassword')
+    }
+
+    register = () =>{
+        createHashHistory().push()
     }
 
     render() {
@@ -72,6 +79,11 @@ class Login extends Component {
                     <div className='registerBox' onClick={this.forgetPassword}>
                         忘记密码?
                     </div>
+
+                    <div className='registerBox2' onClick={this.register}>
+                        注册
+                    </div>
+
                 </div>
             </div>
         );

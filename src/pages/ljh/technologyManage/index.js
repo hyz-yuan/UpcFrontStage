@@ -148,11 +148,11 @@ state={
         let pname ={};
         this.options=[];
         this.options.push(<Select key='0'>第一级</Select>);
+
         list.map((item, index) => {
             pname[item.id]=item.technologyName;
             this.options.push(<Select key={item.id}>{item.technologyName}</Select>);
         })
-        //this.state.options.push(<Select key='a'>'a'</Select>);
         this.setState({
             dataSource: list.map((item, index) => {
                 return {
@@ -188,10 +188,11 @@ state={
         this.setState({
             dataSource: newData,
         });
+        let reg=/\d/ //正则表达式，测试是否只包含数字
         let params={
             id : row.id,
             technologyName:row.technologyName,
-            pId:row.pId.length>2?null:row.pId, /// will cause error
+            pId:reg.test(row.pId)?row.pId:null, /// will cause error
         };
         this.requestProgress(global.constants.updateTechnology,params);
     };
@@ -234,6 +235,7 @@ state={
                         新增
                     </Button>
                     <Table
+                        style={{ width: 500 }}
                         components={components}
                         rowClassName={() => 'editable-row'}
                         bordered
