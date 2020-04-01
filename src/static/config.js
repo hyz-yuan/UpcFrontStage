@@ -28,12 +28,14 @@ global.constants = {
     changeProject:serverUrl+'/project1/changeProject',
     getProject:serverUrl+ '/project1/getProject',
 
+    //dzh
     login:serverUrl+'web/login',
     sendCode:serverUrl+'web/sendCode',
     codeMaching:serverUrl+'web/codeMaching',
     logout:serverUrl+'web/logout',
+    //hyz
     organizationChart : serverUrl + '/teamStructure/getTeamStructure',
-
+    //yxy
     register:serverUrl+'/web/register',
 
 };
