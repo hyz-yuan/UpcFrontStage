@@ -49,8 +49,8 @@ class ForgetPassword extends Component {
             email: this.state.email,
             realName: this.state.name
         }
-        fetchPost('http://localhost:7080/pages/web/sendCode', params)
-        // fetchPost(global.constants.sendCode, params)
+        // fetchPost('http://localhost:7080/pages/web/sendCode', params)
+        fetchPost(global.constants.sendCode, params)
             .then(
                 res => {
                     switch (res) {
@@ -94,8 +94,8 @@ class ForgetPassword extends Component {
                 code: this.state.verification,
                 password: this.state.password
             }
-            fetchPost('http://localhost:7080/pages/web/codeMaching', params)
-            // fetchPost(global.constants.codeMaching, params)
+            // fetchPost('http://localhost:7080/pages/web/codeMaching', params)
+            fetchPost(global.constants.codeMaching, params)
                 .then(
                     res => {
                         switch (res) {

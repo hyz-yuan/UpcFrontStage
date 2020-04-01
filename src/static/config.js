@@ -32,6 +32,8 @@ global.constants = {
     sendCode:serverUrl+'web/sendCode',
     codeMaching:serverUrl+'web/codeMaching',
     logout:serverUrl+'web/logout',
-    organizationChart : serverUrl + '/teamStructure/getTeamStructure'
+    organizationChart : serverUrl + '/teamStructure/getTeamStructure',
+
+    register:serverUrl+'/web/register',
 
 };
