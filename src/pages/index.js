@@ -13,6 +13,7 @@ const organizationChart = loadable(()=>import('./hyz/organizationChart'));
 const projectProgress = loadable(()=>import('./ljh/projectProgress'));
 const technologyManage = loadable(()=>import('./ljh/technologyManage'));
 
+const  projectListUser = loadable(()=>import('./xjs/projectListUser'));
 const taskList = loadable(()=>import('./wjb/taskList'));
 
 const projectDetail = loadable(() => import('./dzw/projectDetail'));
@@ -39,6 +40,7 @@ class MainFrame extends Component{
                     <Route path="/sys/projectProgress" component={projectProgress}/>
                     <Route path="/sys/technologyManage" component={technologyManage}/>
 
+                    <Route path="/sys/projectListUser" component= {projectListUser}/>
 
                     <Route path="/sys/technologyManage" component={technologyManage}/>
                     <Route path="/sys/taskList" component= {taskList}/>

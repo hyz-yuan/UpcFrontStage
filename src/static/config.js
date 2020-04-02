@@ -1,4 +1,4 @@
-const serverUrl = "http://localhost:9080/test"
+const serverUrl = "http://localhost:9082/test"
 global.constants = {
     // create by ljh ---begin
     projectListByMid: serverUrl + '/project/getProjectByManagerId',
@@ -54,5 +54,11 @@ global.constants = {
     changePassword: serverUrl + '/manage1/changePassword',
     //刘宁用到的工作地点和技术领域接口
     selectWorkPlace:  serverUrl + '/workPlace/selectWorkPlace',
-    selectTechnology:  serverUrl + '/technology/selectTechnology'
+    selectTechnology:  serverUrl + '/technology/selectTechnology',
+    //xjs
+    deleteGroup:serverUrl + '/project/deleteGroup',
+    addGroup:serverUrl + '/project/addGroup',
+    projectList:serverUrl + '/project2/projectList',
+    getGroupList:serverUrl + '/project/getGroupList',
+    getPersonList:serverUrl + '/project1/getPersonList?id&pageNo'
 };
