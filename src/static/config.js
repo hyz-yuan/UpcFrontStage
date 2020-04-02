@@ -1,5 +1,4 @@
 const serverUrl = "http://localhost:9080/test"
-//const serverUrl = "https://www.intell-traffic.com:8444"
 global.constants = {
     // create by ljh ---begin
     projectListByMid: serverUrl + '/project/getProjectByManagerId',
@@ -18,7 +17,7 @@ global.constants = {
     insertWorkPlace: serverUrl + '/workPlace/insertWorkPlace',
     deleteWorkPlace: serverUrl + '/workPlace/deleteWorkPlace',
 
-    rightsList: serverUrl + '/manage/setRight',
+    rightsList: serverUrl + '/manage1/setRight',
     // create by ljh ---end
 
     //gsl用到的后端接口
