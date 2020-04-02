@@ -38,5 +38,22 @@ global.constants = {
     //yxy
     register: serverUrl + '/web/register',
     //dzw
-    projectDetailSingle: serverUrl + '/project1/getProjectDetail'
+    projectDetailSingle: serverUrl + '/project1/getProjectDetail',
+    //ln
+    setRightList: serverUrl + '/manage1/setRight',
+    insertRight: serverUrl + '/manage1/insertNewRight',
+    deleteRight: serverUrl + '/manage1/deleteRight',
+    updateRight: serverUrl + '/manage1/updateRight',
+    setRoleList: serverUrl + '/manage1/Role',
+    insertRole: serverUrl + '/manage1/insertNewRole',
+    deleteRole: serverUrl + '/manage1/deleteRole',
+    updateRole: serverUrl + '/manage1/updateRole',
+    getEmployee: serverUrl + '/manage1/getEmployee',
+    searchEmployee: serverUrl + '/manage1/search',
+    deleteUser: serverUrl + '/manage1/deleteUser',
+    updateUser: serverUrl + '/manage1/updateUser',
+    changePassword: serverUrl + '/manage1/changePassword',
+    //刘宁用到的工作地点和技术领域接口
+    selectWorkPlace:  serverUrl + '/workPlace/selectWorkPlace',
+    selectTechnology:  serverUrl + '/technology/selectTechnology'
 };

@@ -16,7 +16,10 @@ const taskList = loadable(()=>import('./wjb/taskList'));
 
 const projectDetail = loadable(() => import('./dzw/projectDetail'));
 const workPlace = loadable(()=>import('./wwp/workPlace'));
-
+//ln
+const rights=loadable(()=>import('./ln/rights'));
+const roles=loadable(()=>import('./ln/roles'));
+const Employees=loadable(()=>import('./ln/Employees'));
 
 class MainFrame extends Component{
     state = {
@@ -39,7 +42,10 @@ class MainFrame extends Component{
 
                     <Route path ="/sys/projectDetail" component={projectDetail}/>
                     <Route path="/sys/workPlace" component={workPlace}/>
-
+                    //ln
+                    <Route path="/sys/rights" component={rights}/>
+                    <Route path="/sys/roles" component={roles}/>
+                    <Route path="/sys/Employees" component={Employees}/>
                 </div>
             </div>
         )
