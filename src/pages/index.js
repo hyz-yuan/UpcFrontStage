@@ -8,13 +8,16 @@ import Header from '../static/component/header'
 
 const Home = loadable(()=>import('./ljh/home'));
 const projectList = loadable(()=>import('./ljh/projectList'));
-const projectListNew = loadable(()=>import('./gsl/projectList'));
 const organizationChart = loadable(()=>import('./hyz/organizationChart'));
 const projectProgress = loadable(()=>import('./ljh/projectProgress'));
 const technologyManage = loadable(()=>import('./ljh/technologyManage'));
 
 const  projectListUser = loadable(()=>import('./xjs/projectListUser'));
 const taskList = loadable(()=>import('./wjb/taskList'));
+
+//gsl
+const projectListNew = loadable(()=>import('./gsl/projectList'));
+const projectManage = loadable(()=>import('./gsl/projectManage'));
 
 const projectDetail = loadable(() => import('./dzw/projectDetail'));
 const workPlace = loadable(()=>import('./wwp/workPlace'));
@@ -43,12 +46,14 @@ class MainFrame extends Component{
 
                     <Route path="/sys/projectListUser" component= {projectListUser}/>
 
+                    <Route path="/sys/projectManage/:id" component={projectManage}/>
+
                     <Route path="/sys/technologyManage" component={technologyManage}/>
                     <Route path="/sys/taskList" component= {taskList}/>
 
                     <Route path ="/sys/projectDetail" component={projectDetail}/>
                     <Route path="/sys/workPlace" component={workPlace}/>
-                    //ln
+                    {/*ln*/}
                     <Route path="/sys/rights" component={rights}/>
                     <Route path="/sys/roles" component={roles}/>
                     <Route path="/sys/Employees" component={Employees}/>

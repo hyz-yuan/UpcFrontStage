@@ -37,6 +37,8 @@ class projectList extends React.Component {
     };
     //修改项目
     handleProjectManage = (id) => {
+        sessionStorage.clear();
+        //注意路径最后的斜杠，丢了不能路由过来
         createHashHistory().push('/sys/projectManage/'+id)
     };
 

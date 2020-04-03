@@ -26,6 +26,8 @@ global.constants = {
     deleteProject: serverUrl + '/project1/deleteProject',
     changeProject: serverUrl + '/project1/changeProject',
     getProject: serverUrl + '/project1/getProject',
+    workPlaceList: serverUrl + '/workPlace/list',
+    managerList: serverUrl+'/user/manager',
 
     //dzh
     login: serverUrl + 'web/login',
@@ -53,6 +55,8 @@ global.constants = {
     updateUser: serverUrl + '/manage1/updateUser',
     changePassword: serverUrl + '/manage1/changePassword',
     //刘宁用到的工作地点和技术领域接口
+    selectWorkPlace: serverUrl + '/workPlace/selectWorkPlace',
+    selectTechnology: serverUrl + '/technology/selectTechnology',
     selectWorkPlace:  serverUrl + '/workPlace/selectWorkPlace',
     selectTechnology:  serverUrl + '/technology/selectTechnology',
     //xjs

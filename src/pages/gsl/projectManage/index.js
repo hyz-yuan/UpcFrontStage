@@ -15,13 +15,16 @@ class projectManage extends Component {
         this.state = {
             id: "",
             projectName: "",
-            place: null,
-            manager: null,
+            place: "",
+            manager: "",
             beginTime: "",
             endTime: "",
             remark: "",
             workPlaceName: "",
             managerName: "",
+            workPlaceList: [],
+            managerList:[],
+            requestLoading: false,
         };
     }
 
@@ -42,8 +45,8 @@ class projectManage extends Component {
                         beginTime: res.beginTime,
                         endTime: res.endTime,
                         remark: res.remark,
-                        workPlaceName:res.workPlaceName,
-                        managerName:res.managerName,
+                        workPlaceName: res.workPlaceName,
+                        managerName: res.managerName,
                     })
                 });
         }
@@ -54,7 +57,7 @@ class projectManage extends Component {
     postProject = () => {
         console.log(this.state);
         let projectId = this.props.match.params.id;
-        //0为新建项目的标志，非0位修改项目的标志
+        //0为新建项目的标志，非0为修改项目的标志
         if (projectId === "0") {
             fetchPost(global.constants.addProject, this.state)
                 .catch(e => console.log(e))
@@ -87,7 +90,7 @@ class projectManage extends Component {
 
     goFather = () => {
         // sessionStorage.clear();
-        createHashHistory().push('/sys/projectList')
+        createHashHistory().push('/sys/projectListNew')
     };
 
     handleGetInputValue = (event) => {
@@ -97,8 +100,6 @@ class projectManage extends Component {
     };
 
     onChangeB = (value, dateString) => {
-        // console.log('Selected Time: ', moment(value).format('YYYY-MM-DD'));
-        // console.log('Formatted Selected Time: ', dateString);
         this.setState({
             beginTime: dateString,
         })
@@ -109,6 +110,28 @@ class projectManage extends Component {
             endTime: dateString,
         })
     };
+
+    //从后端动态获取workPlace的方法
+    getWorkPlaceList() {
+        const that = this;
+        fetchPost(global.constants.workPlaceList)
+            .then(function (res) {
+                that.setState({
+                    workPlaceList: res
+                });
+            });
+    }
+
+    //从后端获取manager的方法
+    getManagerList(){
+        const that = this;
+        fetchPost(global.constants.managerList)
+            .then(function (res) {
+                that.setState({
+                    managerList:res,
+                })
+            })
+    }
 
     render() {
         console.log("aaa" + this.state.projectName);
@@ -122,7 +145,6 @@ class projectManage extends Component {
 
 
         const {Option} = Select;
-
         return (
             <div>
                 <RightBodyHeaderBar title={"新增/修改项目"}/>
@@ -145,15 +167,24 @@ class projectManage extends Component {
                     >
                         <Select
                             defaultValue={Option.valueOf()}
-                            value={this.state.place}
-                            // value={this.state.workPlaceName}
-                            onChange={value => this.setState({place: value})}
+                            value={this.state.workPlaceName}
+                            onChange={value => this.setState({workPlaceName: value})}
+                            //当获得焦点时调用
+                            onFocus={() => this.getWorkPlaceList()}
                             allowClear
                         >
-                            <Option value="1">北京</Option>
-                            <Option value="2">东营</Option>
-                            <Option value="3">青岛</Option>
-                            <Option value="4">沈阳</Option>
+                            {
+                                this.state.workPlaceList.map((item, i) => {
+                                        return (
+                                            <Option index={i} value={item.workPlace}>{item.workPlace}</Option>
+                                        )
+                                    }
+                                )
+                            }
+                            {/*<Option value="1">北京</Option>*/}
+                            {/*<Option value="2">东营</Option>*/}
+                            {/*<Option value="3">青岛</Option>*/}
+                            {/*<Option value="4">沈阳</Option>*/}
                         </Select>
                     </Form.Item>
 
@@ -164,15 +195,22 @@ class projectManage extends Component {
                     >
                         <Select
                             defaultValue={Option.valueOf()}
-                            value={this.state.manager}
-                            // value={this.state.managerName}
-                            onChange={value => this.setState({manager: value})}
+                            // value={this.state.manager}
+                            value={this.state.managerName}
+                            onChange={value => this.setState({managerName: value})}
+                            onFocus={()=>this.getManagerList()}
                             allowClear
                         >
-                            <Option value="1">张三</Option>
-                            <Option value="2">c</Option>
-                            <Option value="3">ddd</Option>
-                            <Option value="4">cxm</Option>
+                            {/*从祸端获取的动态*/}
+                            {
+                                this.state.managerList.map((item,index)=>{
+                                    return(<Option index={index} value={item.id}>{item.realName}</Option>)
+                                })
+                            }
+                            {/*<Option value="1">张三</Option>*/}
+                            {/*<Option value="2">c</Option>*/}
+                            {/*<Option value="3">ddd</Option>*/}
+                            {/*<Option value="4">cxm</Option>*/}
                         </Select>
                     </Form.Item>
                     <Form.Item label="起止日期"
