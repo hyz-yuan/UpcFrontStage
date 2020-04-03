@@ -23,7 +23,7 @@ class projectManage extends Component {
             workPlaceName: "",
             managerName: "",
             workPlaceList: [],
-            managerList:[],
+            managerList: [],
             requestLoading: false,
         };
     }
@@ -32,6 +32,7 @@ class projectManage extends Component {
     componentDidMount() {
         let projectId = this.props.match.params.id;
         console.log("项目id：" + projectId);
+        //非0为修改项目的标志
         if (projectId !== "0") {
             let params = {id: projectId};
             fetchPost(global.constants.getProject, params)
@@ -81,7 +82,7 @@ class projectManage extends Component {
         }
     };
 
-    //消息提示框
+    //消息提示框方法
     success = (msg) => {
         Modal.success({
             content: msg,
@@ -89,7 +90,7 @@ class projectManage extends Component {
     };
 
     goFather = () => {
-        // sessionStorage.clear();
+        sessionStorage.clear();
         createHashHistory().push('/sys/projectListNew')
     };
 
@@ -99,13 +100,14 @@ class projectManage extends Component {
         })
     };
 
-    onChangeB = (value, dateString) => {
+    //时间选择框改变的回调函数
+    onChangeBeginTime = (value, dateString) => {
         this.setState({
             beginTime: dateString,
         })
     };
 
-    onChangeE = (value, dateString) => {
+    onChangeEndTime = (value, dateString) => {
         this.setState({
             endTime: dateString,
         })
@@ -123,18 +125,18 @@ class projectManage extends Component {
     }
 
     //从后端获取manager的方法
-    getManagerList(){
+    getManagerList() {
         const that = this;
         fetchPost(global.constants.managerList)
             .then(function (res) {
                 that.setState({
-                    managerList:res,
+                    managerList: res,
                 })
             })
     }
 
     render() {
-        console.log("aaa" + this.state.projectName);
+        console.log("打印项目名称" + this.state.projectName);
         const layout = {
             labelCol: {span: 5},//设置距离做边框的距离
             wrapperCol: {span: 12},//宽度
@@ -143,13 +145,12 @@ class projectManage extends Component {
             wrapperCol: {offset: 8, span: 12},
         };
 
-
         const {Option} = Select;
         return (
             <div>
                 <RightBodyHeaderBar title={"新增/修改项目"}/>
-                <Form
-                    {...layout}
+                <Form name={"projectForm"}
+                      {...layout}
                     // initialValues={{remember: false}}
                 >
                     <Form.Item
@@ -163,8 +164,7 @@ class projectManage extends Component {
 
                     <Form.Item
                         label="实施地点"
-                        rules={[{required: true, message: '请选择项目地点!'}]}
-                    >
+                        rules={[{required: true, message: '请选择项目地点!'}]}>
                         <Select
                             defaultValue={Option.valueOf()}
                             value={this.state.workPlaceName}
@@ -181,10 +181,6 @@ class projectManage extends Component {
                                     }
                                 )
                             }
-                            {/*<Option value="1">北京</Option>*/}
-                            {/*<Option value="2">东营</Option>*/}
-                            {/*<Option value="3">青岛</Option>*/}
-                            {/*<Option value="4">沈阳</Option>*/}
                         </Select>
                     </Form.Item>
 
@@ -198,19 +194,15 @@ class projectManage extends Component {
                             // value={this.state.manager}
                             value={this.state.managerName}
                             onChange={value => this.setState({managerName: value})}
-                            onFocus={()=>this.getManagerList()}
+                            onFocus={() => this.getManagerList()}
                             allowClear
                         >
-                            {/*从祸端获取的动态*/}
+                            {/*从后端获取的动态*/}
                             {
-                                this.state.managerList.map((item,index)=>{
-                                    return(<Option index={index} value={item.id}>{item.realName}</Option>)
+                                this.state.managerList.map((item, index) => {
+                                    return (<Option index={index} value={item.id}>{item.realName}</Option>)
                                 })
                             }
-                            {/*<Option value="1">张三</Option>*/}
-                            {/*<Option value="2">c</Option>*/}
-                            {/*<Option value="3">ddd</Option>*/}
-                            {/*<Option value="4">cxm</Option>*/}
                         </Select>
                     </Form.Item>
                     <Form.Item label="起止日期"
@@ -220,13 +212,13 @@ class projectManage extends Component {
                             showTime
                             format='YYYY-MM-DD HH:mm:ss'
                             value={this.state.beginTime !== "" ? moment(this.state.beginTime) : null}
-                            onChange={this.onChangeB}/>
+                            onChange={this.onChangeBeginTime()}/>
                         —
                         <DatePicker
                             showTime
                             format='YYYY-MM-DD HH:mm:ss'
                             value={this.state.endTime !== "" ? moment(this.state.endTime) : null}
-                            onChange={this.onChangeE}/>
+                            onChange={this.onChangeEndTime()}/>
                     </Form.Item>
                     <Form.Item label="备注"
                     >
