@@ -45,7 +45,7 @@ class leftBar extends Component {
                             {this.sub(list,item.id)}
                         </SubMenu>)
                     }else{
-                        return (<Menu.Item  onClick={this.goChildren}>{item.rights}</Menu.Item>)
+                        return (<Menu.Item  onClick={this.goChildren} key={item.urls}>{item.rights}</Menu.Item>)
                     }
                 }
             }

@@ -1,4 +1,4 @@
-const serverUrl = "http://localhost:9082/test"
+const serverUrl = "http://localhost:9080/test"
 global.constants = {
     // create by ljh ---begin
     projectListByMid: serverUrl + '/project/getProjectByManagerId',

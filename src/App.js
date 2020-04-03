@@ -6,10 +6,10 @@ import 'antd/dist/antd.css';
 import loadable from "./static/util/loadbale";
 import MainFrame from './pages'
 
- const Login = loadable(()=>import('./pages/ljh/login'));
-//const Login = loadable(()=>import('./pages/dzh/login'));
+//const Login = loadable(()=>import('./pages/ljh/login'));
+const Login = loadable(()=>import('./pages/dzh/login'));
 const ForgetPassword = loadable(()=>import('./pages/dzh/forgetPassword'));
-const Register = loadable(()=>import('./pages/yxy/register'));
+const Register = loadable(()=>import('./pages/ljh/register'));
 
 
 //exact是精确匹配
