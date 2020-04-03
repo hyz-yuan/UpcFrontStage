@@ -1,4 +1,5 @@
-const serverUrl = "http://localhost:9080/test"
+//const serverUrl = "http://localhost:9080/test"
+const serverUrl = "http://localhost:8080/manage_war/"
 global.constants = {
     // create by ljh ---begin
     projectListByMid: serverUrl + '/project/getProjectByManagerId',
@@ -64,5 +65,8 @@ global.constants = {
     addGroup:serverUrl + '/project/addGroup',
     projectList:serverUrl + '/project2/projectList',
     getGroupList:serverUrl + '/project/getGroupList',
-    getPersonList:serverUrl + '/project1/getPersonList?id&pageNo'
+    getPersonList:serverUrl + '/project1/getPersonList?id&pageNo',
+    //yxy
+    insertUser:serverUrl + '/web/register',
+    selectUsername:serverUrl + '/web/selectusername'
 };

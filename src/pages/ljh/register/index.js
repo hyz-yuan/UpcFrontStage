@@ -14,10 +14,17 @@ class ForgetPassword extends Component {
         hasChoose: false,
         email: '',
         password: '',
+        confirmPassword: '',
         name: '',
+        realName: '',
         verification: '',
+        messagePassword: '',
+        message: '',
         workplace:[],
-        thenology:[],
+        technology:[],
+        workplaceId: 0,
+        technologyId: 0,
+        tips: '',
     }
     componentDidMount() {
 
@@ -61,6 +68,12 @@ class ForgetPassword extends Component {
             password: value
         })
     }
+    handlePassword2 = (e) => {
+        let value = e.target.value.replace(/[\u4e00-\u9fa5]/g, '')
+        this.setState({
+            confirmPassword: value
+        })
+    }
 
 
     handleName = (e) => {
@@ -68,7 +81,11 @@ class ForgetPassword extends Component {
             name: e.target.value
         })
     }
-
+    handleRealName = (e) => {
+        this.setState({
+            realName: e.target.value
+        })
+    }
 
 
 
@@ -114,16 +131,96 @@ class ForgetPassword extends Component {
                 .catch(e => console.log(e))
         }
     }
+    //判断用户名是否存在
+    inputOnBlur = (e) =>{
+        const { name } = this.state;
+        let params = name;
+        fetchPost(global.constants.selectUsername,
+            params
+        ).then(
+                res => {
+                    // let message = [res];
+                    this.setState({message:res})
+                }
+
+            ).catch(e => console.log(e))
+
+
+    }
+    //判断密码是否一致
+    handleConfirm = (e) =>{
+
+        let messagePassword = '';
+        const {password,confirmPassword} = this.state;
+        if(password!==confirmPassword){
+            messagePassword = '两次密码输入不一致'
+        }else {
+            messagePassword = ''
+        }
+        this.setState({
+            messagePassword,
+        })
+    }
+    //获取工作地点ID
+    selectWorkPlaceId = (value) =>{
+        this.setState({workplaceId:value})
+    }
+    //获取工作领域ID
+    selectTechnologyId = (value) =>{
+        this.setState({technologyId:value})
+    }
+    //注册
+    handleRegister = () =>{
+        let tips = '';
+        const {email, password, name, realName, technologyId, workplaceId, message, confirmPassword,} = this.state;
+       if(name===''){tips = '用户名不能为空'}
+       else if(password===''){tips = '密码不能为空'}
+       else if(confirmPassword===''){tips = '请再次确认密码'}
+       else if(realName===''){tips = '真实姓名不能为空'}
+       else if(workplaceId===[]){tips = '工作地点不能为空'}
+       else if(technologyId===[]){tips = '技术领域不能为空'}
+       else if(email===''){tips = '邮箱不能为空'}
+       else if(password!==confirmPassword){tips = ''}
+       else if(message!==''){tips = ''}
+       else{
+           fetchPost(global.constants.insertUser, {
+               userName: name,
+               password: password,
+               realName: realName,
+               workPlace: workplaceId,
+               technology: technologyId,
+               email: email
+           })
+               .then(
+                   res => {
+                       alert(res)
+                       if(res==='注册成功'){
+                           createHashHistory().push('/')
+                       }
+                   }
+               )
+               .catch(e => console.log(e))
+       }
+       this.setState({tips});
+    }
+
+
+
+
+
 
     render() {
-        const {email, password, name, verification} = this.state
+        const {email, password, name, message, realName, confirmPassword, messagePassword, tips} = this.state;
+
         return (
             <div className='forgetPassword' style={{backgroundImage: `url("${Background}")`}}>
                 <div className="login">
                     <div className="title">用  户  注  册</div>
+                    {message}
                     <div className="line">
+
                         <img className="smallImg" src={LoginCompany} alt={'name'}/>
-                        <input placeholder="请输入用户名" value={name} type="text" onChange={this.handleName}/>
+                        <input placeholder="请输入用户名" value={name} type="text" onChange={this.handleName} onBlur={this.inputOnBlur}/>
                     </div>
 
                     <div className="line">
@@ -132,23 +229,24 @@ class ForgetPassword extends Component {
                     </div>
                     <div className="line">
                         <img className="smallImg" src={LoginPassword} alt={'password'}/>
-                        <input placeholder="请确认密码" value={password} type="password" onChange={this.handlePassword}/>
+                        <input placeholder="请确认密码" value={confirmPassword} type="password" onChange={this.handlePassword2} onBlur={this.handleConfirm}/>
                     </div>
+                    {messagePassword}
                     <div className="line">
                         <img className="smallImg" src={LoginCompany} alt={'name'}/>
-                        <input placeholder="请输入真实姓名" value={name} type="text" onChange={this.handleName}/>
+                        <input placeholder="请输入真实姓名" value={realName} type="text" onChange={this.handleRealName}/>
                     </div>
                     <div className="line">
                         <img className="smallImg" src={LoginCompany} alt={'name'}/>
                         工作地：
-                        <Select  style={{ width: 100}} >
+                        <Select  style={{ width: 100}} onChange={this.selectWorkPlaceId.bind(this)}>
                             {this.state.workplace}
                         </Select>
                     </div>
                     <div className="line">
                         <img className="smallImg" src={LoginCompany} alt={'name'}/>
                         技术领域：
-                        <Select  style={{ width: 200}} >
+                        <Select  style={{ width: 200}} onChange={this.selectTechnologyId.bind(this)}>
                             {this.state.technology}
                         </Select>
                     </div>
@@ -158,8 +256,8 @@ class ForgetPassword extends Component {
                         <input placeholder="请输入邮箱" value={email} type="text" onChange={this.handleemail}/>
                     </div>
 
-
-                    <button type="button" className="logBut" onClick={this.register}>注&nbsp;&nbsp;册</button>
+                    {tips}
+                    <button type="button" className="logBut" onClick={this.handleRegister}>注&nbsp;&nbsp;册</button>
                 </div>
             </div>
         );
