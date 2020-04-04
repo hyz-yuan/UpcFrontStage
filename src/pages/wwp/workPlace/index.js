@@ -20,9 +20,9 @@ export  default class workPlace extends Component{
 
             {
                 title: '地方',
-                dataIndex: 'place',
+                dataIndex: 'workPlace',
                 editable:true,
-                key:'place',
+                key:'workPlace',
                 render:(text,record)=>(
 
                     <Input size="default" value={record.place}
