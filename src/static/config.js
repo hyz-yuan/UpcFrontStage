@@ -55,11 +55,10 @@ global.constants = {
     deleteUser: serverUrl + '/manage1/deleteUser',
     updateUser: serverUrl + '/manage1/updateUser',
     changePassword: serverUrl + '/manage1/changePassword',
+    selectItem: serverUrl + '/manage1/selectItem',
     //刘宁用到的工作地点和技术领域接口
     selectWorkPlace: serverUrl + '/workPlace/selectWorkPlace',
     selectTechnology: serverUrl + '/technology/selectTechnology',
-    selectWorkPlace:  serverUrl + '/workPlace/selectWorkPlace',
-    selectTechnology:  serverUrl + '/technology/selectTechnology',
     //xjs
     deleteGroup:serverUrl + '/project/deleteGroup',
     addGroup:serverUrl + '/project/addGroup',
