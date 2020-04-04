@@ -24,15 +24,16 @@ const { TextArea } = Input;
         this.props.dispatchData(data);
    }
    handleFile = (info) => {
-     console.log(info.fileList)
+     
     const fileList = info.fileList;
+    console.log(fileList)
    
     if (info.file.status === 'done') {
         message.success(`${info.file.name} 上传成功`);
     } else if (info.file.status === 'error') {
         message.error(`${info.file.name} 上传失败.`);
     }
-    this.changeInput(fileList,"document");
+    this.changeInput(fileList,'document');
 }
 
     render() {
