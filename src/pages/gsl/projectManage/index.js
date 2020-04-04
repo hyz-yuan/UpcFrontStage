@@ -10,13 +10,17 @@ import moment from 'moment';
 
 class projectManage extends Component {
 
+    //注意：此代码里共有三个关于【项目地点】的变量
+    //place:指project表里的数字id，
+    //workPlace:指work_place表映射到mapper里的
+    //workPlaceName:后端返回的名称
     constructor(props) {
         super(props);
         this.state = {
             id: "",
             projectName: "",
-            place: "",
-            manager: "",
+            place: null,
+            manager: null,
             beginTime: "",
             endTime: "",
             remark: "",
@@ -40,10 +44,10 @@ class projectManage extends Component {
                     this.setState({
                         id: res.id,
                         projectName: res.projectName,
-                        place: res.place,
-                        manager: res.manager,
-                        beginTime: res.beginTime,
-                        endTime: res.endTime,
+                        place: res.workPlaceName,
+                        manager: res.managerName,
+                        beginTime: moment(res.beginTime).format("YYYY-MM-DD"),
+                        endTime: moment(res.endTime).format("YYYY-MM-DD"),
                         remark: res.remark,
                         workPlaceName: res.workPlaceName,
                         managerName: res.managerName,
@@ -57,9 +61,18 @@ class projectManage extends Component {
     postProject = () => {
         console.log(this.state);
         let projectId = this.props.match.params.id;
+        let params={
+            id: this.state.id,
+            projectName: this.state.projectName,
+            place: this.state.place,
+            manager: this.state.manager,
+            beginTime: this.state.beginTime + ' 00:00:00',
+            endTime: this.state.endTime + ' 00:00:00',
+            remark: this.state.remark,
+        };
         //0为新建项目的标志，非0为修改项目的标志
         if (projectId === "0") {
-            fetchPost(global.constants.addProject, this.state)
+            fetchPost(global.constants.addProject, params)
                 .catch(e => console.log(e))
                 .finally(() => {
                     this.setState({
@@ -69,7 +82,7 @@ class projectManage extends Component {
             //提示成功
             this.success("保存成功")
         } else {
-            fetchPost(global.constants.changeProject, this.state)
+            fetchPost(global.constants.changeProject, params)
                 .catch(e => console.log(e))
                 .finally(() => {
                     this.setState({
@@ -85,6 +98,7 @@ class projectManage extends Component {
     success = (msg) => {
         Modal.success({
             content: msg,
+            onOk:this.goFather
         });
     };
 
@@ -99,14 +113,14 @@ class projectManage extends Component {
         })
     };
 
-    //时间选择框改变的回调函数
+    //时间选择框改变的回调函数,默认时间：日期当天的0点
     onChangeBeginTime = (value, dateString) => {
         this.setState({
             beginTime: dateString,
         })
     };
 
-    onChangeEndTime = (value, dateString) => {
+    onChangeEndTime = (value,dateString) => {
         this.setState({
             endTime: dateString,
         })
@@ -138,10 +152,10 @@ class projectManage extends Component {
         // console.log("打印项目名称" + this.state.projectName);
         const layout = {
             labelCol: {span: 5},//设置距离做边框的距离
-            wrapperCol: {span: 12},//宽度
+            wrapperCol: {span: 9},//宽度
         };
         const tailLayout = {
-            wrapperCol: {offset: 8, span: 12},
+            wrapperCol: {offset: 8, span: 9},
         };
 
         const {Option} = Select;
@@ -166,16 +180,16 @@ class projectManage extends Component {
                         rules={[{required: true, message: '请选择项目地点!'}]}>
                         <Select
                             defaultValue={Option.valueOf()}
-                            value={this.state.workPlaceName}
-                            onChange={value => this.setState({workPlaceName: value})}
+                            value={this.state.place}
+                            onChange={value => this.setState({place: value})}
                             //当获得焦点时调用
                             onFocus={() => this.getWorkPlaceList()}
                             allowClear
                         >
                             {
-                                this.state.workPlaceList.map((item, i) => {
+                                this.state.workPlaceList.map((item, index) => {
                                         return (
-                                            <Option index={i} value={item.workPlace}>{item.workPlace}</Option>
+                                            <Option index={index} value={item.id}>{item.workPlace}</Option>
                                         )
                                     }
                                 )
@@ -190,9 +204,10 @@ class projectManage extends Component {
                     >
                         <Select
                             defaultValue={Option.valueOf()}
-                            // value={this.state.manager}
-                            value={this.state.managerName}
-                            onChange={value => this.setState({managerName: value})}
+                            value={this.state.manager}
+                            // value={this.state.managerName}
+                            // value={Option.valueOf()}
+                            onChange={value => this.setState({manager: value})}
                             onFocus={() => this.getManagerList()}
                             allowClear
                         >
@@ -208,16 +223,16 @@ class projectManage extends Component {
                                rules={[{required: true, message: '请选择日期!'}]}
                     >
                         <DatePicker
-                            showTime
-                            format='YYYY-MM-DD HH:mm:ss'
+                            // showTime
+                            format='YYYY-MM-DD'
                             value={this.state.beginTime !== "" ? moment(this.state.beginTime) : null}
-                            onChange={()=>this.onChangeBeginTime()}/>
-                        —
+                            onChange={this.onChangeBeginTime}/>
+                        ——
                         <DatePicker
-                            showTime
-                            format='YYYY-MM-DD HH:mm:ss'
+                            // showTime
+                            format='YYYY-MM-DD'
                             value={this.state.endTime !== "" ? moment(this.state.endTime) : null}
-                            onChange={()=>this.onChangeEndTime()}/>
+                            onChange={this.onChangeEndTime}/>
                     </Form.Item>
                     <Form.Item label="备注"
                     >
