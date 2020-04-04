@@ -2,26 +2,26 @@ import React, { Component } from 'react'
 import {fetchPost} from "../../../static/util/fetch";
 import ReactEcharts from 'echarts-for-react'
 
-
 class organizationChart extends Component{
     state = {
         treeData : []
     };
     componentDidMount() {
-        this.fetchData()
+        this.fetchData();
     }
     fetchData =()=>{
         let params={}
-        fetchPost(global.constants.organizationChart,params)
+        fetchPost(global.constants.organizationChart, params)
             .then(
                 res => this.setTeamStructureData(res),
             )
             .catch(e => console.log(e))
             .finally(() => {
+
                 this.setState({
                     requestLoading: false
                 })
-            })
+            });
     }
     setTeamStructureData =(list)=>{
         this.setState({
@@ -64,24 +64,26 @@ class organizationChart extends Component{
                     rootLocation: {x: '50%', y: '15%'}, // 根节点位置  {x: 'center',y: 10}
                     nodePadding: 20,
                     layerPadding:40,
-                    symbol: 'rectangle',
-                    symbolSize: [70, 30],
-                    borderColor:'black',
+                    symbol: 'roundRect',
+                    symbolSize: [60, 45],//窗口大小
+                    initialTreeDepth : -1 ,//展开层数0根节点，-1，null都展开
+                    roam : "true" , //如果只想要开启缩放或者平移，可以设置成 'scale' 或者 'move'。设置成 true 为都开启
                     //节点类型
                     itemStyle: {
-                            normal: {
-                                color: '#fff',//节点背景色
-                                label: {
-                                    show: true,
-                                    position: 'inside',
-                                    textStyle: {
-                                        color: 'black',
-                                        fontSize: 15,
+                        borderColor:'black',
+                        normal: {
+                            color: '#fff',//节点背景色
+                            label: {
+                                show: true,
+                                position: 'inside',
+                                textStyle: {
+                                    color: 'black',
+                                    fontWeight: "bolder",//设置文字粗细
+                                    fontSize: 12,
                                     //fontWeight:  'bolder'
-                                    }
-                                },
-
+                                }
                             },
+                        },
                     },
                     lineStyle: {
                         color: '#000',
@@ -91,7 +93,7 @@ class organizationChart extends Component{
                     },
                     emphasis: {
                         label: {
-                            show: false
+                            show: "true"
                         }
                     },
                     data: [treeData]
@@ -99,9 +101,9 @@ class organizationChart extends Component{
         }
 
         return(
-            <div >
-                <ReactEcharts  option={option} style={{height:'500px',width:'100%'}}/>
-            </div>
+                <div>
+                    <ReactEcharts  option={option} style={{height:'800px',width:'90%'}}/>
+                </div>
         )
     }
 

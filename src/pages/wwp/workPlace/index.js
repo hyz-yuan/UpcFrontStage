@@ -1,6 +1,6 @@
 import React, { Component } from  'react'
 import {Button, message,Input,Table,Select} from "antd";
-import {fetchPost} from "../../static/util/fetch";
+import {fetchPost} from "../../../static/util/fetch";
 const {Option}=Select;
 export  default class workPlace extends Component{
 

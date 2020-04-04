@@ -16,7 +16,8 @@
     "react-scripts": "3.4.0",
     "time-gantt": "0.0.1",
     "echarts": "4.7.0",
-    "echarts-for-react": "2.0.15-beta.1"
+    "echarts-for-react": "2.0.15-beta.1",
+    "@ant-design/icons": "latest"
   },
   "scripts": {
     "start": "react-scripts start",

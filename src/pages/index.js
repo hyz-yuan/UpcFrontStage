@@ -11,9 +11,22 @@ const projectList = loadable(()=>import('./ljh/projectList'));
 const organizationChart = loadable(()=>import('./hyz/organizationChart'));
 const projectProgress = loadable(()=>import('./ljh/projectProgress'));
 const technologyManage = loadable(()=>import('./ljh/technologyManage'));
+
+const  projectListUser = loadable(()=>import('./xjs/projectListUser'));
+const taskList = loadable(()=>import('./wjb/taskList'));
+
+//gsl
+const projectListNew = loadable(()=>import('./gsl/projectList'));
+const projectManage = loadable(()=>import('./gsl/projectManage'));
+
+const projectDetail = loadable(() => import('./dzw/projectDetail'));
 const workPlace = loadable(()=>import('./wwp/workPlace'));
+//ln
+const rights=loadable(()=>import('./ln/rights'));
+const roles=loadable(()=>import('./ln/roles'));
+const Employees=loadable(()=>import('./ln/Employees'));
 
-
+const messageList=loadable(()=>import('./zy/messageList'));
 class MainFrame extends Component{
     state = {
     };
@@ -27,11 +40,25 @@ class MainFrame extends Component{
                     <Route path="/sys/home" component={Home}/>
                     <Route path="/sys/organizationChart" component={organizationChart}/>
                     <Route path="/sys/projectList" component={projectList}/>
+                    <Route path="/sys/projectListNew" component={projectListNew}/>
                     <Route path="/sys/projectProgress" component={projectProgress}/>
+                    <Route path="/sys/technologyManage" component={technologyManage}/>
+
+                    <Route path="/sys/projectListUser" component= {projectListUser}/>
+
+                    <Route path="/sys/projectManage/:id" component={projectManage}/>
 
                     <Route path="/sys/technologyManage" component={technologyManage}/>
-                    <Route path="/sys/workPlace" component={workPlace}/>
+                    <Route path="/sys/taskList" component= {taskList}/>
 
+                    <Route path ="/sys/projectDetail" component={projectDetail}/>
+                    <Route path="/sys/workPlace" component={workPlace}/>
+                    {/*ln*/}
+                    <Route path="/sys/rights" component={rights}/>
+                    <Route path="/sys/roles" component={roles}/>
+                    <Route path="/sys/Employees" component={Employees}/>
+
+                    <Route path="/sys/messageList" component={messageList}/>
                 </div>
             </div>
         )
