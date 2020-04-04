@@ -26,11 +26,11 @@ export  default class workPlace extends Component{
                 render:(text,record)=>(
 
                     <Input size="default" value={record.workPlace}
-<<<<<<< HEAD
+
                            onChange={(e)=>this.inputChange({workPlace:e.target.value},record)}
-=======
+
                            onChange={(e)=>this.inputChange({place:e.target.value},record)}
->>>>>>> 580bc16867fcd764bfbf349574f13e503ed30cf6
+
                            onBlur={this.updateChange.bind(this,record)}
                     />
 
