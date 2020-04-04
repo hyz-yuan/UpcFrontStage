@@ -4,7 +4,7 @@ import {fetchPost} from "../../../static/util/fetch";
 import {createHashHistory} from "history";
 import RightBodyHeaderBar from '../../../static/component/rightBodyHeaderBar'
 import moment from "moment";
-import {ExclamationCircleOutlined} from '@ant-design/icons';
+//import {ExclamationCircleOutlined} from '@ant-design/icons';
 
 class projectList extends React.Component {
 
@@ -83,7 +83,7 @@ class projectList extends React.Component {
     showDeleteConfirm = (id) => {
         Modal.confirm({
             title: '确认删除此项目吗?',
-            icon: <ExclamationCircleOutlined/>,
+           // icon: <ExclamationCircleOutlined/>,
             content: '',
             okText: '是',
             okType: 'danger',

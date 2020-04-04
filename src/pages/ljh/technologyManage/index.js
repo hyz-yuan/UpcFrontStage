@@ -3,7 +3,6 @@ import {Table, Button, Popconfirm, Form,  Input,Select,message} from "antd/lib/i
 import {fetchPost} from "../../../static/util/fetch";
 import RightBodyHeaderBar from '../../../static/component/rightBodyHeaderBar'
 
-import moment from "../projectProgress/progressTable";
 import {useState} from "react";
 import {useRef} from "react";
 import {useContext} from "react";

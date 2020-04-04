@@ -34,7 +34,7 @@ class leftBar extends Component {
             if(item.id>0){
                 if(item.lastMenus==pid){
                     if(pid==0){
-                        return (<SubMenu
+                        return (<SubMenu onClick={this.goChildren}  key={item.urls}
                                           title={
                                               <span>
                                                 <Icon type={this.state.icon[this.i++]}/>

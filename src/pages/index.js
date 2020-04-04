@@ -46,14 +46,10 @@ class MainFrame extends Component{
 
                     <Route path="/sys/projectListUser" component= {projectListUser}/>
 
-                    <Route path="/sys/projectManage/:id" component={projectManage}/>
-
-                    <Route path="/sys/technologyManage" component={technologyManage}/>
                     <Route path="/sys/taskList" component= {taskList}/>
 
                     <Route path ="/sys/projectDetail" component={projectDetail}/>
                     <Route path="/sys/workPlace" component={workPlace}/>
-                    {/*ln*/}
                     <Route path="/sys/rights" component={rights}/>
                     <Route path="/sys/roles" component={roles}/>
                     <Route path="/sys/Employees" component={Employees}/>

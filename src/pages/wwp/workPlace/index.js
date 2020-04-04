@@ -25,7 +25,7 @@ export  default class workPlace extends Component{
                 key:'workPlace',
                 render:(text,record)=>(
 
-                    <Input size="default" value={record.place}
+                    <Input size="default" value={record.workPlace}
                            onChange={(e)=>this.inputChange({place:e.target.value},record)}
                            onBlur={this.updateChange.bind(this,record)}
                     />
