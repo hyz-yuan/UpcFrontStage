@@ -135,7 +135,7 @@ class projectManage extends Component {
     }
 
     render() {
-        console.log("打印项目名称" + this.state.projectName);
+        // console.log("打印项目名称" + this.state.projectName);
         const layout = {
             labelCol: {span: 5},//设置距离做边框的距离
             wrapperCol: {span: 12},//宽度
@@ -148,7 +148,7 @@ class projectManage extends Component {
         return (
             <div>
                 <RightBodyHeaderBar title={"新增/修改项目"}/>
-                <Form name={"projectForm"}
+                <Form
                       {...layout}
                     // initialValues={{remember: false}}
                 >
@@ -211,13 +211,13 @@ class projectManage extends Component {
                             showTime
                             format='YYYY-MM-DD HH:mm:ss'
                             value={this.state.beginTime !== "" ? moment(this.state.beginTime) : null}
-                            onChange={this.onChangeBeginTime()}/>
+                            onChange={()=>this.onChangeBeginTime()}/>
                         —
                         <DatePicker
                             showTime
                             format='YYYY-MM-DD HH:mm:ss'
                             value={this.state.endTime !== "" ? moment(this.state.endTime) : null}
-                            onChange={this.onChangeEndTime()}/>
+                            onChange={()=>this.onChangeEndTime()}/>
                     </Form.Item>
                     <Form.Item label="备注"
                     >
