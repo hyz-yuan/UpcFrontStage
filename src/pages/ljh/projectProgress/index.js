@@ -22,15 +22,7 @@ class projectProgress extends React.Component{
         requestLoading:true,
         currentProjectID:1,
     }
-    goChildren = (record) => {
-        this.setState({
-            projectTitle:record.projectName,
-            currentProjectID:record.id,
-        },()=>{
-            this.requestProgress();
-            this.ProgressTable.loadData();
-        });
-    }
+
 
     componentDidMount() {
         let params={}
@@ -45,7 +37,15 @@ class projectProgress extends React.Component{
                 })
             })
     }
-
+    goChildren = (record) => {
+        this.setState({
+            projectTitle:record.projectName,
+            currentProjectID:record.id,
+        },()=>{
+            this.requestProgress();
+            this.ProgressTable.loadData();
+        });
+    }
     //赋予表格数据
     setProjectData = (list) => {
         this.setState({
@@ -109,7 +109,7 @@ class projectProgress extends React.Component{
                             <TimeLine  mode="year" data={gantData}  />
                             </div>
                         <div style={{marginTop:'50px'}}>
-                            <ProgressTable pid={currentProjectID} reloadGant={this.requestProgress}/></div>
+                            <ProgressTable ref={this.onRef} pid={currentProjectID} reloadGant={this.requestProgress}/></div>
                     </div>
                 </div>
 

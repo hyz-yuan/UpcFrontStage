@@ -36,6 +36,7 @@ class Login extends Component {
         createHashHistory().push('/sys/workPlace');
         //gsl测试
         // createHashHistory().push('/sys/projectList');
+        createHashHistory().push('/sys/zy');
 
         // fetchPost(global.constants.login, params)
         //     .then(

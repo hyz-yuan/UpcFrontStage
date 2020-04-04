@@ -4,7 +4,7 @@ import {fetchPost} from "../../../static/util/fetch";
 import {createHashHistory} from "history";
 import RightBodyHeaderBar from '../../../static/component/rightBodyHeaderBar'
 import moment from "moment";
-
+//import {ExclamationCircleOutlined} from '@ant-design/icons';
 
 class projectList extends React.Component {
 
@@ -17,7 +17,7 @@ class projectList extends React.Component {
             {
                 title: '项目名称', dataIndex: 'projectName',
                 //点击项目名称后，进行跳转
-                render: (text, record) => (<a onClick={(e) => this.goChildren(record.id)}>{text}</a>)
+                render: (text, record) => (<a onClick={() => this.goChildren(record.id)}>{text}</a>)
             },
             {title: '实施地', dataIndex: 'workPlaceName',},
             {title: '负责人', dataIndex: 'managerName',},
@@ -26,24 +26,29 @@ class projectList extends React.Component {
             {
                 title: '操作', dataIndex: 'action',
                 render: (text, record) => <span>
-        <a name={"changeProject"} onClick={() => this.handleProjectManage(record.id)}>修改{record.name}</a>&nbsp;&nbsp;
-                    <a onClick={() => this.showModal(record.id)}>删除</a>
+        <a className={"changeProject"} onClick={() => this.handleProjectManage(record.id)}>修改</a>&nbsp;&nbsp;
+                    <a className={"deleteProject"} onClick={() => this.showDeleteConfirm(record.id)}>删除</a>
       </span>
             }
         ],
         data: [],
         requestLoading: true,
-        visible: false
-    };
-    //修改项目
-    handleProjectManage = (id) => {
-        createHashHistory().push('/sys/projectManage/'+id)
+        visible: false,
     };
 
+    //修改项目
+    handleProjectManage = (id) => {
+        sessionStorage.clear();
+        //注意路径最后的斜杠，丢了不能路由过来
+        createHashHistory().push('/sys/projectManage/' + id)
+    };
+
+    //路由到下一级
     goChildren = (id) => {
         sessionStorage.clear();
-        createHashHistory().push('/sys/projectDetail'+id)
+        createHashHistory().push('/sys/projectDetail?id=' + id)
     };
+
 
 
     componentDidMount = (value) => {
@@ -74,58 +79,50 @@ class projectList extends React.Component {
         })
     };
 
-    showModal = (id) => {
-        this.setState({
-            visible: true, projectId: id
+    //修改为删除弹出框样式
+    showDeleteConfirm = (id) => {
+        Modal.confirm({
+            title: '确认删除此项目吗?',
+           // icon: <ExclamationCircleOutlined/>,
+            content: '',
+            okText: '是',
+            okType: 'danger',
+            cancelText: '否',
+            onOk: () => {
+                this.handleOk(id)
+            }
+            ,
+            onCancel() {
+                console.log('Cancel');
+            },
         });
     };
 
-
     //删除的弹出框的确认按钮,执行删除操作
-    handleOk = e => {
-        console.log(e);
-        let params = {id: this.state.projectId};
+    handleOk = (id) => {
+        let params = {id: id};
         fetchPost(global.constants.deleteProject, params).then(
             res => this.setData(res)
-        )
-            .catch(e => console.log(e))
+        ).catch(e => console.log(e))
             .finally(() => {
                 this.setState({
                     requestLoading: false
                 })
             });
-        this.setState({
-            visible: false,
-        });
-    };
-
-    handleCancel = e => {
-        console.log(e);
-        this.setState({
-            visible: false,
-        });
     };
 
 
     render() {
         const {data, columns, title} = this.state;
-        const {Search} = Input;
         return (
             <div>
                 <RightBodyHeaderBar title={title}/>
-                <Search addonBefore={"项目查询"} placeholder="请输入项目名称" enterButton="查询"
+                <Input.Search addonBefore={"项目查询"} placeholder="请输入项目名称" enterButton="查询"
                         style={{width: 400}}
                         onSearch={value => this.componentDidMount(value)}/>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <Button type="primary" name={"addProject"} onClick={()=>this.handleProjectManage(0)}>新增项目</Button>
+                <Button type="primary" name={"addProject"} onClick={() => this.handleProjectManage(0)}>新增项目</Button>
                 <Table dataSource={data} pagination={{pageSize: 5}} columns={columns}/>
-                <Modal
-                    title={"提示!"}
-                     visible={this.state.visible}
-                    onOk={this.handleOk}
-                    onCancel={this.handleCancel}>
-                    <p>确认要删除这条记录吗</p>
-                </Modal>
             </div>
         )
     }

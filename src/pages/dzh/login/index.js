@@ -36,8 +36,8 @@ class Login extends Component {
         }
         //createHashHistory().push('/sys/home');
         // eslint-disable-next-line no-undef
-        fetchPost('http://localhost:7080/pages/web/login', params)
-        //     fetchPost(global.constants.login,params)
+        // fetchPost('http://localhost:7080/pages/web/login', params)
+            fetchPost(global.constants.login,params)
             .then(
                 res => {
                     // res.userType?createHashHistory().push('/sys/projectList'):createHashHistory().push('/sys/home')
@@ -54,7 +54,7 @@ class Login extends Component {
     }
 
     register = () =>{
-        createHashHistory().push()
+        createHashHistory().push('/register')
     }
 
     render() {

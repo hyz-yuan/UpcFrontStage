@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import {fetchPost} from "../../../static/util/fetch";
-import {Table,Modal} from 'antd';
+import {Table,Modal,message} from 'antd';
 import moment from "moment";
 import ReportDetails from './ReportDetails'
 
@@ -14,20 +14,23 @@ import ReportDetails from './ReportDetails'
     isVisible:false
 }
     requestList= ()=>{
-      fetchPost("http://localhost:9080/test/project/getProjectEmployeeRoleList")
+
+      fetchPost("http://localhost:9080/test/project/getProjectEmployeeRoleList",{})
             .then(
                 res => this.setData(res)
-                
+
             )
             .catch(e => console.log(e))
             .finally(() => {
+
                 this.setState({
                     requestLoading: false
                 })
             })
     }
     componentDidMount(){
-        this.requestList()
+        this.requestList();
+
     }
     setData = (list) => {
         this.setState({
