@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Form, Button, Input, Select, Modal} from 'antd'
-import {DatePicker} from 'antd';
+import {DatePicker,message} from 'antd';
 import RightBodyHeaderBar from "../../../static/component/rightBodyHeaderBar";
 import {fetchPost} from "../../../static/util/fetch";
 import {createHashHistory} from "history";
@@ -37,7 +37,6 @@ class projectManage extends Component {
             let params = {id: projectId};
             fetchPost(global.constants.getProject, params)
                 .then(res => {
-                    console.log(res.id);
                     this.setState({
                         id: res.id,
                         projectName: res.projectName,

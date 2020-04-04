@@ -2,6 +2,7 @@ import {message} from 'antd';
 import {createHashHistory} from "history";
 
 export function fetchPost(url, params) {
+
     return new Promise((resolve, reject) => fetch(url, {
             method: 'POST',
             body: JSON.stringify(params),
