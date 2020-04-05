@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 .idea
+react-scripts
 /.pnp
 .pnp.js
 
