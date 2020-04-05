@@ -133,14 +133,15 @@ class ForgetPassword extends Component {
     }
     //判断用户名是否存在
     inputOnBlur = (e) =>{
-        const { name } = this.state;
-        let params = name;
+        let params = {userName:e.target.value};
+        let n=e.target.value;
         fetchPost(global.constants.selectUsername,
             params
         ).then(
                 res => {
-                    // let message = [res];
-                    this.setState({message:res})
+                    if(res=="用户名已存在"){this.setState({message:n+res,name:""})}
+
+
                 }
 
             ).catch(e => console.log(e))
@@ -216,7 +217,7 @@ class ForgetPassword extends Component {
             <div className='forgetPassword' style={{backgroundImage: `url("${Background}")`}}>
                 <div className="login">
                     <div className="title">用  户  注  册</div>
-                    {message}
+                    <div style={{color:"red"}}>{message}</div>
                     <div className="line">
 
                         <img className="smallImg" src={LoginCompany} alt={'name'}/>
