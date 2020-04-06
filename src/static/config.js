@@ -1,4 +1,4 @@
-const serverUrl = "http://localhost:9080/test"
+const serverUrl = "http://localhost:9080/pages"
 //const serverUrl = "http://localhost:8080/manage_war/"
 global.constants = {
     // create by ljh ---begin
@@ -31,10 +31,11 @@ global.constants = {
     managerList: serverUrl+'/user/manager',
 
     //dzh
-    login: serverUrl + 'web/login',
-    sendCode: serverUrl + 'web/sendCode',
-    codeMaching: serverUrl + 'web/codeMaching',
-    logout: serverUrl + 'web/logout',
+    login: serverUrl + '/web/login',
+    sendCode: serverUrl + '/web/sendCode',
+    codeMaching: serverUrl + '/web/codeMaching',
+    logout: serverUrl + '/web/logout',
+    getRole:serverUrl+'/manage1/selectRightByRole',
     //hyz
     organizationChart: serverUrl + '/teamStructure/getTeamStructure',
     //yxy
@@ -55,11 +56,10 @@ global.constants = {
     deleteUser: serverUrl + '/manage1/deleteUser',
     updateUser: serverUrl + '/manage1/updateUser',
     changePassword: serverUrl + '/manage1/changePassword',
+    selectItem: serverUrl + '/manage1/selectItem',
     //刘宁用到的工作地点和技术领域接口
     selectWorkPlace: serverUrl + '/workPlace/selectWorkPlace',
     selectTechnology: serverUrl + '/technology/selectTechnology',
-    selectWorkPlace:  serverUrl + '/workPlace/selectWorkPlace',
-    selectTechnology:  serverUrl + '/technology/selectTechnology',
     //xjs
     deleteGroup:serverUrl + '/project/deleteGroup',
     addGroup:serverUrl + '/project/addGroup',

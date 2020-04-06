@@ -19,9 +19,10 @@ class leftBar extends Component {
 
     componentDidMount() {
         let params = {}
-        fetchPost(global.constants.rightsList, params)
+        fetchPost(global.constants.getRole, params)
             .then(
                 res => this.setData(res)
+
             )
             .catch(e => console.log(e))
     }
