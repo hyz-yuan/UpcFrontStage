@@ -47,10 +47,12 @@ global.constants = {
     insertRight: serverUrl + '/manage1/insertNewRight',
     deleteRight: serverUrl + '/manage1/deleteRight',
     updateRight: serverUrl + '/manage1/updateRight',
+
     setRoleList: serverUrl + '/manage1/Role',
     insertRole: serverUrl + '/manage1/insertNewRole',
     deleteRole: serverUrl + '/manage1/deleteRole',
     updateRole: serverUrl + '/manage1/updateRole',
+
     getEmployee: serverUrl + '/manage1/getEmployee',
     searchEmployee: serverUrl + '/manage1/search',
     deleteUser: serverUrl + '/manage1/deleteUser',

@@ -1,16 +1,22 @@
 import * as React from "react";
-import {Input, Checkbox, Row, Col, Button, Modal, Popconfirm, Select, Table, List} from "antd";
+import {Input, Checkbox, Row, Col, Button, Modal, Popconfirm, Select, Table, List, Menu} from "antd";
 import {Component} from "react";
 import {fetchPost} from "../../../static/util/fetch";
 import zhCN from 'antd/es/locale/zh_CN';
+import {Icon} from "@ant-design/compatible";
+import {createHashHistory} from "history";
+import RightBodyHeaderBar from "../../../static/component/rightBodyHeaderBar";
 const { Option } = Select;
+const {SubMenu} = Menu;
+
 export default class roles extends Component{
     state={
         buttonValue:"新增",
+        title:"角色管理",
         columns:[
             {title:'序号',dataIndex:'Index'},
             {title:'角色名称',dataIndex:'roleName'},
-            {title:'权限名',dataIndex:'rightsName'},
+            {title:'权限名',dataIndex:'rightsName',width:500},
             {
                 title: '操作',
                 key: 'action',
@@ -30,56 +36,13 @@ export default class roles extends Component{
         itemId:0,
         itemList:[],
         updateList:[],
+        menus:[],
         flag: false,
         visible: false,
     }
 
     componentDidMount(){
         this.setRole()
-    }
-
-    setProjectData =(list)=>{
-        this.setState({
-                data: list.map((item, index) => {
-                    return {
-                        ...item,
-                        id:item.id,
-                        deleteFlag:item.delFlag,
-                        Index:index+1,
-                        key: index,
-                        flag: false
-                    }
-                }),
-            }
-        )
-    }
-    setRightData =(list)=>{
-        this.setState({
-            right: list.map((item, index) => {
-                return {
-                    ...item,
-                    id:item.id,
-                    deleteFlag:item.delFlag,
-                    Index:index+1,
-                    key: index,
-                    flag: false
-                }
-            }),
-        })
-    }
-    setItemListData =(list)=>{
-        this.setState({
-            itemList: list.map((item, index) => {
-                return {
-                    ...item,
-                    id:item.id,
-                    deleteFlag:item.delFlag,
-                    Index:index+1,
-                    key: index,
-                    flag: false
-                }
-            }),
-        })
     }
     setRole=()=>{
         let params={}
@@ -96,21 +59,59 @@ export default class roles extends Component{
 
         fetchPost(global.constants.setRightList,params)
             .then(
-                res => this.setRightData(res)
+                res => this.setData(res)
             )
             .catch(e => console.log(e))
-            .finally(() => {
-                this.setState({
-                    requestLoading: false
-                })
-            })
+    }
+    setProjectData =(list)=>{
+        this.setState({
+                data: list.map((item, index) => {
+                    return {
+                        ...item,
+                        id:item.id,
+                        deleteFlag:item.delFlag,
+                        Index:index+1,
+                        key: index,
+                        flag: false
+                    }
+                }),
+            }
+        )
+    }
+    setData = (list) => {
+        this.setState({menus:this.sub(list,0)})
+    }
+    i=0;
+    sub =(list,pid)=>{
+        return list.map((item, index) => {
+            if(item.lastMenus==pid){
+                if(pid==0){
+                    return (<SubMenu   key={item.urls}
+                                     title={
+                                         <span>
+                                             <Checkbox value={item.id}>{item.rights}</Checkbox>
+                                         </span>
+                                     }
+                    >
+                        {this.sub(list,item.id)}
+                    </SubMenu>)
+                }else{
+                    return (<Menu.Item key={item.urls}>
+                        <span>
+                            <Checkbox value={item.id}>{item.rights}</Checkbox>
+                        </span></Menu.Item>)
+                }
+            }
+        })
     }
 
     render(){
+        const {title,menus} = this.state
         return (
             <div>
+                <RightBodyHeaderBar title={title}/>
                 <Button onClick={this.showModal}>新增</Button>
-                <Table dataSource={this.state.data} columns={this.state.columns}/>
+                <Table dataSource={this.state.data}  pagination={{pageSize: 7}} columns={this.state.columns}/>
                 <div  style={{height:"200px"}}>
                 <Modal
                     destroyOnClose={true}
@@ -129,11 +130,17 @@ export default class roles extends Component{
                     <a>角色名称</a>
                     <Input defaultValue={this.state.newRole.roleName} onChange={(e)=>this.handleInsertName(e.target.value)}/>
                     <a>权限选择（可多选）</a>
-                    <div style={{height:"200px" ,overflow:"auto"}}>
+                    <div style={{height:"250px" ,overflow:"auto"}}>
                         <Checkbox.Group defaultValue={this.state.newRole.rightsList} style={{ width: '100%' }} onChange={(value)=>this.handleInsertRights(value)}>
-                            <Col span={8}>
-                                {this.state.right.map((item,index) => <Checkbox value={item.id}>{item.rights}</Checkbox>)}
-                            </Col>
+                            <Menu
+                                style={{height: "250px"}}
+                                multiple={"true"}
+                                defaultSelectedKeys={['1']}
+                                defaultOpenKeys={['sub1']}
+                                mode="inline"
+                            >
+                                {menus}
+                            </Menu>
                         </Checkbox.Group>
                     </div>
                 </Modal>
@@ -146,6 +153,7 @@ export default class roles extends Component{
         this.setState({
             visible: true
         });
+
     };
     handleCancel = () => {
         this.setState({
@@ -210,6 +218,20 @@ export default class roles extends Component{
                 })
                 this.setRole();
             })
+    }
+    setItemListData =(list)=>{
+        this.setState({
+            itemList: list.map((item, index) => {
+                return {
+                    ...item,
+                    id:item.id,
+                    deleteFlag:item.delFlag,
+                    Index:index+1,
+                    key: index,
+                    flag: false
+                }
+            }),
+        })
     }
     updateRecord=(record)=>{
         this.state.newRole.roleName=record.roleName;
