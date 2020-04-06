@@ -66,7 +66,7 @@ global.constants = {
     deleteGroup:serverUrl + '/project/deleteGroup',
     addGroup:serverUrl + '/project/addGroup',
     projectList:serverUrl + '/project2/projectList',
-    getGroupList:serverUrl + '/project/getGroupList',
+    getGroupList:serverUrl + '/project/getGroupUser',
     getPersonList:serverUrl + '/project1/getPersonList?id&pageNo',
     //yxy
     insertUser:serverUrl + '/web/register',
