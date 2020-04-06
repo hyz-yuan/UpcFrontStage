@@ -3,9 +3,11 @@ import {Radio, Button, Popconfirm, Select, Table, Input, Checkbox, Col, Modal} f
 import {Component} from "react";
 import {fetchPost} from "../../../static/util/fetch";
 import zhCN from 'antd/es/locale/zh_CN';
+import RightBodyHeaderBar from "../../../static/component/rightBodyHeaderBar";
 const { Option } = Select;
 export default class test extends Component{
     state={
+        title:"人员管理",
         buttonValue:"查询",
         selectName:"",
         selectTec:0,
@@ -200,6 +202,7 @@ export default class test extends Component{
     render(){
         return (
             <div>
+                <RightBodyHeaderBar title={this.state.title}/>
                 <Input  style={{ width: '20%',marginRight:'3%' }} placeholder="员工姓名" onChange={(e)=>this.handleSetName(e.target.value)} />
                 <Select
                     style={{ width: '15%',marginRight:'2%' }}
@@ -231,7 +234,7 @@ export default class test extends Component{
                     <a>请输入新密码</a>
                     <Input  onChange={(e)=>this.handleInputPass(e.target.value)}/>
                 </Modal>
-                <Table dataSource={this.state.data} columns={this.state.columns}/>
+                <Table dataSource={this.state.data} pagination={{pageSize: 7}} columns={this.state.columns}/>
             </div>
         )
     }
