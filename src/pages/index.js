@@ -13,6 +13,8 @@ const projectProgress = loadable(()=>import('./ljh/projectProgress'));
 const technologyManage = loadable(()=>import('./ljh/technologyManage'));
 
 const  projectListUser = loadable(()=>import('./xjs/projectListUser'));
+
+//wjb
 const taskList = loadable(()=>import('./wjb/taskList'));
 
 //gsl
