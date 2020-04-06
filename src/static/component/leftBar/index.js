@@ -19,19 +19,19 @@ class leftBar extends Component {
 
     componentDidMount() {
         let params = {}
-        fetchPost(global.constants.rightsList, params)
+        fetchPost(global.constants.getRole, params)
             .then(
                 res => this.setData(res)
             )
             .catch(e => console.log(e))
     }
     setData = (list) => {
+
         this.setState({menus:this.sub(list,0)})
     }
     i=0;
      sub =(list,pid)=>{
         return list.map((item, index) => {
-            if(item.id>0){
                 if(item.lastMenus==pid){
                     if(pid==0){
                         return (<SubMenu onClick={this.goChildren}  key={item.urls}
@@ -44,13 +44,12 @@ class leftBar extends Component {
                                 >
                             {this.sub(list,item.id)}
                         </SubMenu>)
+
                     }else{
                         return (<Menu.Item  onClick={this.goChildren} key={item.urls}>{item.rights}</Menu.Item>)
                     }
                 }
-            }
         })
-
     }
 
     goChildren = (e) => {
@@ -60,6 +59,7 @@ class leftBar extends Component {
 
     render() {
         const {userType,nodes,menus} = this.state
+
         return (
             <div style={{width: 256, height: "100%", position: "fixed", zIndex: 101, paddingTop: 49}}>
                 <Menu

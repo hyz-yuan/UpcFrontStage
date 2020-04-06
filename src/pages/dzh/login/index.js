@@ -5,6 +5,7 @@ import LoginPassword from '../../../static/image/loginPassword.png';
 import './index.css'
 import {createHashHistory} from "history";
 import {fetchPost} from "../../../static/util/fetch";
+import {message} from "antd";
 
 class Login extends Component {
     state = {
@@ -34,23 +35,31 @@ class Login extends Component {
             loginName: this.state.username,
             password: this.state.password
         }
-        //createHashHistory().push('/sys/home');
+
         // eslint-disable-next-line no-undef
         // fetchPost('http://localhost:7080/pages/web/login', params)
             fetchPost(global.constants.login,params)
             .then(
                 res => {
+
+                    if(res.errCode==20002)message.info("请输入正确的帐号或密码")
+                    else if(res.errCode==20001) message.info("账号不存在")
+                        else if(res.errCode==10002) message.info("未知错误")
+                    else
+                    createHashHistory().push('/sys/organizationChart');
                     // res.userType?createHashHistory().push('/sys/projectList'):createHashHistory().push('/sys/home')
-                    if(res.userType==1)createHashHistory().push('/sys/projectList');
-                    else if(res.userType==2)createHashHistory().push('/sys/projectList');
-                    else if(res.userType==3)createHashHistory().push('/sys/projectList');
+                    // if(res.userType==1)createHashHistory().push('/sys/projectList');
+                    // else if(res.userType==2)createHashHistory().push('/sys/projectList');
+                    // else if(res.userType==3)createHashHistory().push('/sys/projectList');
                 }
+
             )
             .catch(e => console.log(e))
     }
 
     forgetPassword = () => {
         createHashHistory().push('/forgetPassword')
+
     }
 
     register = () =>{

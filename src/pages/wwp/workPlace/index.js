@@ -26,7 +26,11 @@ export  default class workPlace extends Component{
                 render:(text,record)=>(
 
                     <Input size="default" value={record.workPlace}
+
+                           onChange={(e)=>this.inputChange({workPlace:e.target.value},record)}
+
                            onChange={(e)=>this.inputChange({place:e.target.value},record)}
+
                            onBlur={this.updateChange.bind(this,record)}
                     />
 
@@ -78,7 +82,7 @@ export  default class workPlace extends Component{
     }
     insertName=()=>{
         let params={}
-        fetchPost(global.constants. insertWorkPlace,params)
+        fetchPost(global.constants.insertWorkPlace,params)
             .then(
                 res => this.setProjectData(res)
             )
@@ -96,14 +100,14 @@ export  default class workPlace extends Component{
             record[i]=e[i];
         }
         this.setState({
-            place:e,
+            workPlace:e,
 
         })
     }
     updateChange=(record)=>{
         let params1={
             id:record.id,
-            place:record.place,
+            workPlace:record.workPlace,
 
 
         }
