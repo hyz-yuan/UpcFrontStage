@@ -41,7 +41,6 @@ class Login extends Component {
             fetchPost(global.constants.login,params)
             .then(
                 res => {
-
                     if(res.errCode==20002)message.info("请输入正确的帐号或密码")
                     else if(res.errCode==20001) message.info("账号不存在")
                         else if(res.errCode==10002) message.info("未知错误")

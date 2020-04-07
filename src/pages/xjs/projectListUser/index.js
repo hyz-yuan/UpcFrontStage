@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Table, Modal, Popconfirm, Button, Input, Radio} from "antd";
+import {Table, Modal, Popconfirm, Button, Input, Radio,message} from "antd";
 import RightBodyHeaderBar from "../../../static/component/rightBodyHeaderBar";
 import {fetchPost} from "../../../static/util/fetch";
 
@@ -8,6 +8,8 @@ class projectListUser extends React.Component{
         super(props)
         this.state={
             //项目列表
+            projectId:0,
+            groupUserId:0,
             visible:false,//人员设定页面控制开关
             membvisible:false,//人员管理页面控制开关
             inputvisible:false,//新增输入框modal控制
@@ -61,21 +63,20 @@ class projectListUser extends React.Component{
             membcolumns:[
                 { title: '姓名',dataIndex: 'realName',
                     render: text => <a>{text}</a>,},
-                { title: '工作地',dataIndex: 'workPlaceName',},
-                { title: '技术领域',dataIndex: 'technologyName',},
+             //   { title: '工作地',dataIndex: 'workPlaceName',},
+               // { title: '技术领域',dataIndex: 'technologyName',},
                 { title: '职 位',dataIndex: 'userType',
 
                     render: (text,record) => (
                         <span>
-        <Radio.Group
-            onChange={(e)=>this.onChangeuType(e,record)} >
+        <Radio.Group  onChange={(e)=>this.onChangeuType(e,record)} defaultValue={text} >
                     <Radio value={2}>取消身份</Radio>
                     <Radio value={1}>组员</Radio>
                     <Radio value={0}>组长</Radio>
                   </Radio.Group>
             </span>
                     ),},
-                { title: '工作内容',dataIndex: 'technologyName',},
+                //{ title: '工作内容',dataIndex: 'technologyName',},
             ],
             data:[], //存放项目列表页面数据
             personData:[],//存放人员设定页面数据
@@ -88,39 +89,29 @@ class projectListUser extends React.Component{
             id:record.id,
             visible:true,
         },()=>{
-            this.requestpersonData();
+            this.requestpersonData(record.id);
         });
     }
 
 //点击人员管理打开Modal 并传groupUserId值(勾选身份用)
     changeState=(record)=>{
         this.setState({
-            gid:record.groupUserId,
-            membvisible:true
+            gid:record.groupId,
         },()=>{
-            this.requestmembData();
-        })}
+            this.requestmembData(record.projectId,record.groupId);
+        })
+
+    }
+
         //人员管理页面 勾选身份时获取单选框的值，对应userId值
     onChangeuType=(e,record)=>{
-        console.log( record.id);
-        this.setState({
-            userId:record.id,
-            uType:e.target.value
-        },()=>{
-            this.requestGroupMemb(); //  勾选身份所需要的4个值传入setPerson接口
-        })
-    }
-    requestGroupMemb(){
         let params={
-               id:this.state.gid,
-              userId:this.state.userId,
-              groupId:this.state.mid,
-              userType:this.state.uType,
-           content:"null"}
-        console.log("groupUserId"+this.state.gid)
-        console.log("userId"+this.state.userId)
-        console.log("groupId"+this.state.mid)
-        console.log("userType"+this.state.uType)
+               id:record.groupUserId,
+            projectId:this.state.projectId,
+            userId:record.userId,
+              groupId:this.state.gid,
+              userType:e.target.value,
+           }
         fetchPost('http://localhost:9080/test/project1/setPerson',params) //接口在后端 DZW文件夹
             .then(
                 res => this.setmembData(res),
@@ -211,15 +202,14 @@ class projectListUser extends React.Component{
     }
 
     //请求人员设定页面接口
-    requestpersonData = () => {
+    requestpersonData = (pid) => {
         this.setState({
+            projectId:pid,//edit by ljh 点击人员设定按钮，设置projectId
             requestLoading: true,
         })
         let params = {
-            projectId:this.state.id
+            projectId:pid
         }
-        console.log("pid"+this.state.id)
-
         fetchPost('http://localhost:9080/test/project/getGroupPerson',params) //  后端xjs/project下
             .then(
                 res => this.setpersonData(res),
@@ -233,16 +223,16 @@ class projectListUser extends React.Component{
     }
 
 //请求人员管理页面接口
-    requestmembData = () => {
+    requestmembData = (projectId,groupId) => {
+
         this.setState({
             requestLoading: true
         })
         let params={
-            id:1,
-            pageNo:1
+            projectId:projectId,
+            id:groupId
         }
-        console.log("groupId"+this.state.mid)
-        fetchPost(global.constants.getPersonList,params)
+        fetchPost(global.constants.getGroupUser,params)
             .then(
                 res => this.setmembData(res),
             )
@@ -257,9 +247,11 @@ class projectListUser extends React.Component{
     setData = (list) => {
         this.setState({
             data: list.map((item, index) => {
+
                 return {
                     ...item,
                     time:item.beginTime+"-"+item.endTime,
+                    operate:item.projectId,
                     key: index
                 }
             })
@@ -271,9 +263,12 @@ class projectListUser extends React.Component{
             personData: list.map((item, index) => {
                 return {
                     ...item,
+                    groupId:item.id,
                     key: index
                 }
             })
+        },()=>{
+            this.setState({          visible:true            })
         })
     }
     //赋予人员管理页面表格数据
@@ -286,6 +281,9 @@ class projectListUser extends React.Component{
 
                 }
             })
+        },()=>{
+            this.setState({membvisible:true});
+            this.requestpersonData(this.state.projectId);
         })
     }
 
