@@ -29,13 +29,16 @@ global.constants = {
     getProject: serverUrl + '/project1/getProject',
     workPlaceList: serverUrl + '/workPlace/list',
     managerList: serverUrl+'/user/manager',
-
+    //wjb
+    getProjectEmployeeRoleList:serverUrl+'/project/getProjectEmployeeRoleList',
+    getProjectReportList:serverUrl+'/projectReport/getProjectReportList',
     //dzh
     login: serverUrl + '/web/login',
     sendCode: serverUrl + '/web/sendCode',
     codeMaching: serverUrl + '/web/codeMaching',
     logout: serverUrl + '/web/logout',
     getRole:serverUrl+'/manage1/selectRightByRole',
+    setPerson:serverUrl+'/project1/setPerson',
     //hyz
     organizationChart: serverUrl + '/teamStructure/getTeamStructure',
     //yxy
@@ -65,10 +68,10 @@ global.constants = {
     //xjs
     deleteGroup:serverUrl + '/project/deleteGroup',
     addGroup:serverUrl + '/project/addGroup',
-    projectList:serverUrl + '/project2/projectList',
     getGroupList:serverUrl + '/project/getGroupUser',
     getPersonList:serverUrl + '/project1/getPersonList',
     getGroupUser:serverUrl + '/project/getGroupUsers',
+    getGroupPerson:serverUrl + '/project/getGroupPerson',
     //yxy
     insertUser:serverUrl + '/web/register',
     selectUsername:serverUrl + '/web/selectusername'

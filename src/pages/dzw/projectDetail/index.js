@@ -3,6 +3,8 @@ import RightBodyHeaderBar from '../../../static/component/rightBodyHeaderBar';
 import {fetchPost} from "../../../static/util/fetch";
 import TimeLine from "react-gantt-timeline";
 import './index.css'
+import ReportDetails from "../../wjb/taskList/ReportDetails";
+import {Modal} from "antd";
 
 export default class ProjectDetail extends Component {
 
@@ -16,7 +18,9 @@ export default class ProjectDetail extends Component {
             manager: "",
             groupList: [],
             requestLoading: true,
-            group: []
+            group: [],
+            queryTerms:[],
+            isVisible:false
         };
     }
 
@@ -92,6 +96,8 @@ export default class ProjectDetail extends Component {
         console.log("projectId:" + projectId);
         console.log("groupId:" + groupId);
         console.log("employeeId:" + employeeId);
+        let t={projectId:projectId,groupId:groupId,userId:employeeId}
+        this.setState({isVisible:true,queryTerms:t})
     };
 
     render() {
@@ -119,14 +125,11 @@ export default class ProjectDetail extends Component {
                     <table className="table" style={{tableLayout: "auto", marginTop: 40}}>
                         <tbody>
                         <td rowSpan={groupList.length + 1}>
-                            <a onClick={() => this.jumpToReport(0, projectInfo.id,
-                                0, 0)}>{manager}</a>
+                            {manager}
                         </td>
                         {groupNew.map((item, value) => (
                             <div key={value}>
-                                <th colSpan="5">
-                                    <a onClick={() => this.jumpToReport(1, item[0].projectId,
-                                        item[0].groupId, 0)}>{item[0].groupName}</a>
+                                <th colSpan="5">{item[0].groupName}
                                 </th>
                                 <tr>
                                     <th>姓名</th>
@@ -154,6 +157,24 @@ export default class ProjectDetail extends Component {
                         </tbody>
                     </table>
                 </div>
+                <Modal
+                    title={"工作详情"}
+                    visible={this.state.isVisible}
+                    width={1000}
+                    footer={null}
+                    maskClosable={false}
+                    destroyOnClose={true}
+                    onCancel={()=>{
+                        this.setState({
+                            isVisible:false,
+                            queryTerms:''
+                        })
+                    }}
+                >
+                    <ReportDetails btnv={"none"}
+                        queryTerms={this.state.queryTerms||{}}
+                    />
+                </Modal>
             </div>
         );
     };

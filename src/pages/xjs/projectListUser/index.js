@@ -112,7 +112,7 @@ class projectListUser extends React.Component{
               groupId:this.state.gid,
               userType:e.target.value,
            }
-        fetchPost('http://localhost:9080/test/project1/setPerson',params) //接口在后端 DZW文件夹
+        fetchPost(global.constants.setPerson,params) //接口在后端 DZW文件夹
             .then(
                 res => this.setmembData(res),
             )
@@ -189,7 +189,7 @@ class projectListUser extends React.Component{
     //请求人员列表页面接口
     componentDidMount() {
         let params={id:1}
-        fetchPost(global.constants.projectList,params)
+        fetchPost(global.constants.projectListByMid,params)
             .then(
                 res => this.setData(res),
             )
@@ -210,7 +210,7 @@ class projectListUser extends React.Component{
         let params = {
             projectId:pid
         }
-        fetchPost('http://localhost:9080/test/project/getGroupPerson',params) //  后端xjs/project下
+        fetchPost(global.constants.getGroupPerson,params) //  后端xjs/project下
             .then(
                 res => this.setpersonData(res),
             )

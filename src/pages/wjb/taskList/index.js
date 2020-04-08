@@ -15,7 +15,7 @@ import ReportDetails from './ReportDetails'
 }
     requestList= ()=>{
 
-      fetchPost("http://localhost:9080/test/project/getProjectEmployeeRoleList",{})
+      fetchPost(global.constants.getProjectEmployeeRoleList,{})
             .then(
                 res => this.setData(res)
 
@@ -39,7 +39,7 @@ import ReportDetails from './ReportDetails'
                     ...item,
                     beginTime:moment(parseInt(item.beginTime)).format("YYYY-MM-DD"),
                     endTime:moment(parseInt(item.endTime)).format("YYYY-MM-DD"),
-                    updateTime:moment(parseInt(item.updateTime)).format("YYYY-MM-DD"),
+                   // updateTime:moment(parseInt(item.updateTime)).format("YYYY-MM-DD"),
                     key: index
                 }
             })
@@ -96,10 +96,10 @@ import ReportDetails from './ReportDetails'
                 dataIndex: 'endTime',
                
               },
-              {
-                title: '最近更新',
-                dataIndex: 'updateTime',
-              },
+              // {
+              //   title: '最近更新',
+              //   dataIndex: 'updateTime',
+              // },
           ];
         const data = this.state.data
         return(
