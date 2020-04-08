@@ -28,7 +28,7 @@ const rights=loadable(()=>import('./ln/rights'));
 const roles=loadable(()=>import('./ln/roles'));
 const Employees=loadable(()=>import('./ln/Employees'));
 
-const messageList=loadable(()=>import('./zy/messageList'));
+// const messageList=loadable(()=>import('./zy/messageList'));
 class MainFrame extends Component{
     state = {
     };
@@ -57,7 +57,7 @@ class MainFrame extends Component{
                     <Route path="/sys/roles" component={roles}/>
                     <Route path="/sys/Employees" component={Employees}/>
 
-                    <Route path="/sys/messageList" component={messageList}/>
+                    {/* <Route path="/sys/messageList" component={messageList}/> */}
                 </div>
             </div>
         )

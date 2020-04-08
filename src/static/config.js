@@ -1,4 +1,5 @@
-const serverUrl = "http://localhost:9080/pages"
+const serverUrl = "http://localhost:9080/test"
+// const serverUrl = "http://localhost:9080/pages"
 //const serverUrl = "http://localhost:8080/manage_war/"
 global.constants = {
     // create by ljh ---begin

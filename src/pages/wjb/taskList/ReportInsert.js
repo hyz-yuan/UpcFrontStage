@@ -24,10 +24,10 @@ const { TextArea } = Input;
         this.props.dispatchData(data);
    }
    handleFile = (info) => {
+       
      
-    const fileList = info.fileList;
-    console.log(fileList)
-   
+    let fileList = [...info.fileList];
+    
     if (info.file.status === 'done') {
         message.success(`${info.file.name} 上传成功`);
     } else if (info.file.status === 'error') {
@@ -35,6 +35,7 @@ const { TextArea } = Input;
     }
     this.changeInput(fileList,'document');
 }
+   
 
     render() {
       
@@ -60,13 +61,16 @@ const { TextArea } = Input;
                 <Col span={20}><TextArea style={{height:73}}  onChange={(e)=>this.changeInput(e.target.value,'content')}/></Col>
             </Row>
             <Row style={{marginTop:10}}>
-                <Col span={3} style={{lineHeight:'41px'}}>附件上传<span style={{color:'#FF3300'}}>*</span></Col>
+                <Col span={3} style={{lineHeight:'41px'}}>附件上传</Col>
                 <Col span={20}>
                     <Upload
+                    
+                    name='file'
                      action={'http://localhost:9080/test/upload/uploadReport'}
                      onChange={this.handleFile}
-                    //  showUploadList={false}
+                    
                     //   fileList={formData.propagandaEnclosure}>
+                  
                        >
                         <Button>
                          选择上传文件

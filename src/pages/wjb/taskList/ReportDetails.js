@@ -58,11 +58,13 @@ import moment from "moment";
     handleSubmit = ()=>{
       const { projectId,groupId,userId,projectName,groupName,userName} = this.state.conditions;
 
-      let data = this.state.insertData
-      
-      
+      let data = this.state.insertData;
+      let s =JSON.stringify(data.document)
+  
             let params = {
-              ...data,
+              type:data.type,
+              content:data.content,
+              document:s,
               projectId,
               groupId,
               employeeId: userId,
@@ -71,7 +73,12 @@ import moment from "moment";
               employeeName:userName,
               operator:userName
             }
-            
+            if(data.type===undefined||data.content===undefined)
+            {
+              Modal.error({title:"请填写所有带*号的选项"})
+                return
+            }
+           
             fetchPost("http://localhost:9080/test/projectReport/insertProjectReportList",params)
               .then()
               .finally(() => {
@@ -102,7 +109,12 @@ import moment from "moment";
             {
                 title: '附件',
                 dataIndex: 'document',
-      
+                
+                render:(text,record)=>{
+                  let list = JSON.parse(record.document)
+                  console.log(list)
+                 return list.map((item, index) => { return item.name  })
+                }
             },
              
           ];

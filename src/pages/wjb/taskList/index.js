@@ -46,7 +46,7 @@ import ReportDetails from './ReportDetails'
         })
     }
     
-    handleClick = (item)=>{console.log(item)
+    handleClick = (item)=>{
           this.setState({
             isVisible:true,
             queryTerms:item
