@@ -89,7 +89,13 @@ import moment from "moment";
                 this.requestList()
             })       
     }
-    
+    handleExport=(name)=>{console.log(name)
+      let params = {
+        document:name
+      }
+      fetchPost("http://localhost:9080/test/upload/downloadFileEx",params)
+        .then()
+    }
 
     render() {
       
@@ -112,8 +118,12 @@ import moment from "moment";
                 
                 render:(text,record)=>{
                   let list = JSON.parse(record.document)
-                  console.log(list)
-                 return list.map((item, index) => { return item.name  })
+                 return list.map((item, index) => { 
+
+                   return <li key={index}>
+                          <a onClick={()=>this.handleExport(item.response.data)}>{item.name}</a> 
+                          </li> 
+                  })
                 }
             },
              
