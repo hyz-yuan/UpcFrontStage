@@ -8,6 +8,8 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "antd": "^4.0.2",
+    "echarts": "4.7.0",
+    "echarts-for-react": "^2.0.15-beta.1",
     "history": "latest",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",

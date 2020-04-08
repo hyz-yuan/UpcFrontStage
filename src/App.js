@@ -21,8 +21,7 @@ function App() {
             <Route exact strict path="/" component={Login} />
             <Route strict path="/sys" component={MainFrame}/>
             <Route strict path="/forgetPassword" component={ForgetPassword}/>
-              <Route strict path="/register" component={Register}/>
-
+            <Route strict path="/register" component={Register}/>
           </Switch>
         </div>
       </HashRouter>

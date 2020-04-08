@@ -3,10 +3,12 @@ import {Button, Popconfirm, Select, Table} from "antd";
 import {Component} from "react";
 import {fetchPost} from "../../../static/util/fetch";
 import zhCN from 'antd/es/locale/zh_CN';
+import RightBodyHeaderBar from "../../../static/component/rightBodyHeaderBar";
 const { Option } = Select;
 export default class test extends Component{
    state={
       buttonValue:"新增",
+       title:"权限管理",
        columns:[
            {title:'序号',dataIndex:'Index'},
            {title:'上级菜单',dataIndex:'lastMenus',
@@ -98,8 +100,9 @@ export default class test extends Component{
     render(){
         return (
             <div>
+                <RightBodyHeaderBar title={this.state.title}/>
                 <Button onClick={()=>this.insertRight()}>新增</Button>
-                <Table dataSource={this.state.data} columns={this.state.columns}/>
+                <Table dataSource={this.state.data} pagination={{pageSize: 7}} columns={this.state.columns}/>
             </div>
                 )
     }

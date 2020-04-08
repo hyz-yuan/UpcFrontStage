@@ -16,8 +16,8 @@ import moment from "moment";
         reportList:[],
         visible:false,
         insertData:[],
-        conditions:this.props.queryTerms
-
+        conditions:this.props.queryTerms,
+        btnVisible:this.props.btnv,
     }
   }
   requestList=()=>{
@@ -26,7 +26,7 @@ import moment from "moment";
       groupId:  this.state.conditions.groupId,
       employeeId:  this.state.conditions.userId
     }
-    fetchPost("http://localhost:9080/test/projectReport/getProjectReportList",params)
+    fetchPost(global.constants.getProjectReportList,params)
       .then( res => this.setReportData(res))
       .catch(e => console.log(e))
           .finally(() => {
@@ -122,7 +122,7 @@ import moment from "moment";
         return(
           <div>
             <Table dataSource={data} columns={columns} />
-            <Button type="primary"  onClick={()=> {this.handleOperator()}}>添加记录</Button>
+            <Button type="primary" style={{display:this.state.btnVisible}}  onClick={()=> {this.handleOperator()}}>添加记录</Button>
             <Modal
                     title={"工作汇报"}
                     visible={this.state.visible}

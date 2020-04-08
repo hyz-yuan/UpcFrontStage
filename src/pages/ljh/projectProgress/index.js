@@ -59,7 +59,8 @@ class projectProgress extends React.Component{
             projectTitle:list[0].projectName,
             currentProjectID:list[0].id,
         },()=>{
-            this.requestProgress()
+            this.requestProgress();
+            this.ProgressTable.loadData();
         });
 
     }

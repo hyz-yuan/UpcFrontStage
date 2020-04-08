@@ -12,11 +12,11 @@ export  default class workPlace extends Component{
 
     state={
         columns:[
-            {
-                title: '序号',
-                dataIndex: 'id',
-                key:'id'
-            },
+            // {
+            //     title: '序号',
+            //     dataIndex: 'id',
+            //     key:'id'
+            // },
 
             {
                 title: '地方',
@@ -28,8 +28,6 @@ export  default class workPlace extends Component{
                     <Input size="default" value={record.workPlace}
 
                            onChange={(e)=>this.inputChange({workPlace:e.target.value},record)}
-
-                           onChange={(e)=>this.inputChange({place:e.target.value},record)}
 
                            onBlur={this.updateChange.bind(this,record)}
                     />
@@ -156,7 +154,7 @@ export  default class workPlace extends Component{
     }
     render(){
         return(
-            <div>
+            <div style={{width:'300px'}}>
 
                 <Button onClick={this.insertName} style={{borderRadius:'6px',marginLeft:'6px'}}>新增</Button>
                 <Table dataSource={this.state.data} columns={this.state.columns} rowKey={'key'}/>
