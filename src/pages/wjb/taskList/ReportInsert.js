@@ -1,6 +1,5 @@
 import React,{Component} from 'react';
 import {Col,Row,Select,Input,Upload,Button,message} from 'antd';
-import {serverUrl} from "../../../static/config";
 
 
 
@@ -66,7 +65,7 @@ const { TextArea } = Input;
                     <Upload
                     
                     name='file'
-                     action={'http://localhost:9080/test/upload/uploadReport'}
+                     action={global.constants.uploadReport}
                      onChange={this.handleFile}
                     
                     //   fileList={formData.propagandaEnclosure}>

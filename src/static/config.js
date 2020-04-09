@@ -31,8 +31,11 @@ global.constants = {
     workPlaceList: serverUrl + '/workPlace/list',
     managerList: serverUrl+'/user/manager',
     //wjb
-    getProjectEmployeeRoleList:serverUrl+'/project/getProjectEmployeeRoleList',
-    getProjectReportList:serverUrl+'/projectReport/getProjectReportList',
+    getProjectEmployeeRoleList: serverUrl + '/project/getProjectEmployeeRoleList',
+    getProjectReportList: serverUrl + '/projectReport/getProjectReportList',
+    insertReport: serverUrl + '/projectReport/insertProjectReportList',
+    downloadFile: serverUrl + '/upload/downloadFileEx',
+    uploadReport: serverUrl + '/upload/uploadReport',
     //dzh
     login: serverUrl + '/web/login',
     sendCode: serverUrl + '/web/sendCode',

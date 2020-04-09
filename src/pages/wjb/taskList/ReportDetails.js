@@ -79,7 +79,7 @@ import moment from "moment";
                 return
             }
            
-            fetchPost("http://localhost:9080/test/projectReport/insertProjectReportList",params)
+            fetchPost(global.constants.insertReport,params)
               .then()
               .finally(() => {
                 this.setState({
@@ -89,12 +89,9 @@ import moment from "moment";
                 this.requestList()
             })       
     }
-    handleExport=(name)=>{console.log(name)
-      let params = {
-        document:name
-      }
-      fetchPost("http://localhost:9080/test/upload/downloadFileEx",params)
-        .then()
+    handleExport=(name)=>{
+      // window.open('http://localhost:9080/test/upload/downloadFileEx?name='+name) 
+      window.open(global.constants.downloadFile +'?name='+name) 
     }
 
     render() {
