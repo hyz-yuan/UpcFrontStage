@@ -65,7 +65,7 @@ const { TextArea } = Input;
                     <Upload
                     
                     name='file'
-                     action={global.constants.uploadReport}
+                     action={global.constants.uploadFile}
                      onChange={this.handleFile}
                     
                     //   fileList={formData.propagandaEnclosure}>

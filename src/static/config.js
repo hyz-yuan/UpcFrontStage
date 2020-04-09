@@ -35,7 +35,7 @@ global.constants = {
     getProjectReportList: serverUrl + '/projectReport/getProjectReportList',
     insertReport: serverUrl + '/projectReport/insertProjectReportList',
     downloadFile: serverUrl + '/upload/downloadFileEx',
-    uploadReport: serverUrl + '/upload/uploadReport',
+    uploadFile: serverUrl + '/upload/uploadReport',
     //dzh
     login: serverUrl + '/web/login',
     sendCode: serverUrl + '/web/sendCode',
