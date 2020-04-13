@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Table,message} from "antd/lib/index";
+import {Table} from "antd/lib/index";
 import {fetchPost} from "../../../static/util/fetch";
 import {createHashHistory} from "history";
 import RightBodyHeaderBar from '../../../static/component/rightBodyHeaderBar'

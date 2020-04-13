@@ -6,7 +6,7 @@ import LoginPassword from '../../../static/image/loginPassword.png';
 
 import './index.css'
 import {fetchPost} from "../../../static/util/fetch";
-import { Button, Input, Col, message,Select } from 'antd';
+import {  message,Select } from 'antd';
 import {createHashHistory} from "history";
 
 class ForgetPassword extends Component {
@@ -50,7 +50,7 @@ class ForgetPassword extends Component {
     setTechnology = (list) => {
         this.setState({
             technology: list.map((item, index) => {
-                return (<Select value={item.id} selected>{item.pId==0?item.technologyName:"+--"+item.technologyName}</Select>)
+                return (<Select value={item.id} selected>{item.pId===0?item.technologyName:"+--"+item.technologyName}</Select>)
             })
         })
     }
@@ -139,7 +139,7 @@ class ForgetPassword extends Component {
             params
         ).then(
                 res => {
-                    if(res=="用户名已存在"){this.setState({message:n+res,name:""})}
+                    if(res==="用户名已存在"){this.setState({message:n+res,name:""})}
 
 
                 }

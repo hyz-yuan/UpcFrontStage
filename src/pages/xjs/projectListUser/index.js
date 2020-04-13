@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Table, Modal, Popconfirm, Button, Input, Radio,message} from "antd";
+import {Table, Modal, Popconfirm, Button, Input, Radio} from "antd";
 import RightBodyHeaderBar from "../../../static/component/rightBodyHeaderBar";
 import {fetchPost} from "../../../static/util/fetch";
 

@@ -1,12 +1,8 @@
 import * as React from "react";
-import {Input, Checkbox, Row, Col, Button, Modal, Popconfirm, Select, Table, List, Menu} from "antd";
+import {Input, Checkbox, Button,  Popconfirm,  Table,  Modal,Menu} from "antd";
 import {Component} from "react";
 import {fetchPost} from "../../../static/util/fetch";
-import zhCN from 'antd/es/locale/zh_CN';
-import {Icon} from "@ant-design/compatible";
-import {createHashHistory} from "history";
 import RightBodyHeaderBar from "../../../static/component/rightBodyHeaderBar";
-const { Option } = Select;
 const {SubMenu} = Menu;
 
 export default class roles extends Component{
@@ -84,8 +80,8 @@ export default class roles extends Component{
     i=0;
     sub =(list,pid)=>{
         return list.map((item, index) => {
-            if(item.lastMenus==pid){
-                if(pid==0){
+            if(item.lastMenus===pid){
+                if(pid===0){
                     return (<SubMenu   key={item.urls}
                                      title={
                                          <span>

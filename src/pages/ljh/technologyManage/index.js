@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Table, Button, Popconfirm, Form,  Input,Select,message} from "antd/lib/index";
+import {Table, Button, Popconfirm, Form,  Input,Select} from "antd/lib/index";
 import {fetchPost} from "../../../static/util/fetch";
 import RightBodyHeaderBar from '../../../static/component/rightBodyHeaderBar'
 
@@ -156,7 +156,7 @@ state={
             dataSource: list.map((item, index) => {
                 return {
                     ...item,
-                    pId:item.pId==0?"第一级":pname[item.pId],
+                    pId:item.pId===0?"第一级":pname[item.pId],
                     key: index
 
                 }

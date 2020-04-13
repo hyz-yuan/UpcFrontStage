@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
-import { Table, Input,DatePicker, Button, Popconfirm, Form,message } from 'antd/lib/index';
+import { Table, Input,DatePicker, Button, Popconfirm, Form } from 'antd/lib/index';
 import './index.css'
 import moment from "moment";
 import {fetchPost} from "../../../static/util/fetch";

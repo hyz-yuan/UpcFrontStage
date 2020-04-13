@@ -1,5 +1,4 @@
 import {Menu} from 'antd';
-import {message} from "antd/lib/index";
 
 import { Icon } from '@ant-design/compatible';
 import React, {Component} from 'react'
@@ -32,8 +31,8 @@ class leftBar extends Component {
     i=0;
      sub =(list,pid)=>{
         return list.map((item, index) => {
-                if(item.lastMenus==pid){
-                    if(pid==0){
+                if(item.lastMenus===pid){
+                    if(pid===0){
                         return (<SubMenu onClick={this.goChildren}  key={item.urls}
                                           title={
                                               <span>
@@ -58,7 +57,7 @@ class leftBar extends Component {
     }
 
     render() {
-        const {userType,nodes,menus} = this.state
+        const {menus} = this.state
 
         return (
             <div style={{width: 256, height: "100%", position: "fixed", zIndex: 101, paddingTop: 49}}>

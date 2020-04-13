@@ -1,7 +1,6 @@
 import * as React from "react";
-import {Table, message, DatePicker} from "antd/lib/index";
+import {Table} from "antd/lib/index";
 import {fetchPost} from "../../../static/util/fetch";
-import {createHashHistory} from "history";
 import RightBodyHeaderBar from '../../../static/component/rightBodyHeaderBar'
 import './index.css'
 import TimeLine from "react-gantt-timeline";

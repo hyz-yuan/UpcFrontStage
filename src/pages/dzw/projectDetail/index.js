@@ -32,7 +32,7 @@ export default class ProjectDetail extends Component {
         let url = this.props.location.search; //获取url中"?"符后的字串
         console.log("url:" + url);
         let id = 1;
-        if (url.indexOf("?") != -1) {
+        if (url.indexOf("?") !== -1) {
             let str = url.substr(1);
             console.log("str:" + str);
             // console.log("str1:" + str.split("=")[0]);//id
@@ -101,7 +101,7 @@ export default class ProjectDetail extends Component {
     };
 
     render() {
-        const {title, gantData, projectInfo, projectTitle, manager, groupList, group} = this.state;
+        const {title, gantData,  projectTitle, manager, groupList, group} = this.state;
 
         //划分组
         let groupNew = [];

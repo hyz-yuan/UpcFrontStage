@@ -1,8 +1,7 @@
 import * as React from "react";
-import {Radio, Button, Popconfirm, Select, Table, Input, Checkbox, Col, Modal} from "antd";
+import {Radio, Button, Popconfirm, Select, Table, Input, Modal} from "antd";
 import {Component} from "react";
 import {fetchPost} from "../../../static/util/fetch";
-import zhCN from 'antd/es/locale/zh_CN';
 import RightBodyHeaderBar from "../../../static/component/rightBodyHeaderBar";
 const { Option } = Select;
 export default class test extends Component{
@@ -220,9 +219,9 @@ export default class test extends Component{
                     <p>工作地：{this.state.selectEmployee.workPlaceName}</p>
                     <p>技术领域：{this.state.selectEmployee.technologyName}</p>
                     <p>领域定位：
-                        {this.state.selectEmployee.fieldPosition==1?"组长":""}
-                        {this.state.selectEmployee.fieldPosition==2?"小组长":""}
-                        {this.state.selectEmployee.fieldPosition==3?"组员":""}</p>
+                        {this.state.selectEmployee.fieldPosition===1?"组长":""}
+                        {this.state.selectEmployee.fieldPosition===2?"小组长":""}
+                        {this.state.selectEmployee.fieldPosition===3?"组员":""}</p>
                     <p>当前角色：{this.state.selectEmployee.roleName}</p>
                 </Modal>
                 <Modal
@@ -257,7 +256,7 @@ export default class test extends Component{
                 })
     }
     handleInputPass=(checkedValues)=>{
-        this.state.password=checkedValues;
+        this.setState({password:checkedValues})
     }
     handleCancel1 = () => {
         this.setState({ visible1: false });
