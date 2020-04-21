@@ -65,7 +65,7 @@ class organizationChart extends Component{
                     nodePadding: 20,
                     layerPadding:40,
                     symbol: 'roundRect',
-                    symbolSize: [60, 45],//窗口大小
+                    symbolSize: [80, 45],//窗口大小
                     initialTreeDepth : -1 ,//展开层数0根节点，-1，null都展开
                     roam : "true" , //如果只想要开启缩放或者平移，可以设置成 'scale' 或者 'move'。设置成 true 为都开启
                     //节点类型
@@ -101,7 +101,7 @@ class organizationChart extends Component{
         }
 
         return(
-                <div>
+                <div>{console.log(treeData)}
                     <ReactEcharts  option={option} style={{height:'800px',width:'90%'}}/>
                 </div>
         )
