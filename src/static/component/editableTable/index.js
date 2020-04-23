@@ -31,7 +31,7 @@ class EditableTable extends React.Component {
             <div className='ceShiTable'>
                 <div className='ceShiTable-title'>
                     {
-                        this.props.columns.map((item,index) => {
+                        this.props.columns.map((item, index) => {
                             return (
                                 <span className='ceShiTable-text2' key={index} style={{width:averageWidth}}>{item.title}</span>
                             )
@@ -61,7 +61,7 @@ class EditableTable extends React.Component {
         return (
             <li key={dataIndex}>
                 {
-                    this.props.columns.map((columnsItem,columnsIndex)=>{
+                    this.props.columns.map((columnsItem, columnsIndex)=>{
                         return (
                             <span className='ceShiTable-text2' key={columnsIndex} style={{width:averageWidth}}>
                                 {dataItem[columnsItem.key]}

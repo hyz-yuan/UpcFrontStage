@@ -30,9 +30,10 @@ class leftBar extends Component {
     }
     i=0;
      sub =(list,pid)=>{
+
         return list.map((item, index) => {
                 if(item.lastMenus===pid){
-                    if(pid===0){
+                    if(pid==0){
                         return (<SubMenu onClick={this.goChildren}  key={item.urls}
                                           title={
                                               <span>
@@ -53,7 +54,7 @@ class leftBar extends Component {
 
     goChildren = (e) => {
         sessionStorage.clear()
-        createHashHistory().push(e.key)
+        createHashHistory().push("/sys/"+e.key)
     }
 
     render() {

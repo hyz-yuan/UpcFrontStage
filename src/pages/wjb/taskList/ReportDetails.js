@@ -115,7 +115,7 @@ import moment from "moment";
                 
                 render:(text,record)=>{
                   let list = JSON.parse(record.document)
-                 return list.map((item, index) => { 
+                 return list.map((item, index) => {
 
                    return <li key={index}>
                           <a onClick={()=>this.handleExport(item.response.data)}>{item.name}</a> 

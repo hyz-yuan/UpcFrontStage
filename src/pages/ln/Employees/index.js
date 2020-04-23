@@ -306,11 +306,12 @@ export default class test extends Component{
     }
     handleChange = (value, record) => {
         for (let i in value) {
+            //alert(record[i]+""+value[i])
             record[i] = value[i];//这一句是必须的，不然状态无法更改
         }
-        this.setState({
-            workPlace:record,
-        })
+        // this.setState({
+        //     //workPlace:record,
+        // })
     }
     inputOnBlur=(record)=>{
         let params={id:record.id,

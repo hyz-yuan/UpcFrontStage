@@ -114,7 +114,7 @@ class projectListUser extends React.Component{
            }
         fetchPost(global.constants.setPerson,params) //接口在后端 DZW文件夹
             .then(
-                res => this.setmembData(res),
+                this.requestpersonData(this.state.projectId)
             )
             .catch(e => console.log(e))
             .finally(() => {
@@ -166,7 +166,6 @@ class projectListUser extends React.Component{
         setTimeout(() => {
             this.setState({ loading: false, inputvisible: false });
         }, 1500);
-        console.log(this.state.iptValue)
     };
     //新增接口
     requestAddData(){
@@ -179,10 +178,12 @@ class projectListUser extends React.Component{
             )
             .catch(e => console.log(e))
             .finally(() => {
-                alert("新增小组已成功请刷新页面")
+                //alert("新增小组已成功请刷新页面")
                 this.setState({
                     requestLoading: false
-                })
+                }
+
+                )
             })
     }
 
@@ -261,6 +262,7 @@ class projectListUser extends React.Component{
     setpersonData = (list) => {
         this.setState({
             personData: list.map((item, index) => {
+              //  alert(item)
                 return {
                     ...item,
                     groupId:item.id,
@@ -269,6 +271,7 @@ class projectListUser extends React.Component{
             })
         },()=>{
             this.setState({          visible:true            })
+            //this.requestpersonData(this.state.projectId);
         })
     }
     //赋予人员管理页面表格数据
@@ -283,7 +286,7 @@ class projectListUser extends React.Component{
             })
         },()=>{
             this.setState({membvisible:true});
-            this.requestpersonData(this.state.projectId);
+
         })
     }
 

@@ -67,6 +67,7 @@ class projectList extends React.Component {
 
     //赋予表格数据
     setData = (list) => {
+      //  alert(list[0].beginTime)
         this.setState({
             data: list.map((item, index) => {
                 return {

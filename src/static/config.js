@@ -1,5 +1,5 @@
+// const serverUrl = "http://123.162.181.106:48080/test"
 const serverUrl = "http://localhost:9080/test"
-// const serverUrl = "http://localhost:9080/pages"
 //const serverUrl = "http://localhost:8080/manage_war/"
 global.constants = {
     // create by ljh ---begin
@@ -78,5 +78,106 @@ global.constants = {
     getGroupPerson:serverUrl + '/project/getGroupPerson',
     //yxy
     insertUser:serverUrl + '/web/register',
-    selectUsername:serverUrl + '/web/selectusername'
+    selectUsername:serverUrl + '/web/selectusername',
+    mapData:[{
+        point:"118.585946,37.455028",
+        operationMode:"个体",
+        businessState:1,
+    },{
+        point:"118.58876,37.450492",
+        operationMode:"个体",
+        businessState:1,
+    },{
+        point:"118.588014,37.454726",
+        operationMode:"个体",
+        businessState:2,
+    },{
+        point:"118.582586,37.451807",
+        operationMode:"个体",
+        businessState:2,
+    },{
+        point:"118.578983,37.457228",
+        operationMode:"个体",
+        businessState:3,
+    },{
+        point:"118.580073,37.454062",
+        operationMode:"个体",
+        businessState:3,
+    },{
+        point:"118.587993,37.45437",
+        operationMode:"公司",
+        businessState:1,
+    },{
+        point:"118.587501,37.455171",
+        operationMode:"公司",
+        businessState:1,
+    },{
+        point:"118.587901,37.454177",
+        operationMode:"公司",
+        businessState:2,
+    },{
+        point:"118.588424,37.453998",
+        operationMode:"公司",
+        businessState:2,
+    },{
+        point:"118.588424,37.453998",
+        operationMode:"公司",
+        businessState:3,
+    },{
+        point:"118.588781,37.454026",
+        operationMode:"公司",
+        businessState:3,
+    },{
+        point:"118.587185,37.455172",
+        operationMode:"合作社",
+        businessState:1,
+    },{
+        point:"118.587783,37.454717",
+        operationMode:"合作社",
+        businessState:1,
+    },{
+        point:"118.587194,37.455157",
+        operationMode:"合作社",
+        businessState:2,
+    },{
+        point:"118.587392,37.455154",
+        operationMode:"合作社",
+        businessState:2,
+    },{
+        point:"118.587963,37.454438",
+        operationMode:"合作社",
+        businessState:3,
+    },{
+        point:"118.587553,37.455207",
+        operationMode:"合作社",
+        businessState:3,
+    },{
+        point:"118.587779,37.454762",
+        operationMode:"其他",
+        businessState:1,
+    },{
+        point:"118.586743,37.455806",
+        operationMode:"其他",
+        businessState:1,
+    },{
+        point:"118.587774,37.454889",
+        operationMode:"其他",
+        businessState:2,
+    },{
+        point:"118.586742,37.455792",
+        operationMode:"其他",
+        businessState:2,
+    },{
+        point:"118.586405,37.455167",
+        operationMode:"其他",
+        businessState:3,
+    },{
+        point:"118.585937,37.455025",
+        operationMode:"其他",
+        businessState:3,
+    },]
 };
+
+
+
+

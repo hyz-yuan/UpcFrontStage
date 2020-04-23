@@ -135,7 +135,7 @@ export default class ProgressTable extends React.Component {
         this.loadData();
 
     }
-    loadData(){
+    loadData=()=>{
         let params={ projectId : this.props.pid };
         this.requestProgress(global.constants.progressList,params);
     }
