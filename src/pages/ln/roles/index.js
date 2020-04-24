@@ -14,6 +14,8 @@ export default class roles extends Component{
             {title:'角色名称',dataIndex:'roleName'},
             {title:'权限名',dataIndex:'rightsName',width:500},
             {
+
+                
                 title: '操作',
                 key: 'action',
                 render: (text, record) => (
@@ -106,7 +108,7 @@ export default class roles extends Component{
         return (
             <div>
                 <RightBodyHeaderBar title={title}/>
-                <Button onClick={this.showModal}>新增</Button>
+                <Button style={{marginLeft:'1%' }} onClick={this.showModal}>新增</Button>
                 <Table dataSource={this.state.data}  pagination={{pageSize: 7}} columns={this.state.columns}/>
                 <div  style={{height:"200px"}}>
                 <Modal

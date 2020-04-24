@@ -3,23 +3,30 @@ import {Radio, Button, Popconfirm, Select, Table, Input, Modal} from "antd";
 import {Component} from "react";
 import {fetchPost} from "../../../static/util/fetch";
 import RightBodyHeaderBar from "../../../static/component/rightBodyHeaderBar";
+import workPlace from "../../wwp/workPlace";
 const { Option } = Select;
 export default class test extends Component{
     state={
         title:"人员管理",
         buttonValue:"查询",
+        //查询人员用到
         selectName:"",
         selectTec:0,
+        selectTecName:"",
+        //修改密码时用到
+        id:"",
+        password:"",
+        visible: false,
         columns:[
             {title:'序号',dataIndex:'Index'},
             {title:'工作地',dataIndex:'workPlace',
                 render:(text,record)=>(
                     <span>
                  <Select
-                     defaultValue={this.state.data[record.key].workPlaceName}
+                     value={this.state.data[record.key].workPlaceName}
                      style={{ width: '100%' }}
-                     onChange={(value)=>this.handleChange({workPlace:value},record)}
-                     onBlur={(e)=>this.inputOnBlur(record)}>
+                     onSelect={(e,obj)=>this.handleChangeSelect({workPlace:e},{workPlaceName: obj.props.children},record)}
+                     >
                       {this.state.area.map((item,index) => <Option key={index} value={item.id}>{item.workPlace}</Option>)}
                  </Select>
                </span>)},
@@ -27,11 +34,11 @@ export default class test extends Component{
             {title:'技术领域',dataIndex:'technology',
                 render:(text,record)=>(
                     <span>
-              <Select
-                  defaultValue={this.state.data[record.key].technologyName}
-                  style={{ width: '100%' }}
-                  onChange={(value)=>this.handleChange({technology:value},record)}
-                  onBlur={(e)=>this.inputOnBlur(record)}>
+                        <Select
+                            value={this.state.data[record.key].technologyName}
+                            style={{ width: '100%' }}
+                            onSelect={(e,obj)=>this.handleChangeSelect({technology:e},{technologyName: obj.props.children},record)}
+                        >
                       {this.state.technology.map((item,index) => <Option key={index} value={item.id}>{item.technologyName}</Option>)}
                  </Select>
                </span>)},
@@ -39,7 +46,7 @@ export default class test extends Component{
                 render:(text,record)=>(
                     <span>
                   <Radio.Group
-                      onChange={(e)=>this.handleSetField(e.target.value,record)} value={this.state.data[record.key].fieldPosition}>
+                      onChange={(e)=>this.handleChangeField(e.target.value,record)} value={this.state.data[record.key].fieldPosition}>
                     <Radio value={1}>组长</Radio>
                     <Radio value={2}>小组长</Radio>
                     <Radio value={3}>组员</Radio>
@@ -49,11 +56,11 @@ export default class test extends Component{
                 render:(text,record)=>(
                     <span>
                <Select
-                   defaultValue={this.state.data[record.key].roleName}
+                   value={this.state.data[record.key].roleName}
                    style={{ width: '100%' }}
-                   onChange={(value)=>this.handleChange({role:value},record)}
-                   onBlur={(e)=>this.inputOnBlur(record)}>
-                      {this.state.role.map((item,index) => <Option key={index} value={item.id}>{item.roleName}</Option>)}
+                   onSelect={(e,obj)=>this.handleChangeSelect({role:e},{roleName: obj.props.children},record)}
+               >
+                      {this.state.role.map((item,index) => <Option key={index} value={item.roleId}>{item.roleName}</Option>)}
                  </Select>
                </span>)},
             {
@@ -61,7 +68,7 @@ export default class test extends Component{
                 key: 'action',
                 render: (text, record) => (
                     <span>
-                        <a onClick={() => this.changePass(record)}>修改密码</a>
+                        <a onClick={() => this.handleOk(record)}>修改密码</a>
                         <Popconfirm title="Sure to delete?" onConfirm={() => this.deleteEmployee(record)}>
                         <a style={{ marginLeft:'3%' }} >删除</a>
                         </Popconfirm>
@@ -69,27 +76,18 @@ export default class test extends Component{
                 ),
             },
         ],
-        data:[],
-        area:[],
-        role:[],
-        technology:[],
-        selectEmployee:[],
-        id:"",
-        password:"",
-        visible: false,
-        visible1: false,
+        //后端传过来的值
+        data:[],//所有员工信息
+        area:[],//所有工作地
+        role:[],//所有角色信息
+        technology:[],//所有技术领域信息
     }
 
     componentDidMount(){
-        this.setEmployee()
+        this.selectAllData();
     }
 
-    handleSetField=(checkedValues,record)=>{
-       record.fieldPosition=checkedValues
-        this.inputOnBlur(record)
-    }
-
-    setProjectData =(list)=>{
+    setAllEmployeeData =(list)=>{
         this.setState({
                 data: list.map((item, index) => {
                     return {
@@ -146,20 +144,18 @@ export default class test extends Component{
             }
         )
     }
-    setEmployee=()=>{
+    selectAllData=()=>{
         let params={}
         fetchPost(global.constants.getEmployee,params)
             .then(
-                res => this.setProjectData(res)
+                res => this.setAllEmployeeData(res)
             )
             .catch(e => console.log(e))
             .finally(() => {
                 this.setState({
                     requestLoading: false
                 })
-
             })
-
         fetchPost(global.constants.setRoleList,params)
             .then(
                 res => this.setRoleData(res)
@@ -193,130 +189,58 @@ export default class test extends Component{
                 })
             })
         }
-    changePass=(record)=>{
-        this.setState({
-            id: record.id,
-            visible1: true });
-    }
     render(){
         return (
             <div>
                 <RightBodyHeaderBar title={this.state.title}/>
-                <Input  style={{ width: '20%',marginRight:'3%' }} placeholder="员工姓名" onChange={(e)=>this.handleSetName(e.target.value)} />
+                <Input  style={{ width: '20%',marginRight:'3%',marginLeft:'1%' }} placeholder="员工姓名" onChange={(e)=>this.handleSetName(e.target.value)} />
                 <Select
+                    value={this.state.selectTecName}
                     style={{ width: '15%',marginRight:'2%' }}
-                    onChange={(value)=>this.handleSetRole(value)}>
+                    onSelect={(e,obj)=>this.handleSetRole(e,obj)}
+                >
                     {this.state.technology.map((item,index) => <Option key={index} value={item.id}>{item.technologyName}</Option>)}
                 </Select>
-                <Button onClick={()=>this.selectEmployee()}>查询</Button>
-                <Modal
-                    title="查询结果"
-                    visible={this.state.visible}
-                    onOk={this.handleOk}
-                    onCancel={this.handleOk}
-                >
-                    <p>姓名：{this.state.selectEmployee.realName}</p>
-                    <p>工作地：{this.state.selectEmployee.workPlaceName}</p>
-                    <p>技术领域：{this.state.selectEmployee.technologyName}</p>
-                    <p>领域定位：
-                        {this.state.selectEmployee.fieldPosition===1?"组长":""}
-                        {this.state.selectEmployee.fieldPosition===2?"小组长":""}
-                        {this.state.selectEmployee.fieldPosition===3?"组员":""}</p>
-                    <p>当前角色：{this.state.selectEmployee.roleName}</p>
-                </Modal>
+                <Button style={{marginRight:'2%' }}  onClick={()=>this.selectEmployee()}>查询</Button>
+                <Button onClick={()=>this.selectAllData()}>全部人员</Button>
                 <Modal
                     title="修改密码"
-                    visible={this.state.visible1}
-                    onOk={()=>this.handleOk1()}
-                    onCancel={this.handleCancel1}
+                    visible={this.state.visible}
+                    onOk={()=>this.handleChangePassWord()}
+                    onCancel={this.handleCancel}
                 >
                     <a>请输入新密码</a>
-                    <Input  onChange={(e)=>this.handleInputPass(e.target.value)}/>
+                    <Input value={this.state.password} onChange={(e)=>this.handleInputPass(e.target.value)}/>
                 </Modal>
                 <Table dataSource={this.state.data} pagination={{pageSize: 7}} columns={this.state.columns}/>
             </div>
         )
     }
-    handleOk1=()=>{
-        let params={
-            id:this.state.id,
-            password:this.state.password,
+
+    //更新工作地，技术领域，领域定位，当前角色
+    handleChangeField=(checkedValues,record)=>{
+        record.fieldPosition=checkedValues
+        this.updateUser(record)
+    }
+    handleChangeSelect = (e,obj,record) => {
+        for (let i in e) {
+            record[i] = e[i];//这一句是必须的，不然状态无法更改
         }
-            fetchPost(global.constants.changePassword,params)
-                .then(
-                    res=>this.setState({
-                        visible1: false })
-                )
-                .catch(e => console.log(e))
-                .finally(() => {
-                    this.setState({
-                        requestLoading: false
-                    })
-                    console.log(this.state.selectEmployee)
-                })
-    }
-    handleInputPass=(checkedValues)=>{
-        this.setState({password:checkedValues})
-    }
-    handleCancel1 = () => {
-        this.setState({ visible1: false });
-    };
-    handleSetName=(value)=>{
+        for (let i in obj) {
+            record[i] = obj[i];//这一句是必须的，不然状态无法更改
+        }
+        let a =this.state.data
         this.setState({
-            selectName:value,
+            a:record
         })
+        this.updateUser(record)
     }
-    handleSetRole=(value)=>{
-        this.setState({
-            selectTec:value,
-        })
-    }
-    selectEmployee=()=>{
+    updateUser=(record)=>{
         let params={
-            input:this.state.selectName,
-            technology:this.state.selectTec,
-        }
-        fetchPost(global.constants.searchEmployee,params)
-            .then(
-                res=>this.setState({
-                    selectEmployee:res,
-                    visible: true,
-                })
-            )
-            .catch(e => console.log(e))
-            .finally(() => {
-                this.setState({
-                    requestLoading: false
-                })
-                console.log(this.state.selectEmployee)
-            })
-    }
-    deleteEmployee=(record)=>{
-        let params={id:record.id}
-        fetchPost(global.constants.deleteUser,params)
-            .then(
-            )
-            .catch(e => console.log(e))
-            .finally(() => {
-                this.setState({
-                    requestLoading: false
-                })
-                this.setEmployee();
-            })
-    }
-    handleChange = (value, record) => {
-        for (let i in value) {
-            //alert(record[i]+""+value[i])
-            record[i] = value[i];//这一句是必须的，不然状态无法更改
-        }
-        // this.setState({
-        //     //workPlace:record,
-        // })
-    }
-    inputOnBlur=(record)=>{
-        let params={id:record.id,
+            id:record.id,
             workPlace:record.workPlace,
             technology:record.technology,
+            role:record.role,
             fieldPosition:record.fieldPosition
         }
         fetchPost(global.constants.updateUser,params)
@@ -329,4 +253,81 @@ export default class test extends Component{
                 })
             })
     }
+
+    //修改密码
+    handleOk=(record)=>{
+        this.setState({
+            id: record.id,
+            visible: true });
+    }
+    handleInputPass=(checkedValues)=>{
+        this.setState({password:checkedValues})
+    }
+    handleCancel = () => {
+        this.setState({ visible: false });
+    };
+    handleChangePassWord=()=>{
+        let params={
+            id:this.state.id,
+            password:this.state.password,
+        }
+        fetchPost(global.constants.changePassword,params)
+            .then(
+                res=>this.setState({
+
+                    password:"",
+                    visible: false })
+            )
+            .catch(e => console.log(e))
+            .finally(() => {
+                this.setState({
+                    requestLoading: false
+                })
+            })
+    }
+
+    //查询员工
+    handleSetName=(value)=>{
+        this.setState({
+            selectName:value,
+        })
+    }
+    handleSetRole=(e,obj)=>{
+        this.setState({
+            selectTecName:obj.props.children,
+            selectTec:e,
+        })
+    }
+    selectEmployee=()=>{
+        let params={
+            input:this.state.selectName,
+            technology:this.state.selectTec,
+        }
+        fetchPost(global.constants.searchEmployee,params)
+            .then(
+                res => this.setAllEmployeeData(res)
+            )
+            .catch(e => console.log(e))
+            .finally(() => {
+                this.setState({
+                    requestLoading: false,
+                })
+            })
+    }
+
+    //删除人员
+    deleteEmployee=(record)=>{
+        let params={id:record.id}
+        fetchPost(global.constants.deleteUser,params)
+            .then(
+            )
+            .catch(e => console.log(e))
+            .finally(() => {
+                this.setState({
+                    requestLoading: false
+                })
+                this.selectAllData();
+            })
+    }
+
 }
