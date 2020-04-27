@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Input, Checkbox, Button,  Popconfirm,  Table,  Modal,Menu} from "antd";
+import {Input, Checkbox, Button, Popconfirm, Table, Modal, Menu, Tree} from "antd";
 import {Component} from "react";
 import {fetchPost} from "../../../static/util/fetch";
 import RightBodyHeaderBar from "../../../static/component/rightBodyHeaderBar";
@@ -13,14 +13,11 @@ export default class roles extends Component{
             {title:'序号',dataIndex:'Index'},
             {title:'角色名称',dataIndex:'roleName'},
             {title:'权限名',dataIndex:'rightsName',width:500},
-            {
-
-                
-                title: '操作',
+            {title: '操作',
                 key: 'action',
                 render: (text, record) => (
                     <span>
-                    <a onClick={() => this.updateRecord(record)}>修改</a>
+                    <a onClick={() => this.selectRecord(record)}>修改</a>
                     <Popconfirm title="Sure to delete?" onConfirm={() => this.deleteRole(record)}>
                         <a style={{ marginLeft:'3%' }}>删除</a>
                     </Popconfirm>
@@ -29,19 +26,27 @@ export default class roles extends Component{
             },
         ],
         data:[],
+        //新的角色权限用到
         newRole:[],
-        right:[],
-        itemId:0,
-        itemList:[],
+
+        //修改角色的权限向后端提交的字段
+        selectRoleId:0,
+        selectRightList:[],
         updateList:[],
-        menus:[],
+
+        //Tree的显示
+        rightsTree:[],
+        childList:[],
+
         flag: false,
+        flagL:true,
         visible: false,
     }
 
     componentDidMount(){
         this.setRole()
     }
+
     setRole=()=>{
         let params={}
         fetchPost(global.constants.setRoleList,params)
@@ -60,7 +65,13 @@ export default class roles extends Component{
                 res => this.setData(res)
             )
             .catch(e => console.log(e))
+            .finally(() => {
+                this.setState({
+                    requestLoading: false
+                })
+            })
     }
+
     setProjectData =(list)=>{
         this.setState({
                 data: list.map((item, index) => {
@@ -76,28 +87,37 @@ export default class roles extends Component{
             }
         )
     }
+    //设置权限的主菜单和子菜单
     setData = (list) => {
-        this.setState({menus:this.sub(list,0)})
+        this.setState({
+                rights: list.map((item, index) => {
+                    return {
+                        ...item,
+                        id:item.id,
+                        Index:index+1,
+                        key: index,
+                        flag: false
+                    }
+                }),
+            }
+        )
+        this.sub(this.state.rightsTree,list,0)
     }
-    i=0;
-    sub =(list,pid)=>{
+    sub =(TreeData,list,pid)=>{
         return list.map((item, index) => {
             if(item.lastMenus===pid){
                 if(pid===0){
-                    return (<SubMenu   key={item.urls}
-                                     title={
-                                         <span>
-                                             <Checkbox value={item.id}>{item.rights}</Checkbox>
-                                         </span>
-                                     }
-                    >
-                        {this.sub(list,item.id)}
-                    </SubMenu>)
+                    TreeData.push({title:item.rights,key:item.id,style:{height:"40px"},children:[]})
+                    this.sub(TreeData,list,item.id)
                 }else{
-                    return (<Menu.Item key={item.urls}>
-                        <span>
-                            <Checkbox value={item.id}>{item.rights}</Checkbox>
-                        </span></Menu.Item>)
+                    TreeData.map(node=>{
+                        if(node.key==item.lastMenus)
+                        {
+                            this.state.childList.push(item.id)
+                            node.children.push({title:item.rights,key:item.id,style:{height:"40px"}})
+                        }
+                    })
+                    this.state.rightsTree=TreeData
                 }
             }
         })
@@ -110,38 +130,34 @@ export default class roles extends Component{
                 <RightBodyHeaderBar title={title}/>
                 <Button style={{marginLeft:'1%' }} onClick={this.showModal}>新增</Button>
                 <Table dataSource={this.state.data}  pagination={{pageSize: 7}} columns={this.state.columns}/>
-                <div  style={{height:"200px"}}>
-                <Modal
-                    destroyOnClose={true}
-                    visible={this.state.visible}
-                    title="新增/修改"
-                    onOk={this.handleOk}
-                    onCancel={this.handleCancel}
-                    footer={[
-                        <Button key="back" onClick={this.handleCancel}>
-                            取消
-                        </Button>,
-                        <Button key="submit" type="primary" loading={this.state.loading} onClick={this.insertNewRole}>
-                            提交
-                        </Button>,
-                    ]}>
-                    <a>角色名称</a>
-                    <Input defaultValue={this.state.newRole.roleName} onChange={(e)=>this.handleInsertName(e.target.value)}/>
-                    <a>权限选择（可多选）</a>
-                    <div style={{height:"250px" ,overflow:"auto"}}>
-                        <Checkbox.Group defaultValue={this.state.newRole.rightsList} style={{ width: '100%' }} onChange={(value)=>this.handleInsertRights(value)}>
-                            <Menu
-                                style={{height: "250px"}}
-                                multiple={"true"}
-                                defaultSelectedKeys={['1']}
-                                defaultOpenKeys={['sub1']}
-                                mode="inline"
-                            >
-                                {menus}
-                            </Menu>
-                        </Checkbox.Group>
-                    </div>
-                </Modal>
+                <div  style={{height:"300px"}}>
+                    <Modal
+                        destroyOnClose={true}
+                        visible={this.state.visible}
+                        title="新增/修改"
+                        onOk={this.handleOk}
+                        onCancel={this.handleCancel}
+                        footer={[
+                            <Button key="back" onClick={this.handleCancel}>
+                                取消
+                            </Button>,
+                            <Button key="submit" type="primary" loading={this.state.loading} onClick={this.insertNewRole}>
+                                提交
+                            </Button>,
+                        ]}>
+                        <a>角色名称</a>
+                        <Input defaultValue={this.state.newRole.roleName} onChange={(e)=>this.handleInsertName(e.target.value)}/>
+                        <a>权限选择（可多选）</a>
+                        <div style={{height:"250px" ,overflow:"auto"}}>
+                            <Tree
+                                style={{height:"250px" ,overflow:"auto"}}
+                                checkable
+                                defaultCheckedKeys={this.state.newRole.rightsList}
+                                onCheck={this.handleInsertRights}
+                                treeData={this.state.rightsTree}
+                            />
+                        </div>
+                    </Modal>
                 </div>
             </div>
         )
@@ -151,21 +167,22 @@ export default class roles extends Component{
         this.setState({
             visible: true
         });
-
     };
+
     handleCancel = () => {
         this.setState({
             visible: false,
             flag:false,
             updateList:[],
             newRole:[],
-            itemId:0
+            selectRoleId:0
         });
     };
+
     insertNewRole = () => {
         if(this.state.flag) {
             let param = {
-                roleId: this.state.itemId,
+                roleId: this.state.selectRoleId,
                 roleName:this.state.newRole.roleName,
                 rightsList: this.state.newRole.rightsList
             }
@@ -177,10 +194,12 @@ export default class roles extends Component{
                     this.setState({
                         requestLoading: false,
                         visible: false,
-                        itemId:0,
+                        selectRoleId:0,
                         flag:false,
                         updateList:[],
                         newRole: [],
+                        childList:[],
+                        rightsTree:[],
                     })
                     this.setRole()
                 })
@@ -198,12 +217,15 @@ export default class roles extends Component{
                     this.setState({
                         requestLoading: false,
                         visible: false,
+                        childList:[],
+                        rightsTree:[],
                         newRole: [],
                     })
                     this.setRole()
                 })
         }
     };
+
     deleteRole=(record)=>{
         let params={id:record.roleId}
         fetchPost(global.constants.deleteRole,params)
@@ -212,14 +234,47 @@ export default class roles extends Component{
             .catch(e => console.log(e))
             .finally(() => {
                 this.setState({
+                    childList:[],
+                    rightsTree:[],
                     requestLoading: false
                 })
                 this.setRole();
             })
     }
+
+
+    //查询角色已有的权限
+    selectRecord=(record)=>{
+        this.state.newRole.roleName=record.roleName;
+        this.state.selectRoleId=record.roleId;
+        let params={id:record.roleId}
+        fetchPost(global.constants.selectItem,params)
+            .then(
+                res => this.setItemListData(res)
+            )
+            .catch(e => console.log(e))
+            .finally(() => {
+                this.state.updateList=[];
+                for(let i=0;i<this.state.selectRightList.length;i++)
+                {
+                    for(let j=0;j<this.state.childList.length;j++)
+                    {
+                        if(this.state.selectRightList[i].rightId === this.state.childList[j])
+                        {this.state.updateList.push(this.state.selectRightList[i].rightId)}
+                    }
+                }
+                this.state.newRole.rightsList=this.state.updateList
+                this.setState({
+                    requestLoading: false,
+                    visible: true,
+                    flag:true
+                })
+            })
+    }
+
     setItemListData =(list)=>{
         this.setState({
-            itemList: list.map((item, index) => {
+            selectRightList: list.map((item, index) => {
                 return {
                     ...item,
                     id:item.id,
@@ -231,35 +286,14 @@ export default class roles extends Component{
             }),
         })
     }
-    updateRecord=(record)=>{
-        this.state.newRole.roleName=record.roleName;
-        this.state.itemId=record.roleId;
-        let params={id:record.roleId}
-        fetchPost(global.constants.selectItem,params)
-            .then(
-                res => this.setItemListData(res)
-            )
-            .catch(e => console.log(e))
-            .finally(() => {
-                this.state.updateList=[];
-                for(let i=0;i<this.state.itemList.length;i++)
-                {
-                    this.state.updateList.push(this.state.itemList[i].rightId)
-                }
-                this.state.newRole.rightsList=this.state.updateList
-                this.setState({
-                    requestLoading: false,
-                    visible: true,
-                    flag:true
-                })
-            })
-    }
+
+    //插入姓名和权限
     handleInsertName=(checkedValues)=>{
         this.state.newRole.roleName=checkedValues;
     }
-    handleInsertRights=(checkedValues)=>{
-        this.state.newRole.rightsList=checkedValues;
-        console.log(this.state.newRole.rightsList)
+
+    handleInsertRights=(checkedKeys, e)=> {
+        this.state.newRole.rightsList=[...checkedKeys, ...e.halfCheckedKeys];
     }
 }
 
