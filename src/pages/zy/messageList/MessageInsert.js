@@ -16,35 +16,35 @@ class MessageInsert extends Component{
         select1Value:[],
         select2Value:[],
         inputData :[],
-    }
+    };
 
     changeInput=(value,option)=>{
         /*let data=this.props.insertData;
         data[option]=value;
         this.props.dispatchData(data);*/
         alert("value："+value + "  Option :" + option);
-    }
+    };
     getReturn=()=>{
 
        /* this.props.onRef*/
 
-    }
+    };
 
     getData = ()=>{
         let params = {
-        }
+        };
         fetchPost("http://localhost:9080/test/message/test",params)
             .then(
                 (res)=>this.setData(res)
             )
             .finally()
-    }
+    };
     setData=(list)=>{
-        console.log(list)
+        console.log(list);
         this.setState({
             data:list
         })
-    }
+    };
     componentDidMount() {
         this.props.onRef(this);
         this.getData();
@@ -52,10 +52,10 @@ class MessageInsert extends Component{
     changeSelectOption=(optionValue)=>{
         if(optionValue=='0'){
             this.setState({
-                useData: this.state.data.user.map(item=>{
+                useData: this.state.data.technology.map(item=>{
                     return {
                         id : item.id,
-                        name : item.userName,
+                        name : item.projectName,
                     }
                 })
             })
@@ -70,10 +70,10 @@ class MessageInsert extends Component{
             })
         }else if(optionValue=='2'){
             this.setState({
-                useData: this.state.data.technology.map(item=>{
+                useData: this.state.data.user.map(item=>{
                     return {
                         id : item.id,
-                        name : item.projectName,
+                        name : item.realName,
                     }
                 })
             })
@@ -81,7 +81,7 @@ class MessageInsert extends Component{
         this.setState({
             select1Value: optionValue
         })
-    }
+    };
     getSelectContent =(value)=>{
         this.setState({
             insertMessageData : {
@@ -91,7 +91,7 @@ class MessageInsert extends Component{
             select2Value: value
         });
 
-    }
+    };
     render() {
        
         return(
@@ -102,9 +102,9 @@ class MessageInsert extends Component{
                         <Select style={{width:200}}
 
                                 onChange={(value)=>this.changeSelectOption(value)}>
-                            <Option value={'0'}>个人</Option>
+                            <Option value={'0'}>项目组</Option>
                             <Option value={'1'}>小组</Option>
-                            <Option value={'2'}>项目组</Option>
+                            <Option value={'2'}>个人</Option>
                         </Select>
                     </Col>
                 </Row>

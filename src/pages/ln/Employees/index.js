@@ -155,7 +155,7 @@ export default class test extends Component{
                 this.setState({
                     requestLoading: false
                 })
-            })
+            });
         fetchPost(global.constants.setRoleList,params)
             .then(
                 res => this.setRoleData(res)
@@ -165,7 +165,7 @@ export default class test extends Component{
                 this.setState({
                     requestLoading: false
                 })
-            })
+            });
         fetchPost(global.constants.selectWorkPlace,params)
             .then(
                 res => this.setWorkPlaceData(res)
@@ -176,7 +176,7 @@ export default class test extends Component{
                     requestLoading: false
                 })
 
-            })
+            });
 
         fetchPost(global.constants.selectTechnology,params)
             .then(
@@ -188,7 +188,7 @@ export default class test extends Component{
                     requestLoading: false
                 })
             })
-        }
+        };
     render(){
         return (
             <div>
@@ -219,9 +219,9 @@ export default class test extends Component{
 
     //更新工作地，技术领域，领域定位，当前角色
     handleChangeField=(checkedValues,record)=>{
-        record.fieldPosition=checkedValues
+        record.fieldPosition=checkedValues;
         this.updateUser(record)
-    }
+    };
     handleChangeSelect = (e,obj,record) => {
         for (let i in e) {
             record[i] = e[i];//这一句是必须的，不然状态无法更改
@@ -229,12 +229,12 @@ export default class test extends Component{
         for (let i in obj) {
             record[i] = obj[i];//这一句是必须的，不然状态无法更改
         }
-        let a =this.state.data
+        let a =this.state.data;
         this.setState({
             a:record
-        })
+        });
         this.updateUser(record)
-    }
+    };
     updateUser=(record)=>{
         let params={
             id:record.id,
@@ -242,7 +242,7 @@ export default class test extends Component{
             technology:record.technology,
             role:record.role,
             fieldPosition:record.fieldPosition
-        }
+        };
         fetchPost(global.constants.updateUser,params)
             .then(
             )
@@ -252,17 +252,17 @@ export default class test extends Component{
                     requestLoading: false
                 })
             })
-    }
+    };
 
     //修改密码
     handleOk=(record)=>{
         this.setState({
             id: record.id,
             visible: true });
-    }
+    };
     handleInputPass=(checkedValues)=>{
         this.setState({password:checkedValues})
-    }
+    };
     handleCancel = () => {
         this.setState({ visible: false });
     };
@@ -270,7 +270,7 @@ export default class test extends Component{
         let params={
             id:this.state.id,
             password:this.state.password,
-        }
+        };
         fetchPost(global.constants.changePassword,params)
             .then(
                 res=>this.setState({
@@ -284,25 +284,25 @@ export default class test extends Component{
                     requestLoading: false
                 })
             })
-    }
+    };
 
     //查询员工
     handleSetName=(value)=>{
         this.setState({
             selectName:value,
         })
-    }
+    };
     handleSetRole=(e,obj)=>{
         this.setState({
             selectTecName:obj.props.children,
             selectTec:e,
         })
-    }
+    };
     selectEmployee=()=>{
         let params={
             input:this.state.selectName,
             technology:this.state.selectTec,
-        }
+        };
         fetchPost(global.constants.searchEmployee,params)
             .then(
                 res => this.setAllEmployeeData(res)
@@ -313,11 +313,11 @@ export default class test extends Component{
                     requestLoading: false,
                 })
             })
-    }
+    };
 
     //删除人员
     deleteEmployee=(record)=>{
-        let params={id:record.id}
+        let params={id:record.id};
         fetchPost(global.constants.deleteUser,params)
             .then(
             )
@@ -325,7 +325,7 @@ export default class test extends Component{
             .finally(() => {
                 this.setState({
                     requestLoading: false
-                })
+                });
                 this.selectAllData();
             })
     }

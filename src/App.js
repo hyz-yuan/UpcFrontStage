@@ -10,7 +10,7 @@ import MainFrame from './pages'
 const Login = loadable(()=>import('./pages/dzh/login'));
 const ForgetPassword = loadable(()=>import('./pages/dzh/forgetPassword'));
 const Register = loadable(()=>import('./pages/ljh/register'));
-const Map = loadable(()=>import('./pages/ljh/map'));
+
 
 
 //exact是精确匹配
@@ -20,7 +20,6 @@ function App() {
         <div>
           <Switch>
             <Route exact strict path="/" component={Login} />
-              <Route exact strict path="/map" component={Map} />
             <Route strict path="/sys" component={MainFrame}/>
             <Route strict path="/forgetPassword" component={ForgetPassword}/>
             <Route strict path="/register" component={Register}/>

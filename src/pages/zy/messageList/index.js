@@ -17,7 +17,7 @@ class Message extends  Component{
             { title: '项目名称',dataIndex: 'projectName'},
             { title: '日期',dataIndex: 'operatorTime'},
             {title: '发送人',dataIndex: 'operator'},
-            {title: '来源',dataIndex: 'projectName'},
+            //{title: '来源',dataIndex: 'projectName'},
             {title: '消息内容',dataIndex: 'content',ellipsis: true},
             {title: '状态',dataIndex: 'state',},
             /* {
@@ -49,7 +49,7 @@ class Message extends  Component{
     requestList=()=>{
         let params = {
             id:2
-        }
+        };
         fetchPost("http://localhost:9080/test/message/getList",params)
             .then( res => this.handleMessageData(res))
             .catch(e => console.log(e))
@@ -71,14 +71,14 @@ class Message extends  Component{
                 }
             })
         });
-    }
+    };
     //显示发送数据虚拟框
     displayInsertModal = ()=>{
         this.setState({
             visible:true
 
         });
-    }
+    };
     //点击ok后的操作
     clickOnOk=(child)=>{
         if(child.state.select1Value.length == 0){
@@ -112,7 +112,7 @@ class Message extends  Component{
     };
     //发送消息
     sendMessage = ()=>{
-        console.log(this.state.insertData)
+        console.log(this.state.insertData);
         let data = this.state.insertData;
         console.log(data);
 
@@ -121,14 +121,14 @@ class Message extends  Component{
             projectId:2
 
         };
-        console.log(params)
+        console.log(params);
         fetchPost("http://localhost:9080/test/message/insertNewMessage",params)
             .then()
             .finally(()=>{
                 this.setState({
                     visible:false,
                     insertData:{}
-                })
+                });
                 this.requestList();
 
             })
@@ -137,14 +137,13 @@ class Message extends  Component{
     handleState=(value)=>{
         this.setState({
             insertData : {
-                id : value ,
-                userId : 2 ,
+                id : value
             }
         }, ()=>{
             this.updateState()
             //放入回调函数中，再修改数据后在调用
         })
-    }
+    };
     //状态更新
     updateState = ()=>{
 
@@ -190,9 +189,10 @@ class Message extends  Component{
                                });
                                if ( record.state=== '未读' ){
                                    record.state = '已读';
+                                   this.handleState(record.id);
                                }
                                /*alert(record.id)*/
-                               this.handleState(record.id);
+
 
                            }}}}
                        scroll={{ y: 300 }}/>
