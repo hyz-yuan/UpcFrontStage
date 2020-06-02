@@ -6,29 +6,29 @@ import loadable from "../static/util/loadbale";
 import LeftBar from '../static/component/leftBar'
 import Header from '../static/component/header'
 
-const Home = loadable(()=>import('./ljh/home'));
-const projectList = loadable(()=>import('./ljh/projectList'));
-const organizationChart = loadable(()=>import('./hyz/organizationChart'));
-const projectProgress = loadable(()=>import('./ljh/projectProgress'));
-const technologyManage = loadable(()=>import('./ljh/technologyManage'));
+const Home = loadable(()=>import('./home'));
+const projectList = loadable(()=>import('./projectList'));
+const organizationChart = loadable(()=>import('./organizationChart'));
+const projectProgress = loadable(()=>import('./projectProgress'));
+const technologyManage = loadable(()=>import('./technologyManage'));
 
-const  projectListUser = loadable(()=>import('./xjs/projectListUser'));
+const  projectListUser = loadable(()=>import('./projectListUser'));
 
 //wjb
-const taskList = loadable(()=>import('./wjb/taskList'));
+const taskList = loadable(()=>import('./taskList'));
 
 //gsl
-const projectListNew = loadable(()=>import('./gsl/projectList'));
-const projectManage = loadable(()=>import('./gsl/projectManage'));
+const projectListNew = loadable(()=>import('./projectList'));
+const projectManage = loadable(()=>import('./projectManage'));
 
-const projectDetail = loadable(() => import('./dzw/projectDetail'));
-const workPlace = loadable(()=>import('./wwp/workPlace'));
+const projectDetail = loadable(() => import('./projectDetail'));
+const workPlace = loadable(()=>import('./workPlace'));
 //ln
-const rights=loadable(()=>import('./ln/rights'));
-const roles=loadable(()=>import('./ln/roles'));
-const Employees=loadable(()=>import('./ln/Employees'));
+const rights=loadable(()=>import('./rights'));
+const roles=loadable(()=>import('./roles'));
+const Employees=loadable(()=>import('./Employees'));
 //zy
-const MessageList=loadable(()=>import('./zy/messageList/index'));
+const MessageList=loadable(()=>import('./messageList/index'));
 // const messageList=loadable(()=>import('./zy/messageList'));
 class MainFrame extends Component{
     state = {

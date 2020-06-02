@@ -7,9 +7,9 @@ import loadable from "./static/util/loadbale";
 import MainFrame from './pages'
 
 //const Login = loadable(()=>import('./pages/ljh/login'));
-const Login = loadable(()=>import('./pages/dzh/login'));
-const ForgetPassword = loadable(()=>import('./pages/dzh/forgetPassword'));
-const Register = loadable(()=>import('./pages/ljh/register'));
+const Login = loadable(()=>import('./pages/login'));
+const ForgetPassword = loadable(()=>import('./pages/forgetPassword'));
+const Register = loadable(()=>import('./pages/register'));
 
 
 
