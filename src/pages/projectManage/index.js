@@ -61,15 +61,17 @@ class projectManage extends Component {
     postProject = () => {
         console.log(this.state);
         let projectId = this.props.match.params.id;
+        const {id,projectName,place,manager,beginTime,endTime,remark}=this.state;
         let params={
-            id: this.state.id,
-            projectName: this.state.projectName,
-            place: this.state.place,
-            manager: this.state.manager,
-            beginTime: this.state.beginTime + ' 00:00:00',
-            endTime: this.state.endTime + ' 00:00:00',
-            remark: this.state.remark,
+            id: id,
+            projectName: projectName,
+            place: place,
+            manager: manager,
+            beginTime: beginTime + ' 00:00:00',
+            endTime: endTime + ' 00:00:00',
+            remark: remark,
         };
+        console.log(params);
         //0为新建项目的标志，非0为修改项目的标志
         if (projectId === "0") {
             fetchPost(global.constants.addProject, params)
@@ -189,7 +191,7 @@ class projectManage extends Component {
                             {
                                 this.state.workPlaceList.map((item, index) => {
                                         return (
-                                            <Option index={index} value={item.id}>{item.workPlace}</Option>
+                                            <Option key={index} index={index} value={item.id}>{item.workPlace}</Option>
                                         )
                                     }
                                 )
@@ -214,7 +216,7 @@ class projectManage extends Component {
                             {/*从后端获取的动态*/}
                             {
                                 this.state.managerList.map((item, index) => {
-                                    return (<Option index={index} value={item.id}>{item.realName}</Option>)
+                                    return (<Option key={index} index={index} value={item.id}>{item.realName}</Option>)
                                 })
                             }
                         </Select>
