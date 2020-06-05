@@ -117,7 +117,7 @@ state={
         ],
         title:"技术管理",
         dataSource: [],
-    }
+    };
     options=[];//下列列表选项
     componentDidMount() {
         this.loadData();
@@ -140,8 +140,7 @@ state={
                     requestLoading: false
                 })
             })
-    }
-
+    };
 
     setData = (list) => {
         let pname ={};
@@ -151,7 +150,7 @@ state={
         list.map((item, index) => {
             pname[item.id]=item.technologyName;
             this.options.push(<Select key={item.id}>{item.technologyName}</Select>);
-        })
+        });
         this.setState({
             dataSource: list.map((item, index) => {
                 return {
@@ -163,7 +162,7 @@ state={
             }),
         })
         //message.info("保存成功！")
-    }
+    };
     handleDelete = key => {
         const dataSource = [...this.state.dataSource];
         let params={
@@ -187,7 +186,7 @@ state={
         this.setState({
             dataSource: newData,
         });
-        let reg=/\d/ //正则表达式，测试是否只包含数字
+        let reg=/\d/ ;//正则表达式，测试是否只包含数字
         let params={
             id : row.id,
             technologyName:row.technologyName,

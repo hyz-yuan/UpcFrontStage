@@ -61,7 +61,7 @@ export default class test extends Component{
            ],
        data:[],
 
-   }
+   };
 
    componentDidMount(){
       this.setRight()
@@ -81,9 +81,9 @@ export default class test extends Component{
                }),
        }
        )
-   }
+   };
     setRight=()=>{
-        let params={}
+        let params={};
         fetchPost(global.constants.setRightList,params)
             .then(
                 res => this.setProjectData(res)
@@ -95,7 +95,7 @@ export default class test extends Component{
                 })
             })
 
-    }
+    };
     render(){
         return (
             <div>
@@ -107,7 +107,7 @@ export default class test extends Component{
     }
 
     insertRight=()=>{
-        let params={}
+        let params={};
         fetchPost(global.constants.insertRight,params)
             .then(
                 res => this.setProjectData(res)
@@ -118,9 +118,9 @@ export default class test extends Component{
                     requestLoading: false
                 })
             })
-    }
+    };
     deleteRight=(record)=>{
-        let params={id:record.id}
+        let params={id:record.id};
         fetchPost(global.constants.deleteRight,params)
             .then(
             )
@@ -128,10 +128,10 @@ export default class test extends Component{
             .finally(() => {
                 this.setState({
                     requestLoading: false
-                })
+                });
                 this.setRight();
             })
-    }
+    };
 
     handleChange = (value, record) => {
         for (let i in value) {
@@ -143,7 +143,7 @@ export default class test extends Component{
             urls:record,
             notes:record
         })
-    }
+    };
 
     inputOnBlur=(record)=>{
         let params={id:record.id,
@@ -151,7 +151,7 @@ export default class test extends Component{
             rights:record.rights,
             urls:record.urls,
             notes:record.notes,
-        }
+        };
         fetchPost(global.constants.updateRight,params)
             .then(
             )
@@ -159,7 +159,7 @@ export default class test extends Component{
             .finally(() => {
                 this.setState({
                     requestLoading: false
-                })
+                });
                 this.setRight();
             })
     }

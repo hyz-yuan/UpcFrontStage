@@ -21,7 +21,7 @@ const { TextArea } = Input;
         let data=this.props.insertData;
         data[option]=value;
         this.props.dispatchData(data);
-   }
+   };
    handleFile = (info) => {
        
      
@@ -33,12 +33,12 @@ const { TextArea } = Input;
         message.error(`${info.file.name} 上传失败.`);
     }
     this.changeInput(fileList,'document');
-}
+};
    
 
     render() {
       
-        const {projectName} = this.state
+        const {projectName} = this.state;
         
         return(
           <div>

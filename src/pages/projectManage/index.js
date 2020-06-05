@@ -6,8 +6,6 @@ import {fetchPost} from "../../static/util/fetch";
 import {createHashHistory} from "history";
 
 import moment from 'moment';
-
-
 class projectManage extends Component {
 
     //注意：此代码里共有三个关于【项目地点】的变量

@@ -16,39 +16,32 @@ class ForgetPassword extends Component {
         password: '',
         name: '',
         verification: ''
-    }
-
-    //
-
+    };
     handleemail = (e) => {
-        let value = e.target.value.replace(/[\u4e00-\u9fa5]/g, '')
+        let value = e.target.value.replace(/[\u4e00-\u9fa5]/g, '');
         this.setState({
             email: value
         })
-    }
+    };
 
     handlePassword = (e) => {
-        let value = e.target.value.replace(/[\u4e00-\u9fa5]/g, '')
+        let value = e.target.value.replace(/[\u4e00-\u9fa5]/g, '');
         this.setState({
             password: value
         })
-    }
-
-
+    };
     handleName = (e) => {
         this.setState({
             name: e.target.value
         })
-    }
-
-
+    };
 
     //发送验证码
     handleSendPhoneMsg = () => {
         let params = {
             email: this.state.email,
             realName: this.state.name
-        }
+        };
         // fetchPost('http://localhost:7080/pages/web/sendCode', params)
         fetchPost(global.constants.sendCode, params)
             .then(
@@ -56,29 +49,28 @@ class ForgetPassword extends Component {
                     switch (res) {
 
                         case "真实姓名不正确":
-                            message.info("真实姓名不正确")
-                            break
+                            message.info("真实姓名不正确");
+                            break;
                         case "发送成功":
-                            message.info("发送成功")
-                            break
+                            message.info("发送成功");
+                            break;
                         case "邮箱没有注册":
-                            message.info("邮箱没有注册")
-                            break
+                            message.info("邮箱没有注册");
+                            break;
                         default:
-                            message.info("未知错误")
+                            message.info("未知错误");
                             break
                     }
                 }
             )
             .catch(e => console.log(e))
-    }
-
+    };
     //输入验证码
     handleVerification = (e) => {
         this.setState({
             verification: e.target.value
         })
-    }
+    };
 
     //重置密码
     resetPassword = () => {
@@ -93,31 +85,31 @@ class ForgetPassword extends Component {
                 email: this.state.email,
                 code: this.state.verification,
                 password: this.state.password
-            }
+            };
             // fetchPost('http://localhost:7080/pages/web/codeMaching', params)
             fetchPost(global.constants.codeMaching, params)
                 .then(
                     res => {
                         switch (res) {
                             case '验证成功':
-                                message.info('修改成功')
-                                createHashHistory().push('/')
-                                break
+                                message.info('修改成功');
+                                createHashHistory().push('/');
+                                break;
                             case '验证失败':
-                                message.info('验证码不正确')
-                                break
+                                message.info('验证码不正确');
+                                break;
                             default:
-                                message.info("未知错误")
+                                message.info("未知错误");
                                 break
                         }
                     }
                 )
                 .catch(e => console.log(e))
         }
-    }
+    };
 
     render() {
-        const {email, password, name, verification} = this.state
+        const {email, password, name, verification} = this.state;
         return (
             <div className='forgetPassword' style={{backgroundImage: `url("${Background}")`}}>
                 <div className="login">

@@ -81,7 +81,7 @@ export default class test extends Component{
         area:[],//所有工作地
         role:[],//所有角色信息
         technology:[],//所有技术领域信息
-    }
+    };
 
     componentDidMount(){
         this.selectAllData();
@@ -100,7 +100,7 @@ export default class test extends Component{
                 }),
             }
         )
-    }
+    };
     setRoleData =(list)=>{
         this.setState({
                 role: list.map((item, index) => {
@@ -114,7 +114,7 @@ export default class test extends Component{
                 }),
             }
         )
-    }
+    };
     setTechnologyData =(list)=>{
         this.setState({
             technology: list.map((item, index) => {
@@ -128,7 +128,7 @@ export default class test extends Component{
                 }),
             }
         )
-    }
+    };
     setWorkPlaceData =(list)=>{
         this.setState({
             area: list.map((item, index) => {
@@ -143,9 +143,9 @@ export default class test extends Component{
                 }),
             }
         )
-    }
+    };
     selectAllData=()=>{
-        let params={}
+        let params={};
         fetchPost(global.constants.getEmployee,params)
             .then(
                 res => this.setAllEmployeeData(res)

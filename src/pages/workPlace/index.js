@@ -46,10 +46,10 @@ export  default class workPlace extends Component{
 
         ],
         data:[],
-    }
+    };
 
     componentDidMount() {
-        let params={}
+        let params={};
         fetchPost(global.constants.WorkPlaceSelect,params)
             .then(
                 res => this.setProjectData(res)
@@ -76,9 +76,9 @@ export  default class workPlace extends Component{
         })
 
 
-    }
+    };
     insertName=()=>{
-        let params={}
+        let params={};
         fetchPost(global.constants.insertWorkPlace,params)
             .then(
                 res => this.setProjectData(res)
@@ -89,10 +89,10 @@ export  default class workPlace extends Component{
                     requestLoading: false
                 });
                 this.requestData(); })
-    }
+    };
 
     inputChange=(e,record)=> {
-        console.log(e)
+        console.log(e);
         for(let i in e){
             record[i]=e[i];
         }
@@ -100,14 +100,14 @@ export  default class workPlace extends Component{
             workPlace:e,
 
         })
-    }
+    };
     updateChange=(record)=>{
         let params1={
             id:record.id,
             workPlace:record.workPlace,
 
 
-        }
+        };
         fetchPost(global.constants.updateWorkPlace,params1)
             .then(
                 res => {message.info("更新成功")
@@ -120,12 +120,12 @@ export  default class workPlace extends Component{
                     requestLoading: false
                 });
                 this.requestData();})
-    }
+    };
     deleteChange=(record)=>{
-        let params1={id:record.id,}
+        let params1={id:record.id,};
         fetchPost(global.constants.deleteWorkPlace,params1)
             .then(
-                res => {message.info("删除成功")
+                res => {message.info("删除成功");
                     this.requestData();
                 })
 
@@ -137,9 +137,9 @@ export  default class workPlace extends Component{
 
             })
 
-    }
+    };
     requestData=()=>{
-        let params={}
+        let params={};
         fetchPost(global.constants. WorkPlaceSelect,params)
             .then(
                 res => this.setProjectData(res)
@@ -150,7 +150,7 @@ export  default class workPlace extends Component{
                     requestLoading: false
                 })
             })
-    }
+    };
     render(){
         return(
             <div style={{width:'300px'}}>

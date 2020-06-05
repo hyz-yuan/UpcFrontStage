@@ -130,7 +130,7 @@ export default class ProgressTable extends React.Component {
     }
     state={
         dataSource: [],
-    }
+    };
     componentDidMount() {
         this.loadData();
 
@@ -138,7 +138,7 @@ export default class ProgressTable extends React.Component {
     loadData=()=>{
         let params={ projectId : this.props.pid };
         this.requestProgress(global.constants.progressList,params);
-    }
+    };
 
 
     requestProgress = (url,params) =>{
@@ -153,7 +153,7 @@ export default class ProgressTable extends React.Component {
                     requestLoading: false
                 })
             })
-    }
+    };
     setProgressData = (list) => {
         this.setState({
             dataSource: list.map((item, index) => {
@@ -166,10 +166,10 @@ export default class ProgressTable extends React.Component {
                 }
             }),
 
-        })
+        });
         this.props.reloadGant();
         //message.info("保存成功！")
-    }
+    };
     handleDelete = key => {
         const dataSource = [...this.state.dataSource];
         let params={

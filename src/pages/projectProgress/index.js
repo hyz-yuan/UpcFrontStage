@@ -20,11 +20,11 @@ class projectProgress extends React.Component{
         progressData:[],
         requestLoading:true,
         currentProjectID:1,
-    }
+    };
 
 
     componentDidMount() {
-        let params={}
+        let params={};
         fetchPost(global.constants.projectListByMid,params)
             .then(
                 res => this.setProjectData(res)
@@ -44,7 +44,7 @@ class projectProgress extends React.Component{
             this.requestProgress();
             this.ProgressTable.loadData();
         });
-    }
+    };
     //赋予表格数据
     setProjectData = (list) => {
         this.setState({
@@ -62,7 +62,7 @@ class projectProgress extends React.Component{
             this.ProgressTable.loadData();
         });
 
-    }
+    };
 
     requestProgress =()=>{
         let params={ projectId : this.state.currentProjectID };
@@ -76,7 +76,7 @@ class projectProgress extends React.Component{
                     requestLoading: false
                 })
             })
-    }
+    };
     setGantData = (list) => {
 
         this.setState({
@@ -90,10 +90,10 @@ class projectProgress extends React.Component{
                 }
             }),
         })
-    }
+    };
     onRef = (ref) => {
         this.ProgressTable = ref
-    }
+    };
     render(){
         const {data,gantData,columns,title,currentProjectID,projectTitle}=this.state;
         return (

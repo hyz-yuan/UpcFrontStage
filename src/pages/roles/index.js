@@ -41,14 +41,14 @@ export default class roles extends Component{
         flag: false,
         flagL:true,
         visible: false,
-    }
+    };
 
     componentDidMount(){
         this.setRole()
     }
 
     setRole=()=>{
-        let params={}
+        let params={};
         fetchPost(global.constants.setRoleList,params)
             .then(
                 res => this.setProjectData(res)
@@ -58,7 +58,7 @@ export default class roles extends Component{
                 this.setState({
                     requestLoading: false
                 })
-            })
+            });
 
         fetchPost(global.constants.setRightList,params)
             .then(
@@ -70,7 +70,7 @@ export default class roles extends Component{
                     requestLoading: false
                 })
             })
-    }
+    };
 
     setProjectData =(list)=>{
         this.setState({
@@ -86,7 +86,7 @@ export default class roles extends Component{
                 }),
             }
         )
-    }
+    };
     //设置权限的主菜单和子菜单
     setData = (list) => {
         this.setState({
@@ -100,31 +100,31 @@ export default class roles extends Component{
                     }
                 }),
             }
-        )
+        );
         this.sub(this.state.rightsTree,list,0)
-    }
+    };
     sub =(TreeData,list,pid)=>{
         return list.map((item, index) => {
             if(item.lastMenus===pid){
                 if(pid===0){
-                    TreeData.push({title:item.rights,key:item.id,style:{height:"40px"},children:[]})
+                    TreeData.push({title:item.rights,key:item.id,style:{height:"40px"},children:[]});
                     this.sub(TreeData,list,item.id)
                 }else{
                     TreeData.map(node=>{
                         if(node.key==item.lastMenus)
                         {
-                            this.state.childList.push(item.id)
+                            this.state.childList.push(item.id);
                             node.children.push({title:item.rights,key:item.id,style:{height:"40px"}})
                         }
-                    })
+                    });
                     this.state.rightsTree=TreeData
                 }
             }
         })
-    }
+    };
 
     render(){
-        const {title,menus} = this.state
+        const {title,menus} = this.state;
         return (
             <div>
                 <RightBodyHeaderBar title={title}/>
@@ -185,7 +185,7 @@ export default class roles extends Component{
                 roleId: this.state.selectRoleId,
                 roleName:this.state.newRole.roleName,
                 rightsList: this.state.newRole.rightsList
-            }
+            };
             fetchPost(global.constants.updateRole, param)
                 .then(
                 )
@@ -200,7 +200,7 @@ export default class roles extends Component{
                         newRole: [],
                         childList:[],
                         rightsTree:[],
-                    })
+                    });
                     this.setRole()
                 })
         }
@@ -208,7 +208,7 @@ export default class roles extends Component{
             let params = {
                 roleName: this.state.newRole.roleName,
                 rightsList: this.state.newRole.rightsList
-            }
+            };
             fetchPost(global.constants.insertRole, params)
                 .then(
                 )
@@ -220,14 +220,14 @@ export default class roles extends Component{
                         childList:[],
                         rightsTree:[],
                         newRole: [],
-                    })
+                    });
                     this.setRole()
                 })
         }
     };
 
     deleteRole=(record)=>{
-        let params={id:record.roleId}
+        let params={id:record.roleId};
         fetchPost(global.constants.deleteRole,params)
             .then(
             )
@@ -237,17 +237,17 @@ export default class roles extends Component{
                     childList:[],
                     rightsTree:[],
                     requestLoading: false
-                })
+                });
                 this.setRole();
             })
-    }
+    };
 
 
     //查询角色已有的权限
     selectRecord=(record)=>{
         this.state.newRole.roleName=record.roleName;
         this.state.selectRoleId=record.roleId;
-        let params={id:record.roleId}
+        let params={id:record.roleId};
         fetchPost(global.constants.selectItem,params)
             .then(
                 res => this.setItemListData(res)
@@ -263,14 +263,14 @@ export default class roles extends Component{
                         {this.state.updateList.push(this.state.selectRightList[i].rightId)}
                     }
                 }
-                this.state.newRole.rightsList=this.state.updateList
+                this.state.newRole.rightsList=this.state.updateList;
                 this.setState({
                     requestLoading: false,
                     visible: true,
                     flag:true
                 })
             })
-    }
+    };
 
     setItemListData =(list)=>{
         this.setState({
@@ -285,12 +285,12 @@ export default class roles extends Component{
                 }
             }),
         })
-    }
+    };
 
     //插入姓名和权限
     handleInsertName=(checkedValues)=>{
         this.state.newRole.roleName=checkedValues;
-    }
+    };
 
     handleInsertRights=(checkedKeys, e)=> {
         this.state.newRole.rightsList=[...checkedKeys, ...e.halfCheckedKeys];

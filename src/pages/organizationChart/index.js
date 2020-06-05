@@ -22,24 +22,19 @@ class organizationChart extends Component{
                     requestLoading: false
                 })
             });
-    }
+    };
     setTeamStructureData =(list)=>{
         this.setState({
             treeData: list
         })
-    }
+    };
 
     onChange = value => {
         console.log(value);
         this.setState({ value });
     };
-    changeData = (list) =>{
-        list.forEach((item)=>{
-
-        })
-    }
     render(){
-        let treeData =   this.state.treeData
+        let treeData =   this.state.treeData;
         let option =  {
             tooltip: {
                 // show：'true',//默认：true；是否显示提示框组件，包括提示框浮层和 axisPointer。
@@ -98,7 +93,7 @@ class organizationChart extends Component{
                     },
                     data: [treeData]
                 }]
-        }
+        };
 
         return(
                 <div>{console.log(treeData)}

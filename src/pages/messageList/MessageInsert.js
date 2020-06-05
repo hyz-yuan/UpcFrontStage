@@ -24,12 +24,6 @@ class MessageInsert extends Component{
         this.props.dispatchData(data);*/
         alert("value："+value + "  Option :" + option);
     };
-    getReturn=()=>{
-
-       /* this.props.onRef*/
-
-    };
-
     getData = ()=>{
         let params = {
         };

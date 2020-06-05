@@ -10,8 +10,6 @@ import {get} from "echarts/src/component/toolbox/featureManager";
 
 class Message extends  Component{
 
-
-
     state={
         columns:[
             { title: '项目名称',dataIndex: 'projectName'},

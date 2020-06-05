@@ -31,16 +31,20 @@ class projectListUser extends React.Component{
                 { title: '实施地',dataIndex: 'workPlaceName',},
                 { title: '起 止 时 间',dataIndex: 'time',},
                 { title: '操 作',dataIndex: 'operate',
-                    render:(text,record)=>(  <span>
-                        <button className='commonTableCheckButton'
-                                onClick={this.checkDetail.bind(this, record)}>人员设定</button>
-                    </span>)}
+                    render:(text,record)=>(
+                        <span>
+                            <button className='commonTableCheckButton'
+                                onClick={this.checkDetail.bind(this, record)}>人员设定
+                            </button>
+                        </span>
+                    )
+                }
             ],
             //人员设定页面
             column:[
                 { title: '序号',dataIndex: 'number',
-                    render:(text,record,index)=>`${index+1}`},
-
+                    render:(text,record,index)=>`${index+1}`
+                },
                 { title: '小组名称',
                     dataIndex: 'groupName',
                 },
@@ -66,16 +70,16 @@ class projectListUser extends React.Component{
              //   { title: '工作地',dataIndex: 'workPlaceName',},
                // { title: '技术领域',dataIndex: 'technologyName',},
                 { title: '职 位',dataIndex: 'userType',
-
                     render: (text,record) => (
                         <span>
-        <Radio.Group  onChange={(e)=>this.onChangeuType(e,record)} defaultValue={text} >
-                    <Radio value={2}>取消身份</Radio>
-                    <Radio value={1}>组员</Radio>
-                    <Radio value={0}>组长</Radio>
-                  </Radio.Group>
-            </span>
-                    ),},
+                            <Radio.Group  onChange={(e)=>this.onChangeuType(e,record)} defaultValue={text} >
+                                <Radio value={2}>取消身份</Radio>
+                                <Radio value={1}>组员</Radio>
+                                <Radio value={0}>组长</Radio>
+                            </Radio.Group>
+                        </span>
+                    )
+                },
                 //{ title: '工作内容',dataIndex: 'technologyName',},
             ],
             data:[], //存放项目列表页面数据
@@ -91,7 +95,7 @@ class projectListUser extends React.Component{
         },()=>{
             this.requestpersonData(record.id);
         });
-    }
+    };
 
 //点击人员管理打开Modal 并传groupUserId值(勾选身份用)
     changeState=(record)=>{
@@ -101,7 +105,7 @@ class projectListUser extends React.Component{
             this.requestmembData(record.projectId,record.groupId);
         })
 
-    }
+    };
 
         //人员管理页面 勾选身份时获取单选框的值，对应userId值
     onChangeuType=(e,record)=>{
@@ -111,7 +115,7 @@ class projectListUser extends React.Component{
             userId:record.userId,
               groupId:this.state.gid,
               userType:e.target.value,
-           }
+           };
         fetchPost(global.constants.setPerson,params) //接口在后端 DZW文件夹
             .then(
                 this.requestpersonData(this.state.projectId)
@@ -122,7 +126,7 @@ class projectListUser extends React.Component{
                     requestLoading: false
                 })
             })
-    }
+    };
 
     //删除按钮 uId为小组id
     deleteGroup=(record)=>{
@@ -131,11 +135,11 @@ class projectListUser extends React.Component{
         },()=>{
             this.requestDelGroup();
         })
-    }
+    };
     requestDelGroup(){
         let params={id:this.state.uId,
-            projectId:this.state.id}
-        console.log(this.state.uId)
+            projectId:this.state.id};
+        console.log(this.state.uId);
         fetchPost(global.constants.deleteGroup,params) //在后端xjs文件下 可以删除但返回值不对
             .then(
                 res => this.setpersonData(res),
@@ -152,11 +156,11 @@ class projectListUser extends React.Component{
         this.setState({
             inputvisible:true
         })
-    }
+    };
     //新增小组Modal里的提交按钮
     handleChangeState=(e)=>{
         this.setState({iptValue:e.target.value})
-    }
+    };
     handleOk = (e) => {
         this.setState({
                 loading: true },
@@ -169,9 +173,11 @@ class projectListUser extends React.Component{
     };
     //新增接口
     requestAddData(){
-        let params={groupName:this.state.iptValue,
-            projectId:this.state.id}
-        console.log(this.state.iptValue)
+        let params={
+            groupName:this.state.iptValue,
+            projectId:this.state.id
+        };
+        console.log(this.state.iptValue);
         fetchPost(global.constants.addGroup,params)
             .then(
                 res => this.setpersonData(res),
@@ -189,7 +195,7 @@ class projectListUser extends React.Component{
 
     //请求人员列表页面接口
     componentDidMount() {
-        let params={id:1}
+        let params={id:1};
         fetchPost(global.constants.projectListByMid,params)
             .then(
                 res => this.setData(res),
@@ -207,10 +213,10 @@ class projectListUser extends React.Component{
         this.setState({
             projectId:pid,//edit by ljh 点击人员设定按钮，设置projectId
             requestLoading: true,
-        })
+        });
         let params = {
             projectId:pid
-        }
+        };
         fetchPost(global.constants.getGroupPerson,params) //  后端xjs/project下
             .then(
                 res => this.setpersonData(res),
@@ -221,18 +227,18 @@ class projectListUser extends React.Component{
                     requestLoading: false
                 })
             })
-    }
+    };
 
 //请求人员管理页面接口
     requestmembData = (projectId,groupId) => {
 
         this.setState({
             requestLoading: true
-        })
+        });
         let params={
             projectId:projectId,
             id:groupId
-        }
+        };
         fetchPost(global.constants.getGroupUser,params)
             .then(
                 res => this.setmembData(res),
@@ -243,7 +249,7 @@ class projectListUser extends React.Component{
                     requestLoading: false
                 })
             })
-    }
+    };
     //赋予项目列表页面表格数据
     setData = (list) => {
         this.setState({
@@ -257,7 +263,7 @@ class projectListUser extends React.Component{
                 }
             })
         })
-    }
+    };
     //赋予人员设定页面表格数据
     setpersonData = (list) => {
         this.setState({
@@ -270,10 +276,12 @@ class projectListUser extends React.Component{
                 }
             })
         },()=>{
-            this.setState({          visible:true            })
+            this.setState({
+                visible:true
+            })
             //this.requestpersonData(this.state.projectId);
         })
-    }
+    };
     //赋予人员管理页面表格数据
     setmembData = (list) => {
         this.setState({
@@ -288,7 +296,7 @@ class projectListUser extends React.Component{
             this.setState({membvisible:true});
 
         })
-    }
+    };
 
 
 

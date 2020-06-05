@@ -26,14 +26,14 @@ class ForgetPassword extends Component {
         workplaceId: 0,
         technologyId: 0,
         tips: '',
-    }
+    };
     componentDidMount() {
 
         fetchPost(global.constants.selectWorkPlace, {})
             .then(
                 res => this.setWorkplace(res)
             )
-            .catch(e => console.log(e))
+            .catch(e => console.log(e));
 
         fetchPost(global.constants.technologySelect, {})
             .then(
@@ -47,46 +47,46 @@ class ForgetPassword extends Component {
                 return (<Select value={item.id} selected>{item.workPlace}</Select>)
             })
         })
-    }
+    };
     setTechnology = (list) => {
         this.setState({
             technology: list.map((item, index) => {
                 return (<Select value={item.id} selected>{item.pId===0?item.technologyName:"+--"+item.technologyName}</Select>)
             })
         })
-    }
+    };
 
     handleemail = (e) => {
-        let value = e.target.value.replace(/[\u4e00-\u9fa5]/g, '')
+        let value = e.target.value.replace(/[\u4e00-\u9fa5]/g, '');
         this.setState({
             email: value
         })
-    }
+    };
 
     handlePassword = (e) => {
-        let value = e.target.value.replace(/[\u4e00-\u9fa5]/g, '')
+        let value = e.target.value.replace(/[\u4e00-\u9fa5]/g, '');
         this.setState({
             password: value
         })
-    }
+    };
     handlePassword2 = (e) => {
-        let value = e.target.value.replace(/[\u4e00-\u9fa5]/g, '')
+        let value = e.target.value.replace(/[\u4e00-\u9fa5]/g, '');
         this.setState({
             confirmPassword: value
         })
-    }
+    };
 
 
     handleName = (e) => {
         this.setState({
             name: e.target.value
         })
-    }
+    };
     handleRealName = (e) => {
         this.setState({
             realName: e.target.value
         })
-    }
+    };
 
 
 
@@ -95,7 +95,7 @@ class ForgetPassword extends Component {
         this.setState({
             verification: e.target.value
         })
-    }
+    };
 
     //重置密码
     resetPassword = () => {
@@ -110,28 +110,28 @@ class ForgetPassword extends Component {
                 email: this.state.email,
                 code: this.state.verification,
                 password: this.state.password
-            }
+            };
             // fetchPost('http://localhost:7080/pages/web/codeMaching', params)
             fetchPost(global.constants.codeMaching, params)
                 .then(
                     res => {
                         switch (res) {
                             case '验证成功':
-                                message.info('修改成功')
-                                createHashHistory().push('/')
-                                break
+                                message.info('修改成功');
+                                createHashHistory().push('/');
+                                break;
                             case '验证失败':
-                                message.info('验证码不正确')
-                                break
+                                message.info('验证码不正确');
+                                break;
                             default:
-                                message.info("未知错误")
+                                message.info("未知错误");
                                 break
                         }
                     }
                 )
                 .catch(e => console.log(e))
         }
-    }
+    };
     //判断用户名是否存在
     inputOnBlur = (e) =>{
         let params = {userName:e.target.value};
@@ -147,8 +147,7 @@ class ForgetPassword extends Component {
 
         ).catch(e => console.log(e))
 
-
-    }
+    };
     //判断密码是否一致
     handleConfirm = (e) =>{
 
@@ -162,15 +161,15 @@ class ForgetPassword extends Component {
         this.setState({
             messagePassword,
         })
-    }
+    };
     //获取工作地点ID
     selectWorkPlaceId = (value) =>{
         this.setState({workplaceId:value})
-    }
+    };
     //获取工作领域ID
     selectTechnologyId = (value) =>{
         this.setState({technologyId:value})
-    }
+    };
     //注册
     handleRegister = () =>{
         let tips = '';
@@ -195,7 +194,7 @@ class ForgetPassword extends Component {
             })
                 .then(
                     res => {
-                        alert(res)
+                        alert(res);
                         if(res==='注册成功'){
                             createHashHistory().push('/')
                         }
@@ -204,11 +203,7 @@ class ForgetPassword extends Component {
                 .catch(e => console.log(e))
         }
         this.setState({tips});
-    }
-
-
-
-
+    };
 
 
     render() {

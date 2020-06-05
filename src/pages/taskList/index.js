@@ -12,7 +12,7 @@ import ReportDetails from './ReportDetails'
     queryTerms:[],
     requestLoading:true,
     isVisible:false
-}
+};
     requestList= ()=>{
 
       fetchPost(global.constants.getProjectEmployeeRoleList,{})
@@ -27,7 +27,7 @@ import ReportDetails from './ReportDetails'
                     requestLoading: false
                 })
             })
-    }
+    };
     componentDidMount(){
         this.requestList();
 
@@ -44,7 +44,7 @@ import ReportDetails from './ReportDetails'
                 }
             })
         })
-    }
+    };
     
     handleClick = (item)=>{
           this.setState({
@@ -52,7 +52,7 @@ import ReportDetails from './ReportDetails'
             queryTerms:item
           })
            
-    }
+    };
     
 
     render() {
@@ -101,7 +101,7 @@ import ReportDetails from './ReportDetails'
               //   dataIndex: 'updateTime',
               // },
           ];
-        const data = this.state.data
+        const data = this.state.data;
         return(
           <div>
             <Table dataSource={data} columns={columns} />

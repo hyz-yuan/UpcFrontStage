@@ -14,13 +14,13 @@ class projectList extends React.Component{
         ],
         data:[],
         requestLoading:true
-    }
+    };
     goChildren = (id) => {
-        sessionStorage.clear()
+        sessionStorage.clear();
         createHashHistory().push("/sys/home/"+id)
-    }
+    };
     componentDidMount() {
-        let params={}
+        let params={};
         fetchPost(global.constants.porjectList,params)
             .then(
                 res => this.setData(res)
@@ -43,7 +43,7 @@ class projectList extends React.Component{
                 }
             })
         })
-    }
+    };
 
 
     render(){

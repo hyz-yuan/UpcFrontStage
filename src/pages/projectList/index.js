@@ -13,11 +13,18 @@ class projectList extends React.Component {
         title: "项目列表",
         searchValue: '',
         columns: [
-            {title: '序号', dataIndex: '', render: (text, record, index) => `${index + 1}`},
+            {title: '序号', dataIndex: '', render: (text, record, index) => (
+                `${index + 1}`
+                )
+            },
             {
                 title: '项目名称', dataIndex: 'projectName',
                 //点击项目名称后，进行跳转
-                render: (text, record) => (<a onClick={() => this.goChildren(record.id)}>{text}</a>)
+                render: (text, record) => (
+                    <a onClick={() => this.goChildren(record.id)}>
+                        {text}
+                    </a>
+                )
             },
             {title: '实施地', dataIndex: 'workPlaceName',},
             {title: '负责人', dataIndex: 'managerName',},
@@ -25,10 +32,16 @@ class projectList extends React.Component {
             {title: '结束时间', dataIndex: 'endTime',},
             {
                 title: '操作', dataIndex: 'action',
-                render: (text, record) => <span>
-        <a className={"changeProject"} onClick={() => this.handleProjectManage(record.id)}>修改</a>&nbsp;&nbsp;
-                    <a className={"deleteProject"} onClick={() => this.showDeleteConfirm(record.id)}>删除</a>
-      </span>
+                render: (text, record) => (
+                        <span>
+                        <a className={"changeProject"} onClick={() => this.handleProjectManage(record.id)}>
+                            修改
+                        </a>&nbsp;&nbsp;
+                        <a className={"deleteProject"} onClick={() => this.showDeleteConfirm(record.id)}>
+                            删除
+                        </a>
+                    </span>
+                    )
             }
         ],
         data: [],
@@ -48,8 +61,6 @@ class projectList extends React.Component {
         sessionStorage.clear();
         createHashHistory().push('/sys/projectDetail?id=' + id)
     };
-
-
 
     componentDidMount = (value) => {
         let params = {projectName: value};
