@@ -106,11 +106,11 @@ export default class test extends Component{
                 role: list.map((item, index) => {
                     return {
                         ...item,
-                        id:item.id,
-                        deleteFlag:item.delFlag,
-                        Index:index+1,
+                        id: item.id,
+                        deleteFlag: item.delFlag,
+                        Index: index + 1,
                         key: index,
-                    }
+                    };
                 }),
             }
         )
