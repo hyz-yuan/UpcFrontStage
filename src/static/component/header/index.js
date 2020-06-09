@@ -8,12 +8,12 @@ class Header extends Component {
     state = {};
 
     handleLogout = () => {
-        let params = {}
+        let params = {};
         fetchPost(global.constants.logout, params)
             .then(
                 res => createHashHistory().push('/')
             )
-    }
+    };
 
     render() {
         return (

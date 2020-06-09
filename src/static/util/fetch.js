@@ -12,9 +12,7 @@ export function fetchPost(url, params) {
                 "Content-Type": "application/json"
 
             })
-        }).
-
-        then(checkStatus)
+        }).then(checkStatus)
             .then(response => response.json())
             .then((data)=> {
 
@@ -22,7 +20,7 @@ export function fetchPost(url, params) {
                     resolve(data.data)
                 }
                 else {
-                    reject(data.data.msg )
+                    reject(data.data.msg );
                     message.info(data.data.msg)
                 }
             })
@@ -33,9 +31,9 @@ export function fetchPost(url, params) {
 function checkStatus(response) {
     if (response.status == 1002) {
         message.info('重新登陆');
-        createHashHistory().push('/')
+        createHashHistory().push('/');
         return Promise.reject();
     } else {
-        return response
+        return response;
     }
 }

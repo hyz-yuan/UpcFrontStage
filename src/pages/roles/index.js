@@ -1,9 +1,9 @@
 import * as React from "react";
-import {Input, Checkbox, Button, Popconfirm, Table, Modal, Menu, Tree} from "antd";
+import {Input, Button, Popconfirm, Table, Modal,Tree} from "antd";
 import {Component} from "react";
 import {fetchPost} from "../../static/util/fetch";
 import RightBodyHeaderBar from "../../static/component/rightBodyHeaderBar";
-const {SubMenu} = Menu;
+
 
 export default class roles extends Component{
     state={
@@ -118,18 +118,20 @@ export default class roles extends Component{
                         }
                     });
                     this.state.rightsTree=TreeData
+                    return null;
                 }
             }
+            return null;
         })
     };
 
     render(){
         const {title,menus} = this.state;
         return (
-            <div>
+            <div style={{width:'100%'}}>
                 <RightBodyHeaderBar title={title}/>
-                <Button style={{marginLeft:'1%' }} onClick={this.showModal}>新增</Button>
-                <Table dataSource={this.state.data}  pagination={{pageSize: 7}} columns={this.state.columns}/>
+                <Table dataSource={this.state.data}  pagination={{pageSize: 7}} columns={this.state.columns}/>'
+                <Button style={{marginLeft:'1%' }} type="primary" onClick={this.showModal}>新增</Button>
                 <div  style={{height:"300px"}}>
                     <Modal
                         destroyOnClose={true}

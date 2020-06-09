@@ -1,13 +1,8 @@
 import React, { Component } from  'react'
-import {Button, message,Input,Table,Select} from "antd";
+import {Button, message,Input,Table} from "antd";
 import {fetchPost} from "../../static/util/fetch";
+import RightBodyHeaderBar from "../../static/component/rightBodyHeaderBar";
 export  default class workPlace extends Component{
-
-    //相当于构造方法
-    constructor(props){
-        super(props);
-
-    }
 
     state={
         columns:[
@@ -46,6 +41,7 @@ export  default class workPlace extends Component{
 
         ],
         data:[],
+        title:'地理管理',
     };
 
     componentDidMount() {
@@ -140,7 +136,7 @@ export  default class workPlace extends Component{
     };
     requestData=()=>{
         let params={};
-        fetchPost(global.constants. WorkPlaceSelect,params)
+        fetchPost(global.constants.WorkPlaceSelect,params)
             .then(
                 res => this.setProjectData(res)
             )
@@ -152,11 +148,12 @@ export  default class workPlace extends Component{
             })
     };
     render(){
+        const {title} = this.state;
         return(
-            <div style={{width:'300px'}}>
-
-                <Button onClick={this.insertName} style={{borderRadius:'6px',marginLeft:'6px'}}>新增</Button>
+            <div style={{width:'100%'}}>
+                <RightBodyHeaderBar title={title}/>
                 <Table dataSource={this.state.data} columns={this.state.columns} rowKey={'key'}/>
+                <Button onClick={this.insertName} type="primary" style={{borderRadius:'6px',marginLeft:'6px'}}>新增</Button>
             </div>
         )
     }

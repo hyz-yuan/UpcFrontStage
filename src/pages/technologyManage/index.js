@@ -150,6 +150,7 @@ state={
         list.map((item, index) => {
             pname[item.id]=item.technologyName;
             this.options.push(<Select key={item.id}>{item.technologyName}</Select>);
+            return null;
         });
         this.setState({
             dataSource: list.map((item, index) => {
@@ -220,26 +221,18 @@ state={
             };
         });
         return (
-            <div>
+            <div style={{width:'100%'}}>
                 <RightBodyHeaderBar title={this.state.title}/>
                 <div>
-                    <Button
-                        onClick={this.handleAdd}
-                        type="primary"
-                        style={{
-                            marginBottom: 16,
-                        }}
-                    >
-                        新增
-                    </Button>
                     <Table
-                        style={{ width: 500 }}
+                        style={{ width:'100%' }}
                         components={components}
                         rowClassName={() => 'editable-row'}
                         bordered
                         dataSource={dataSource}
                         columns={columns}
                     />
+                    <Button onClick={this.handleAdd} type="primary" style={{marginBottom: 16}}>新增</Button>
                 </div>
             </div>
         )

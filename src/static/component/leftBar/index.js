@@ -17,7 +17,7 @@ class leftBar extends Component {
     };
 
     componentDidMount() {
-        let params = {}
+        let params = {};
         fetchPost(global.constants.getRole, params)
             .then(
                 res => this.setData(res)
@@ -27,7 +27,7 @@ class leftBar extends Component {
     setData = (list) => {
 
         this.setState({menus:this.sub(list,0)})
-    }
+    };
     i=0;
      sub =(list,pid)=>{
 
@@ -50,15 +50,15 @@ class leftBar extends Component {
                     }
                 }
         })
-    }
+    };
 
     goChildren = (e) => {
-        sessionStorage.clear()
+        sessionStorage.clear();
         createHashHistory().push("/sys/"+e.key)
-    }
+    };
 
     render() {
-        const {menus} = this.state
+        const {menus} = this.state;
 
         return (
             <div style={{width: 256, height: "100%", position: "fixed", zIndex: 101, paddingTop: 49}}>

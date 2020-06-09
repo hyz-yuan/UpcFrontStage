@@ -6,7 +6,6 @@ import loadable from "../static/util/loadbale";
 import LeftBar from '../static/component/leftBar'
 import Header from '../static/component/header'
 
-const Home = loadable(()=>import('./home'));
 const projectList = loadable(()=>import('./projectList'));
 const organizationChart = loadable(()=>import('./organizationChart'));
 const projectProgress = loadable(()=>import('./projectProgress'));
@@ -40,7 +39,6 @@ class MainFrame extends Component{
                 <Header/>
                 <LeftBar/>
                 <div className='rightBodyUnfold'>
-                    <Route path="/sys/home" component={Home}/>
                     <Route path="/sys/organizationChart" component={organizationChart}/>
                     <Route path="/sys/projectList" component={projectList}/>
                     <Route path="/sys/projectListNew" component={projectListNew}/>

@@ -3,8 +3,9 @@ import {Button, Modal, Table} from "antd";
 import {fetchPost} from "../../static/util/fetch";
 import MessageInsert from "./MessageInsert";
 import moment from 'moment';
-import { Descriptions, Radio } from 'antd';
-import {get} from "echarts/src/component/toolbox/featureManager";
+import { Descriptions } from 'antd';
+import RightBodyHeaderBar from "../../static/component/rightBodyHeaderBar";
+
 
 
 
@@ -12,7 +13,7 @@ class Message extends  Component{
 
     state={
         columns:[
-            { title: '项目名称',dataIndex: 'projectName'},
+           /* { title: '项目名称',dataIndex: 'projectName'},*/
             { title: '日期',dataIndex: 'operatorTime'},
             {title: '发送人',dataIndex: 'operator'},
             //{title: '来源',dataIndex: 'projectName'},
@@ -28,7 +29,7 @@ class Message extends  Component{
                  }>Delete</a>,
              },*/
         ],
-
+        title:"消息",
         currentRow : [],
         currentMassage : [],
         currentTime : [],
@@ -171,14 +172,12 @@ class Message extends  Component{
         const data = this.state.messageList||{};
 
         return(
-            <div>
-                <Table dataSource={data}
-                       columns={this.state.columns}
-                    /*expandable={{
-                        expandedRowRender: record => <p style={{ margin: 0 }}>{record.description}</p>,
-                        rowExpandable: record => record.name !== 'Not Expandable',
-                    }}*/
-                       onRow={(record,index)=>{return{onClick:()=> {
+            <div style={{width:'100%'}}>
+                <RightBodyHeaderBar title={this.state.title}/>
+                <Table  style={{height:'60%'}}
+                        dataSource={data}
+                        columns={this.state.columns}
+                        onRow={(record,index)=>{return{onClick:()=> {
                                this.setState({
                                    currentRow : index,
                                    currentMassage : record.content,
@@ -220,6 +219,7 @@ class Message extends  Component{
                 <Descriptions title="消息"
                               bordered = {true}
                               column ={2}
+                              style={{height:'30%'}}
                 >
                     <Descriptions.Item label="发送人">{this.state.currentOperator}</Descriptions.Item>
                     <Descriptions.Item label="时间">{this.state.currentTime}</Descriptions.Item>

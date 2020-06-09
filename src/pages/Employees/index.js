@@ -229,7 +229,6 @@ export default class test extends Component{
         for (let i in obj) {
             record[i] = obj[i];//这一句是必须的，不然状态无法更改
         }
-        let a =this.state.data;
         this.setState({
             a:record
         });

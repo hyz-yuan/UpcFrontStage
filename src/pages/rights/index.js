@@ -98,10 +98,10 @@ export default class test extends Component{
     };
     render(){
         return (
-            <div>
+            <div style={{width:'100%'}}>
                 <RightBodyHeaderBar title={this.state.title}/>
-                <Button onClick={()=>this.insertRight()}>新增</Button>
                 <Table dataSource={this.state.data} pagination={{pageSize: 7}} columns={this.state.columns}/>
+                <Button type="primary" onClick={()=>this.insertRight()}>新增</Button>
             </div>
                 )
     }

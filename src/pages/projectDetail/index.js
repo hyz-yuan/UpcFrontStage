@@ -64,6 +64,7 @@ export default class ProjectDetail extends Component {
             if (group.indexOf(item.groupId) === -1) {
                 group.push(item.groupId);
             }
+            return null;
         });
 
         this.setState({
@@ -114,6 +115,7 @@ export default class ProjectDetail extends Component {
                 }
             });
             groupNew.push(groupById);
+            return null;
         });
         console.log(groupNew);
 
