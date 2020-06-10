@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {fetchPost} from "../../static/util/fetch";
+import {fetchPost} from "../../util/fetch";
 import {Table,Modal} from 'antd';
 import moment from "moment";
 import ReportDetails from './ReportDetails'

@@ -8,9 +8,9 @@ class CommonBackOperateHeader extends Component {
     };
 
     handleBack = () => {
-        sessionStorage.removeItem(this.props.removeItem)
+        sessionStorage.removeItem(this.props.removeItem);
         createHashHistory().goBack()
-    }
+    };
 
     render() {
         return (

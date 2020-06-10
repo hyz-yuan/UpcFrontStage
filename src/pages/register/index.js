@@ -1,12 +1,12 @@
 
 import React, {Component} from 'react'
-import Background from '../../static/image/login.jpg';
-import LoginCompany from '../../static/image/loginCompany.png';
-import LoginUsername from '../../static/image/loginUsername.png';
-import LoginPassword from '../../static/image/loginPassword.png';
+import Background from '../../assets/image/login.jpg';
+import LoginCompany from '../../assets/image/loginCompany.png';
+import LoginUsername from '../../assets/image/loginUsername.png';
+import LoginPassword from '../../assets/image/loginPassword.png';
 
 import './index.css'
-import {fetchPost} from "../../static/util/fetch";
+import {fetchPost} from "../../util/fetch";
 import {  message,Select } from 'antd';
 import {createHashHistory} from "history";
 

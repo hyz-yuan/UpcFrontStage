@@ -1,8 +1,8 @@
 import * as React from "react";
 import {Input, Button, Popconfirm, Table, Modal,Tree} from "antd";
 import {Component} from "react";
-import {fetchPost} from "../../static/util/fetch";
-import RightBodyHeaderBar from "../../static/component/rightBodyHeaderBar";
+import {fetchPost} from "../../util/fetch";
+import RightBodyHeaderBar from "../../component/rightBodyHeaderBar";
 
 
 export default class roles extends Component{

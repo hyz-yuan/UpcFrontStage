@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import {Table,Button,Modal} from 'antd';
-import {fetchPost} from "../../static/util/fetch";
+import {fetchPost} from "../../util/fetch";
 import ReportInsert from "./ReportInsert";
 import moment from "moment";
 

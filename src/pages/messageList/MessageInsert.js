@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import {Col,Row,Select,Input} from 'antd';
-import {fetchPost} from "../../static/util/fetch";
+import {fetchPost} from "../../util/fetch";
 
 
 

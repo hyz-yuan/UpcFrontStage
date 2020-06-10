@@ -5,7 +5,7 @@ class EditableTable extends React.Component {
     componentDidMount = () => {
         //文字无缝滚动
         this.industryNews = setInterval(this.taskIndustryNews, 50);
-    }
+    };
     taskIndustryNews = () => {
         if (this.refs.newDiv.scrollTop >= this.refs.newDivUI.offsetHeight - this.refs.newDiv.clientHeight) {
             this.refs.newDiv.scrollTop = 0;
@@ -13,20 +13,20 @@ class EditableTable extends React.Component {
         else {
             this.refs.newDiv.scrollTop += 1;
         }
-    }
+    };
     handleIndustryNewsEnter = () => {
         clearInterval(this.industryNews);
-    }
+    };
     handleIndustryNewsLeave = () => {
         this.industryNews = setInterval(this.taskIndustryNews, 50);
-    }
+    };
     componentWillUnmount = () => {
         clearInterval(this.industryNews);
-    }
+    };
 
 
     render() {
-        const averageWidth = 100/this.props.columns.length + '%'
+        const averageWidth = 100/this.props.columns.length + '%';
         return (
             <div className='ceShiTable'>
                 <div className='ceShiTable-title'>
@@ -57,7 +57,7 @@ class EditableTable extends React.Component {
     }
 
     tableBody = (dataItem, dataIndex) => {
-        let averageWidth = 100/this.props.columns.length + '%'
+        let averageWidth = 100/this.props.columns.length + '%';
         return (
             <li key={dataIndex}>
                 {

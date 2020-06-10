@@ -1,10 +1,10 @@
 import * as React from "react";
 import {Table} from "antd/lib/index";
-import {fetchPost} from "../../static/util/fetch";
-import RightBodyHeaderBar from '../../static/component/rightBodyHeaderBar'
+import {fetchPost} from "../../util/fetch";
+import RightBodyHeaderBar from '../../component/rightBodyHeaderBar'
 import './index.css'
 import TimeLine from "react-gantt-timeline";
-import Title from '../../static/util/title'
+import Title from '../../util/title'
 import ProgressTable from './progressTable'
 class projectProgress extends React.Component{
     state={

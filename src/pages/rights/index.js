@@ -1,8 +1,8 @@
 import * as React from "react";
 import {Button, Popconfirm, Select, Table} from "antd";
 import {Component} from "react";
-import {fetchPost} from "../../static/util/fetch";
-import RightBodyHeaderBar from "../../static/component/rightBodyHeaderBar";
+import {fetchPost} from "../../util/fetch";
+import RightBodyHeaderBar from "../../component/rightBodyHeaderBar";
 const { Option } = Select;
 export default class test extends Component{
    state={

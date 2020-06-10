@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
 import { HashRouter,Route,Switch } from 'react-router-dom'
-import './static/config'
+import './configs/config'
 import 'antd/dist/antd.css';
-import loadable from "./static/util/loadbale";
+import loadable from "./util/loadbale";
 import MainFrame from './pages'
 
 //const Login = loadable(()=>import('./pages/ljh/login'));

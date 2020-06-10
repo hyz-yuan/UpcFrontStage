@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import RightBodyHeaderBar from '../../static/component/rightBodyHeaderBar';
-import {fetchPost} from "../../static/util/fetch";
+import RightBodyHeaderBar from '../../component/rightBodyHeaderBar';
+import {fetchPost} from "../../util/fetch";
 import TimeLine from "react-gantt-timeline";
 import './index.css'
 import ReportDetails from "../taskList/ReportDetails";

@@ -1,8 +1,8 @@
 import * as React from "react";
 import {Table, Input, Button, Modal} from "antd";
-import {fetchPost} from "../../static/util/fetch";
+import {fetchPost} from "../../util/fetch";
 import {createHashHistory} from "history";
-import RightBodyHeaderBar from '../../static/component/rightBodyHeaderBar'
+import RightBodyHeaderBar from '../../component/rightBodyHeaderBar'
 import moment from "moment";
 //import {ExclamationCircleOutlined} from '@ant-design/icons';
 

@@ -1,10 +1,10 @@
 import React, { Component } from  'react'
 import { Route } from 'react-router-dom'
 import './index.css'
-import '../static/css/index.css'
-import loadable from "../static/util/loadbale";
-import LeftBar from '../static/component/leftBar'
-import Header from '../static/component/header'
+import '../css/index.css'
+import loadable from "../util/loadbale";
+import LeftBar from '../component/leftBar'
+import Header from '../component/header'
 
 const projectList = loadable(()=>import('./projectList'));
 const organizationChart = loadable(()=>import('./organizationChart'));

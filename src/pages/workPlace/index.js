@@ -1,7 +1,7 @@
 import React, { Component } from  'react'
 import {Button, message,Input,Table} from "antd";
-import {fetchPost} from "../../static/util/fetch";
-import RightBodyHeaderBar from "../../static/component/rightBodyHeaderBar";
+import {fetchPost} from "../../util/fetch";
+import RightBodyHeaderBar from "../../component/rightBodyHeaderBar";
 export  default class workPlace extends Component{
 
     state={

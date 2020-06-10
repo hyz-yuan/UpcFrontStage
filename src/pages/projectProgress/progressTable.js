@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect, useRef } from 'react';
 import { Table, Input,DatePicker, Button, Popconfirm, Form } from 'antd/lib/index';
 import './index.css'
 import moment from "moment";
-import {fetchPost} from "../../static/util/fetch";
+import {fetchPost} from "../../util/fetch";
 const EditableContext = React.createContext();
 
 const EditableRow = ({ index, ...props }) => {

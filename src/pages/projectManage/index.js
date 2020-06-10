@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import {Form, Button, Input, Select, Modal} from 'antd'
 import {DatePicker,message} from 'antd';
-import RightBodyHeaderBar from "../../static/component/rightBodyHeaderBar";
-import {fetchPost} from "../../static/util/fetch";
+import RightBodyHeaderBar from "../../component/rightBodyHeaderBar";
+import {fetchPost} from "../../util/fetch";
 import {createHashHistory} from "history";
 
 import moment from 'moment';

@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
-import Background from '../../static/image/login.jpg';
-import LoginUsername from '../../static/image/loginUsername.png';
-import LoginPassword from '../../static/image/loginPassword.png';
+import Background from '../../assets/image/login.jpg';
+import LoginUsername from '../../assets/image/loginUsername.png';
+import LoginPassword from '../../assets/image/loginPassword.png';
 import './index.css'
 import {createHashHistory} from "history";
-import {fetchPost} from "../../static/util/fetch";
+import {fetchPost} from "../../util/fetch";
 import {message} from "antd";
 
 class Login extends Component {
@@ -69,8 +69,8 @@ class Login extends Component {
             <div className='loginPage' style={{backgroundImage: `url("${Background}")`}}>
 
                 <div className="login">
-                    <div className="title">智能农机</div>
-                    <div className="title1">项目管理系统</div>
+                    <div className="title">项目管理系统</div>
+                    <div className="title1">测试</div>
                     <div className="line">
                         <img className="smallImg" src={LoginUsername} alt={'username'}/>
                         <input placeholder="请输入账号" value={username} type="text" onChange={this.handleUsername}/>

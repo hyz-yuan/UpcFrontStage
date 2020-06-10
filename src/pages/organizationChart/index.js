@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {fetchPost} from "../../static/util/fetch";
+import {fetchPost} from "../../util/fetch";
 import ReactEcharts from 'echarts-for-react'
 
 class organizationChart extends Component{

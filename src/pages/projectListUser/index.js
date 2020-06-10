@@ -1,7 +1,7 @@
 import * as React from "react";
 import {Table, Modal, Popconfirm, Button, Input, Radio} from "antd";
-import RightBodyHeaderBar from "../../static/component/rightBodyHeaderBar";
-import {fetchPost} from "../../static/util/fetch";
+import RightBodyHeaderBar from "../../component/rightBodyHeaderBar";
+import {fetchPost} from "../../util/fetch";
 
 class projectListUser extends React.Component{
     constructor(props){
@@ -366,6 +366,7 @@ class projectListUser extends React.Component{
                         <Input type="text"    value={this.state.iptValue} onChange={this.handleChangeState.bind(this)} placeholder="请输入小组名称" />
                     </form>
                 </Modal>
+
             </div>
 
 

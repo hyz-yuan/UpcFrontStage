@@ -1,10 +1,10 @@
 import React, { Component } from  'react'
 import {Button, Modal, Table} from "antd";
-import {fetchPost} from "../../static/util/fetch";
+import {fetchPost} from "../../util/fetch";
 import MessageInsert from "./MessageInsert";
 import moment from 'moment';
 import { Descriptions } from 'antd';
-import RightBodyHeaderBar from "../../static/component/rightBodyHeaderBar";
+import RightBodyHeaderBar from "../../component/rightBodyHeaderBar";
 
 
 

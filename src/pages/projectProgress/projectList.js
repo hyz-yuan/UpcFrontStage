@@ -1,8 +1,8 @@
 import * as React from "react";
 import {Table} from "antd/lib/index";
-import {fetchPost} from "../../static/util/fetch";
+import {fetchPost} from "../../util/fetch";
 import {createHashHistory} from "history";
-import RightBodyHeaderBar from '../../static/component/rightBodyHeaderBar'
+import RightBodyHeaderBar from '../../component/rightBodyHeaderBar'
 
 class projectList extends React.Component{
     state={
