@@ -29,8 +29,7 @@ class leftBar extends Component {
         this.setState({menus:this.sub(list,0)})
     };
     i=0;
-     sub =(list,pid)=>{
-
+    sub =(list,pid)=>{
         return list.map((item, index) => {
                 if(item.lastMenus===pid){
                     if(pid==0){
@@ -40,8 +39,7 @@ class leftBar extends Component {
                                                 <Icon type={this.state.icon[this.i++]}/>
                                                 <span>{item.rights}</span>
                                             </span>
-                                          }
-                                >
+                                          }>
                             {this.sub(list,item.id)}
                         </SubMenu>)
 

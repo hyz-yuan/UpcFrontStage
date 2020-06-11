@@ -97,7 +97,7 @@ export default class ProjectDetail extends Component {
         console.log("projectId:" + projectId);
         console.log("groupId:" + groupId);
         console.log("employeeId:" + employeeId);
-        let t={projectId:projectId,groupId:groupId,userId:employeeId}
+        let t={projectId:projectId,groupId:groupId,userId:employeeId};
         this.setState({isVisible:true,queryTerms:t})
     };
 

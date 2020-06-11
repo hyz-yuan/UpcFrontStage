@@ -14,7 +14,12 @@ export default class test extends Component{
                render:(text,record)=>(
                    <span>
                  <Select
-                     defaultValue={this.state.data[record.key].pRights}
+                     defaultValue={()=>{
+                         if(this.state.data[record.key].pRights!=null)
+                             return this.state.data[record.key].pRights;
+                         else
+                             return '上级菜单';
+                     }}
                      style={{ width: '100%' }}
                      onChange={(value)=>this.handleChange({lastMenus:value},record)}
                      onBlur={(e)=>this.inputOnBlur(record)}>
@@ -78,9 +83,7 @@ export default class test extends Component{
                        key: index,
                        flag: false
                    }
-               }),
-       }
-       )
+               })},console.log(this.state.data))
    };
     setRight=()=>{
         let params={};
@@ -100,7 +103,7 @@ export default class test extends Component{
         return (
             <div style={{width:'100%'}}>
                 <RightBodyHeaderBar title={this.state.title}/>
-                <Table dataSource={this.state.data} pagination={{pageSize: 7}} columns={this.state.columns}/>
+                <Table dataSource={this.state.data} pagination={{pageSize: 7}} columns={this.state.columns} onRow={console.log(this.state.data)}/>
                 <Button type="primary" onClick={()=>this.insertRight()}>新增</Button>
             </div>
                 )

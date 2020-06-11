@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import {fetchPost} from "../../util/fetch";
 import ReactEcharts from 'echarts-for-react'
+import RightBodyHeaderBar from '../../component/rightBodyHeaderBar';
 
 class organizationChart extends Component{
     state = {
-        treeData : []
+        treeData : [],
+        title:'组织结构图',
     };
     componentDidMount() {
         this.fetchData();
@@ -96,9 +98,12 @@ class organizationChart extends Component{
         };
 
         return(
+            <div>
+                <RightBodyHeaderBar title={this.state.title}/>
                 <div>{console.log(treeData)}
                     <ReactEcharts  option={option} style={{height:'800px',width:'90%'}}/>
                 </div>
+            </div>
         )
     }
 

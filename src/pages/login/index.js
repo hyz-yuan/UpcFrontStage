@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import Background from '../../assets/image/login.jpg';
+import Background from '../../assets/image/mylogin.jpg';
 import LoginUsername from '../../assets/image/loginUsername.png';
 import LoginPassword from '../../assets/image/loginPassword.png';
 import './index.css'

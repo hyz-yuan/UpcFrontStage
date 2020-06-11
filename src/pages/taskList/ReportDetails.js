@@ -114,13 +114,17 @@ import moment from "moment";
                 dataIndex: 'document',
                 
                 render:(text,record)=>{
-                  let list = JSON.parse(record.document);
-                 return list.map((item, index) => {
+                    if(record.document){
+                        let list = JSON.parse(record.document);
+                        return list.map((item, index) => {
 
-                   return <li key={index}>
-                          <a onClick={()=>this.handleExport(item.response.data)}>{item.name}</a> 
-                          </li> 
-                  })
+                            return <li key={index}>
+                                <a onClick={()=>this.handleExport(item.response.data)}>{item.name}</a>
+                            </li>
+                        })
+                    }else {
+                        return <span>无</span>
+                    }
                 }
             },
              
